@@ -17,7 +17,7 @@ export default defineConfig(({ command }) => {
 
   // Only add base path for production builds (GitHub Pages)
   if (command === 'build') {
-    config.base = '/findingfauna'; // Replace 'kuno_full' with your actual repository name
+    config.base = '/findingfauna'; // Replace 'findingfauna' with your actual repository name
   }
 
   return config;
