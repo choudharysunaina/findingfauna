@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react';
 
 // https://vitejs.dev/config/
 export default defineConfig(({ command }) => {
-  const config = {
+  const config: any = {
     plugins: [react()],
     optimizeDeps: {
       exclude: ['lucide-react'],
@@ -17,7 +17,7 @@ export default defineConfig(({ command }) => {
 
   // Only add base path for production builds (GitHub Pages)
   if (command === 'build') {
-    config.base = '/findingfauna'; // Replace 'findingfauna' with your actual repository name
+    config.base = '/findingfauna/'; // Note: trailing slash is important for GitHub Pages
   }
 
   return config;
