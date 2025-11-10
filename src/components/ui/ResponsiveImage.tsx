@@ -22,6 +22,36 @@ const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
   onLoad,
   onError,
 }) => {
+  // Handle base path for absolute paths
+  const getBasePath = () => {
+    const base = import.meta.env.BASE_URL || '/';
+    // Remove trailing slash for consistency
+    return base.endsWith('/') ? base.slice(0, -1) : base;
+  };
+  
+  const normalizeSrc = (imageSrc: string) => {
+    // Skip if already has base path, is external URL, or data URI
+    if (imageSrc.startsWith('http') || imageSrc.startsWith('data:') || imageSrc.startsWith('//')) {
+      return imageSrc;
+    }
+    
+    const basePath = getBasePath();
+    // Check if base path is already included
+    if (imageSrc.startsWith(basePath)) {
+      return imageSrc;
+    }
+    
+    // Add base path if it starts with /
+    if (imageSrc.startsWith('/')) {
+      return `${basePath}${imageSrc}`;
+    }
+    
+    return imageSrc;
+  };
+
+  const normalizedSrc = normalizeSrc(src);
+  const normalizedFallbackSrc = fallbackSrc ? normalizeSrc(fallbackSrc) : undefined;
+
   // Generate WebP version path
   const getWebPSrc = (originalSrc: string) => {
     const lastDotIndex = originalSrc.lastIndexOf('.');
@@ -38,7 +68,7 @@ const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
     return originalSrc;
   };
 
-  const webpSrc = getWebPSrc(src);
+  const webpSrc = getWebPSrc(normalizedSrc);
   const isWebPSupported = typeof window !== 'undefined' && 'WebP' in window;
 
   return (
@@ -53,18 +83,18 @@ const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
       
       {/* Original format as fallback */}
       <source
-        src={src}
-        type={src.endsWith('.jpg') || src.endsWith('.jpeg') ? 'image/jpeg' : 'image/png'}
+        src={normalizedSrc}
+        type={normalizedSrc.endsWith('.jpg') || normalizedSrc.endsWith('.jpeg') ? 'image/jpeg' : 'image/png'}
       />
       
       {/* Fallback img element */}
       <OptimizedImage
-        src={src}
+        src={normalizedSrc}
         alt={alt}
         className={className}
         sizes={sizes}
         priority={priority}
-        fallbackSrc={fallbackSrc}
+        fallbackSrc={normalizedFallbackSrc}
         onLoad={onLoad}
         onError={onError}
       />

@@ -182,7 +182,7 @@ const accommodationOptions = [
       "Cultural Experience: Stay with locals, eat fresh home-cooked meals",
       "Simple but Comfortable: Clean, quiet, and practical for wilderness lovers"
     ],
-    image: "/resort.png"
+    image: `${import.meta.env.BASE_URL}resort.png`
   },
   {
     type: "Safari Resort",
@@ -194,7 +194,7 @@ const accommodationOptions = [
       "Private Safaris: Exclusive vehicle and guide arrangements",
       "Photography Support: Professional guidance available"
     ],
-    image: "/fort.jpg"
+    image: `${import.meta.env.BASE_URL}fort.jpg`
   }
 ];
 

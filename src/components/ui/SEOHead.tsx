@@ -90,7 +90,7 @@ const SEOHead: React.FC<SEOHeadProps> = ({
       <meta property="og:description" content={fullDescription} />
       <meta property="og:type" content={ogType} />
       <meta property="og:url" content={canonical || window.location.href} />
-      <meta property="og:image" content={ogImage.startsWith('http') ? ogImage : `https://kunosafari.com${ogImage}`} />
+      <meta property="og:image" content={ogImage.startsWith('http') ? ogImage : `${window.location.origin}${import.meta.env.BASE_URL}${ogImage.startsWith('/') ? ogImage.slice(1) : ogImage}`} />
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
       <meta property="og:site_name" content="Kuno National Park Safari" />
@@ -100,7 +100,7 @@ const SEOHead: React.FC<SEOHeadProps> = ({
       <meta name="twitter:card" content={twitterCard} />
       <meta name="twitter:title" content={fullTitle} />
       <meta name="twitter:description" content={fullDescription} />
-      <meta name="twitter:image" content={ogImage.startsWith('http') ? ogImage : `https://kunosafari.com${ogImage}`} />
+      <meta name="twitter:image" content={ogImage.startsWith('http') ? ogImage : `${window.location.origin}${import.meta.env.BASE_URL}${ogImage.startsWith('/') ? ogImage.slice(1) : ogImage}`} />
       <meta name="twitter:site" content="@kunosafari" />
       
       {/* Additional SEO Meta Tags */}
@@ -127,7 +127,7 @@ const SEOHead: React.FC<SEOHeadProps> = ({
       <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
       <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
       <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-      <link rel="manifest" href="/site.webmanifest" />
+      <link rel="manifest" href={`${import.meta.env.BASE_URL}site.webmanifest`} />
     </Helmet>
   );
 };

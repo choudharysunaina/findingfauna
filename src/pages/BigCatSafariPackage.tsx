@@ -179,7 +179,7 @@ const accommodationOptions = [
       "Cultural Experience: Stay with locals, eat fresh home-cooked meals",
       "Simple but Comfortable: Clean, quiet, and practical for wilderness lovers"
     ],
-    image: "/resort.png"
+    image: `${import.meta.env.BASE_URL}resort.png`
   },
   {
     type: "Premium Safari Lodge",
@@ -191,7 +191,7 @@ const accommodationOptions = [
       "Private Safaris: Exclusive vehicle and guide arrangements",
       "Photography Support: Professional equipment and guidance available"
     ],
-    image: "/fort.jpg"
+    image: `${import.meta.env.BASE_URL}fort.jpg`
   }
 ];
 
@@ -304,7 +304,7 @@ const BigCatSafariPackage = () => {
               className="relative"
             >
               <img
-                src="/3bigcats.png"
+                src={`${import.meta.env.BASE_URL}3bigcats.png`}
                 alt="Cheetah in Kuno National Park"
                 className="w-full h-96 lg:h-[500px] object-cover rounded-2xl shadow-2xl"
               />

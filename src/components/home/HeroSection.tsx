@@ -8,7 +8,7 @@ const HeroSection = () => {
      <section className="relative min-h-[100vh] flex items-center overflow-hidden">
       {/* Background GIF */}
       <img
-        src="/home_background2.webp"
+        src={`${import.meta.env.BASE_URL}home_background2.webp`}
         alt="Safari Background"
         className="absolute inset-0 w-full h-full object-cover z-0"
         style={{ pointerEvents: "none" }}

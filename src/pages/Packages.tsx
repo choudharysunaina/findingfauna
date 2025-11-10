@@ -188,7 +188,7 @@ const Packages: React.FC = () => {
             >
               <div className="relative h-64 overflow-hidden">
                 <img
-                  src="/resort.png"
+                  src={`${import.meta.env.BASE_URL}resort.png`}
                   alt="Budget-Friendly Home Stay"
                   className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                 />
@@ -243,7 +243,7 @@ const Packages: React.FC = () => {
             >
               <div className="relative h-64 overflow-hidden">
                 <img
-                  src="/fort.jpg"
+                  src={`${import.meta.env.BASE_URL}fort.jpg`}
                   alt="Resort Stay"
                   className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                 />

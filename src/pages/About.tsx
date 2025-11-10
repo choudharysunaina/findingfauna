@@ -121,7 +121,7 @@ const About = () => {
               className="relative"
             >
               <img
-                src='/ourstory.jpg'
+                src={`${import.meta.env.BASE_URL}ourstory.jpg`}
                 alt="Our team collaborating"
                 className="rounded-lg shadow-md w-full"
               />
@@ -203,7 +203,7 @@ const About = () => {
               >
                 <div className="relative overflow-hidden">
                   <img
-                    src={member.image}
+                    src={`${import.meta.env.BASE_URL}${member.image.startsWith('/') ? member.image.slice(1) : member.image}`}
                     alt={member.name}
                     className="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-110"
                   />

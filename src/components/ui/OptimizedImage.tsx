@@ -24,6 +24,35 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
   onLoad,
   onError,
 }) => {
+  // Handle base path for absolute paths
+  const getBasePath = () => {
+    const base = import.meta.env.BASE_URL || '/';
+    // Remove trailing slash for consistency
+    return base.endsWith('/') ? base.slice(0, -1) : base;
+  };
+  
+  const normalizeSrc = (imageSrc: string) => {
+    // Skip if already has base path, is external URL, or data URI
+    if (imageSrc.startsWith('http') || imageSrc.startsWith('data:') || imageSrc.startsWith('//')) {
+      return imageSrc;
+    }
+    
+    const basePath = getBasePath();
+    // Check if base path is already included
+    if (imageSrc.startsWith(basePath)) {
+      return imageSrc;
+    }
+    
+    // Add base path if it starts with /
+    if (imageSrc.startsWith('/')) {
+      return `${basePath}${imageSrc}`;
+    }
+    
+    return imageSrc;
+  };
+
+  const normalizedSrc = normalizeSrc(src);
+  const normalizedFallbackSrc = fallbackSrc ? normalizeSrc(fallbackSrc) : undefined;
   const [isLoaded, setIsLoaded] = useState(false);
   const [hasError, setHasError] = useState(false);
   const [isInView, setIsInView] = useState(false);
@@ -76,7 +105,7 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
     onError?.();
   };
 
-  const currentSrc = hasError && fallbackSrc ? fallbackSrc : src;
+  const currentSrc = hasError && normalizedFallbackSrc ? normalizedFallbackSrc : normalizedSrc;
 
   return (
     <div className={`relative overflow-hidden ${className}`}>

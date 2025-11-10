@@ -71,8 +71,8 @@ const Navbar = () => {
 
         <NavLink to="/" className="text-2xl font-bold text-primary-600 flex items-center space-x-2">
             <img 
-              src="/black_logo.png" 
-              alt="Kuno National Park Logo"  
+              src={`${import.meta.env.BASE_URL}ff_logo.png`}
+              alt="Finding Fauna Logo"  
               className="w-12 h-auto" 
               style={{ maxHeight: '48px' }}
             />

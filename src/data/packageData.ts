@@ -45,7 +45,7 @@ export const packageData: Package[] = [
     location: 'Kuno and Madhav National Park, MP',
     duration: '4 Days 3 Nights',
     price: 32000,
-    image: '/3bigcats.png',
+    image: `${import.meta.env.BASE_URL}3bigcats.png`,
     highlights: [
       'Spot cheetahs, tigers, and leopards',
       'Safaris across Kuno and Madhav National Parks',
@@ -70,7 +70,7 @@ export const packageData: Package[] = [
     location: 'Kuno National Park, MP',
     duration: '4 Days 3 Nights',
     price: 35000,
-    image: '/4in1.jpg',
+    image: `${import.meta.env.BASE_URL}4in1.jpg`,
     highlights: [
       'Spot tigers, leopards, cheetahs, and gharials',
       'Experience thrilling jungle and boat safaris',
