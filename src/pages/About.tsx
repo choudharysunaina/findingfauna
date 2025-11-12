@@ -6,7 +6,7 @@ import { Check, Award, Users, Clock, Zap, Heart } from 'lucide-react';
 const About = () => {
   useEffect(() => {
     // Update page title
-    document.title = 'About Us | Nivedya';
+    document.title = 'About Us | Finding Fauna';
   }, []);
 
   const team = [
@@ -128,7 +128,7 @@ const About = () => {
               
               {/* Year badges */}
               <div className="absolute top-0 left-0 -mt-6 -ml-6 bg-primary-600 text-white py-2 px-4 rounded-lg shadow-lg">
-                <span className="font-bold">Since 2015</span>
+                <span className="font-bold">Since 2021</span>
               </div>
               
               <div className="absolute bottom-0 right-0 -mb-6 -mr-6 bg-white py-4 px-6 rounded-lg shadow-lg">
