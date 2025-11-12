@@ -46,7 +46,7 @@ const ExperienceSection = () => {
               transition={{ duration: 0.5, delay: 0.5 }}
             >
               <Link to="/about" className="btn-primary">
-                Watch More
+                Watch Now
               </Link>
             </motion.div>
           </div>
@@ -61,13 +61,13 @@ const ExperienceSection = () => {
            <div className="relative z-10 rounded-lg overflow-hidden shadow-xl group">
             {/* Video Thumbnail */}
             <img
-                src={`${import.meta.env.BASE_URL}more_info.jpg`}
+                src={`${import.meta.env.BASE_URL}cheetahandme.jpg`}
                 alt="Kuno Safari Experience Video"
                 className="w-full h-auto object-cover cursor-pointer transition-opacity duration-300 group-hover:opacity-80"
             />
             {/* Play Button Overlay */}
             <button
-                className="absolute inset-0 flex items-center justify-center text-white text-5xl bg-black bg-opacity-40 transition group-hover:bg-opacity-60"
+                className="absolute inset-0 flex items-center justify-center text-white text-5xl bg-black bg-opacity-5 transition group-hover:bg-opacity-60"
                 aria-label="Play Video"
                 onClick={() => window.open('https://www.youtube.com/@findingfauna', '_blank')}
                 style={{ outline: 'none', border: 'none' }}
