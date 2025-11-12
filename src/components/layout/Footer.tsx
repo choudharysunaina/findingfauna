@@ -85,17 +85,17 @@ const Footer = () => {
             <ul className="space-y-2">
               <li>
                 <NavLink to="/package/kuno-cheetah-safari-package" className="text-neutral-300 hover:text-white transition-colors">
-                 Cheetah Safari
+                 Kuno Cheetah Safari
                 </NavLink>
               </li>
               <li>
                 <NavLink to="/package/big-cat-safari-package" className="text-neutral-300 hover:text-white transition-colors">
-                  BigCat Safari
+                  3 Big Cats Safari
                 </NavLink>
               </li>
               <li>
                 <NavLink to="/package/photography-package" className="text-neutral-300 hover:text-white transition-colors">
-                  Photography
+                  4 in 1 Safari
                 </NavLink>
               </li>
             </ul>
