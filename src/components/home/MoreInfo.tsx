@@ -1,5 +1,5 @@
 
-
+import { Link } from 'react-router-dom';
 import ResponsiveImage from '../ui/ResponsiveImage';
 
 const MoreInfo = () => {
@@ -11,16 +11,16 @@ const MoreInfo = () => {
          <div className="order-2 lg:order-1">
         <h2 className="text-3xl font-bold mb-6">Witness the Indian Cheetah</h2>
         <p className="text-neutral-600 text-lg md:text-s mb-8 max-w-xl">
-          Be among the privileged few to witness these magnificent cheetahs in their natural habitat, a powerful testament to India's remarkable conservation success. Our expertly guided safaris offer you the unparalleled opportunity to spot these swift and elusive predators, alongside Kuno's diverse and fascinating wildlife. Traverse the scenic landscapes of Kuno National Park, home to thriving populations of leopards, sloth bears, hyenas, wolves, various deer species, and a vibrant array of birdlife, all while experiencing the thrill of the search – with your camera, of course! Book your unforgettable cheetah safari today and create memories that will last a lifetime.
+          Experience the magic of Kuno National Park this winter, where golden grasslands and dense forests set the stage for unforgettable wildlife encounters. As the only place to see cheetahs in India, Kuno offers a truly exclusive cheetah safari, along with sightings of leopards, sloth bears, hyenas, jackals, deer species, and diverse birdlife. Every safari leads you through open meadows, rocky terrains, and lush forests—perfect for breathtaking photography. Located near Ranthambore and Madhav Tiger Reserve, Kuno is among India’s most exciting wildlife destinations. If you’re wondering how to book Kuno safari, now is the time to plan your adventure.
         </p>
        
         <div className="mt-4">
-          <a
-            href="/contact"
+          <Link
+            to="/contact"
             className="btn-primary"
           >
             More info
-          </a>
+          </Link>
         </div>
          </div>
      
