@@ -68,12 +68,12 @@ const PackagesSection = () => {
     {
         imageUrl: '/family.jpg',
         title: 'Family',
-        description: 'Customized photo-focused itineraries, On-field photography tips and hacks, Dedicated expert guide and driver, Post-processing session after safari'
+        description: 'Customized best jungle experiences, Expert guide and family driver, Diverse outdoor activities, Detailed Kuno history sessions'
     },
    {
         imageUrl: '/photographer.jpg',
         title: 'Photographers',
-        description: 'Customized best jungle experiences, Expert guide and family driver, Diverse outdoor activities, Detailed Kuno history sessions'
+        description: 'Customized photo-focused itineraries, On-field photography tips and hacks, Dedicated expert guide and driver, Post-processing session after safari'
     },
    {
         imageUrl: '/couple.jpg',
@@ -86,8 +86,8 @@ const PackagesSection = () => {
     <section id="packages" className="section bg-white">
       <div className="container">
         <SectionHeading
-          title="Discover Kuno: Tailored Trips"
-          subtitle="For families, couples, or photographers – experience Kuno with custom plans, expert guides, and unforgettable moments in the wild."
+          title="Discover Kuno National Park"
+          subtitle="Tailored Trips for families, couples, or photographers – experience Kuno with custom plans, expert guides, and unforgettable moments in the wild."
           center
         />
 
