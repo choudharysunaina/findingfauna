@@ -1,6 +1,10 @@
 import { Link, NavLink } from 'react-router-dom';
 import { Facebook, Instagram, Twitter, Linkedin, Mail, Phone, MapPin } from 'lucide-react';
 
+ const handleClick = () => {
+    window.scrollTo(0, 0);
+  };
+
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
@@ -52,27 +56,27 @@ const Footer = () => {
             <h4 className="text-xl font-bold mb-4">Quick Links</h4>
             <ul className="space-y-2">
               <li>
-                <NavLink to="/" className="text-neutral-300 hover:text-white transition-colors">
+                <NavLink onClick={handleClick} to="/" className="text-neutral-300 hover:text-white transition-colors">
                   Home
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/about" className="text-neutral-300 hover:text-white transition-colors">
+                <NavLink onClick={handleClick} to="/about" className="text-neutral-300 hover:text-white transition-colors">
                   About
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/packages" className="text-neutral-300 hover:text-white transition-colors">
+                <NavLink onClick={handleClick} to="/packages" className="text-neutral-300 hover:text-white transition-colors">
                   Packages
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/contact" className="text-neutral-300 hover:text-white transition-colors">
+                <NavLink onClick={handleClick} to="/contact" className="text-neutral-300 hover:text-white transition-colors">
                   Contact
                 </NavLink>
               </li>
                <li>
-                <NavLink to="/beyond-safari" className="text-neutral-300 hover:text-white transition-colors">
+                <NavLink onClick={handleClick} to="/beyond-safari" className="text-neutral-300 hover:text-white transition-colors">
                   Beyond Safari
                 </NavLink>
               </li>
@@ -84,17 +88,17 @@ const Footer = () => {
             <h4 className="text-xl font-bold mb-4">Packages</h4>
             <ul className="space-y-2">
               <li>
-                <NavLink to="/package/kuno-cheetah-safari-package" className="text-neutral-300 hover:text-white transition-colors">
+                <NavLink onClick={handleClick} to="/package/kuno-cheetah-safari-package" className="text-neutral-300 hover:text-white transition-colors">
                  Kuno Cheetah Safari
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/package/big-cat-safari-package" className="text-neutral-300 hover:text-white transition-colors">
+                <NavLink onClick={handleClick} to="/package/big-cat-safari-package" className="text-neutral-300 hover:text-white transition-colors">
                   3 Big Cats Safari
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/package/photography-package" className="text-neutral-300 hover:text-white transition-colors">
+                <NavLink onClick={handleClick} to="/package/photography-package" className="text-neutral-300 hover:text-white transition-colors">
                   4 in 1 Safari
                 </NavLink>
               </li>
@@ -138,10 +142,10 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row justify-between items-center text-neutral-400 text-sm">
           <p>&copy; {currentYear} Finding Fauna. All rights reserved.</p>
           <div className="mt-4 md:mt-0 flex space-x-6">
-             <Link to="/privacy-policy" className="hover:text-white transition-colors">
+             <Link onClick={handleClick} to="/privacy-policy" className="hover:text-white transition-colors">
               Privacy Policy
             </Link>
-            <Link to="/terms-and-conditions" className="text-sm hover:underline">
+            <Link onClick={handleClick} to="/terms-and-conditions" className="text-sm hover:underline">
             Terms and Conditions
           </Link>
           </div>
