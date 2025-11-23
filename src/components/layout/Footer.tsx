@@ -72,7 +72,7 @@ const Footer = () => {
                 </NavLink>
               </li>
                <li>
-                <NavLink to="//beyond-safari" className="text-neutral-300 hover:text-white transition-colors">
+                <NavLink to="/beyond-safari" className="text-neutral-300 hover:text-white transition-colors">
                   Beyond Safari
                 </NavLink>
               </li>
