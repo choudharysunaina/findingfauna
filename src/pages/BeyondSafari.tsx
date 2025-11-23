@@ -27,7 +27,7 @@ const stories = [
     image: "/cheetah.jpg",
   },
   {
-    title: "Rare Melanistic Indian Gray Wolf Puppies Spotted",
+    title: "Rare Melanistic Indian Wolf Puppies Spotted",
     description: "An extraordinary discovery—capturing the rare black-furred wolf pups thriving in the wild was a breathtaking experience.",
     image: "/wolf_puppies.jpg",
   },
