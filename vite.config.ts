@@ -15,9 +15,9 @@ export default defineConfig(({ command }) => {
     },
   };
 
-  // Only add base path for production builds (GitHub Pages)
+  // Base path for custom domain (root path)
   if (command === 'build') {
-    config.base = '/findingfauna/'; // Note: trailing slash is important for GitHub Pages
+    config.base = '/'; // Root path for custom domain deployment
   }
 
   return config;

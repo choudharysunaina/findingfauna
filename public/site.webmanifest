@@ -13,7 +13,7 @@
   "theme_color": "#059669",
   "background_color": "#ffffff",
   "display": "standalone",
-  "start_url": "/findingfauna/",
-  "scope": "/findingfauna/"
+  "start_url": "/",
+  "scope": "/"
 }
 
