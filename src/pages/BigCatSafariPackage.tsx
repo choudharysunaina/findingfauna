@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useForm } from 'react-hook-form';
 import { 
@@ -34,6 +34,7 @@ import {
 } from 'lucide-react';
 import SectionHeading from '../components/ui/SectionHeading';
 import ContactSection from '../components/home/ContactSection';
+import { Link } from 'react-router-dom';
 
 interface ContactFormData {
   name: string;
@@ -225,6 +226,11 @@ const BigCatSafariPackage = () => {
     alert('Thank you for your message! We will get back to you soon.');
     reset();
   };
+  const itineraryRef = useRef<HTMLDivElement>(null); // Create a reference for the Detailed Itinerary section
+
+  const scrollToItinerary = () => {
+    itineraryRef.current?.scrollIntoView({ behavior: 'smooth' }); // Scroll to the section smoothly
+  };
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -291,7 +297,7 @@ const BigCatSafariPackage = () => {
                 transition={{ duration: 0.6, delay: 0.6 }}
                 className="flex flex-col sm:flex-row gap-4"
               >
-                <button className="btn-primary">
+                <button className="btn-primary" onClick={scrollToItinerary}>
                   Get details
                 </button>
               </motion.div>
@@ -336,7 +342,7 @@ const BigCatSafariPackage = () => {
 
      
       {/* Detailed Itinerary */}
-      <section className="section bg-gray-50">
+      <section className="section bg-gray-50"  ref={itineraryRef}>
         <div className="container">
           <SectionHeading
             title="Detailed Itinerary"
@@ -536,9 +542,9 @@ const BigCatSafariPackage = () => {
                           <span className="text-sm font-normal text-gray-500">/person</span>
                         </p>
                       </div>
-                      <button className="btn-primary">
-                        Book
-                      </button>
+                       <Link to="/contact" className="btn-primary">
+                        Book now
+                      </Link>
                     </div>
                   </div>
                 </div>
