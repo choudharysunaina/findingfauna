@@ -104,6 +104,10 @@ const handleClick = () => {
     window.scrollTo(0, 0);
 };
 
+  .force-break {
+  word-wrap: break-word;
+  word-break: break-all;
+}
 
 /* Packages Page Styles */
 .packages-page {
