@@ -88,6 +88,11 @@
   to { transform: translateY(0); opacity: 1; }
 }
 
+/* Prevent horizontal scrolling */
+html, body {
+  overflow-x: hidden;
+}
+
 /* Packages Page Styles */
 .packages-page {
   font-family: 'Arial', sans-serif;
