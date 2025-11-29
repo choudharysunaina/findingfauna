@@ -542,9 +542,9 @@ const PhotographyPackage = () => {
                           <span className="text-sm font-normal text-gray-500">/person</span>
                         </p>
                       </div>
-                      <button className="btn-primary">
+                      <Link to="/contact" className="btn-primary">
                         Book now
-                      </button>
+                      </Link>
                     </div>
                   </div>
                 </div>
