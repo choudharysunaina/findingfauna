@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useForm } from 'react-hook-form';
 import { 
@@ -226,6 +226,12 @@ const PhotographyPackage = () => {
     reset();
   };
 
+  const itineraryRef = useRef<HTMLDivElement>(null); // Create a reference for the Detailed Itinerary section
+
+  const scrollToItinerary = () => {
+    itineraryRef.current?.scrollIntoView({ behavior: 'smooth' }); // Scroll to the section smoothly
+  };
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
@@ -291,7 +297,7 @@ const PhotographyPackage = () => {
                 transition={{ duration: 0.6, delay: 0.6 }}
                 className="flex flex-col sm:flex-row gap-4"
               >
-                <button className="btn-primary">
+                <button className="btn-primary" onClick={scrollToItinerary}>
                   Get details
                 </button>
               </motion.div>
@@ -336,7 +342,7 @@ const PhotographyPackage = () => {
 
 
       {/* Detailed Itinerary */}
-      <section className="section bg-gray-50">
+      <section className="section bg-gray-50" ref={itineraryRef}>
         <div className="container">
           <SectionHeading
             title="Detailed Itinerary"
