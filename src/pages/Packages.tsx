@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ChevronRight, MapPin, Calendar, Users, Star, Phone, Mail, Send, CheckCircle } from 'lucide-react';
 import SectionHeading from '../components/ui/SectionHeading';
@@ -43,6 +44,10 @@ const testimonials: Testimonial[] = [
 ];
 
 const Packages: React.FC = () => {
+const itineraryRef = useRef<HTMLDivElement>(null); // Create a reference for the Detailed Itinerary section
+const scrollToItinerary = () => {
+    itineraryRef.current?.scrollIntoView({ behavior: 'smooth' }); // Scroll to the section smoothly
+  };
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
@@ -78,7 +83,7 @@ const Packages: React.FC = () => {
             transition={{ duration: 0.8, delay: 0.4 }}
           >
             <Link
-              to="#packages"
+              to="#packages" onClick={scrollToItinerary}
               className="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg transition-colors duration-200"
             >
               Explore Packages
@@ -89,7 +94,7 @@ const Packages: React.FC = () => {
       </section>
 
       {/* Packages Grid */}
-      <section id="packages" className="section bg-white">
+      <section id="packages" className="section bg-white" ref={itineraryRef}>
         <div className="container">
           <SectionHeading
             title="Our Safari Packages"
