@@ -2,6 +2,10 @@
 import { Link } from 'react-router-dom';
 import ResponsiveImage from '../ui/ResponsiveImage';
 
+const handleClick = () => {
+    window.scrollTo(0, 0);
+};
+
 const MoreInfo = () => {
   return (
     <section className="section bg-neutral-50">
@@ -15,7 +19,7 @@ const MoreInfo = () => {
         </p>
        
         <div className="mt-4">
-          <Link
+          <Link onClick={handleClick}
             to="/contact"
             className="btn-primary"
           >
