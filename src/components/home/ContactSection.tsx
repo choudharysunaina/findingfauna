@@ -89,7 +89,7 @@ const ContactSection = () => {
                              <h4 className="font-medium text-lg">Email Us</h4>
                              <a
                                href="mailto:contact.findingfauna@gmail.com"
-                               className="text-neutral-600 hover:text-primary-600 transition-colors"
+                               className="text-neutral-600 hover:text-primary-600 transition-colors force-break"
                              >
                                contact.findingfauna@gmail.com
                              </a>
@@ -151,11 +151,11 @@ const ContactSection = () => {
                        <h4 className="font-semibold text-lg mb-4">Business Hours</h4>
                        <ul className="space-y-3">
                          <li className="flex justify-between">
-                           <span className="text-neutral-600">Monday - Friday:</span>
+                           <span className="text-neutral-600">Mon - Fri:</span>
                            <span className="font-medium">9:00 AM - 6:00 PM</span>
                          </li>
                          <li className="flex justify-between">
-                           <span className="text-neutral-600">Saturday-Sunday:</span>
+                           <span className="text-neutral-600">Sat - Sun:</span>
                            <span className="font-medium">10:00 AM - 4:00 PM</span>
                          </li>
                        </ul>
