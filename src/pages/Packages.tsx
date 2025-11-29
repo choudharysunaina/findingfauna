@@ -19,27 +19,27 @@ interface Testimonial {
 const testimonials: Testimonial[] = [
   {
     id: 1,
-    name: "Rajesh Kumar",
-    role: "Wildlife Photographer",
-    content: "The Big Cat Safari exceeded all my expectations. The guides were incredibly knowledgeable and helped me capture stunning shots of the tigers. The accommodation was comfortable and the entire experience was seamless.",
+    name: "Dr.Manish Ranjan",
+    role: "Army Major",
+    content: "My visit to Kuno was planned at a very short notice and relevant searches on the internet did not help me much except that I happened to watch videos posted on YouTube by Mr Nived...I reached out to him and he was way too courteous to explain all that I needed to have my experience of the place a memorable one. Overall I highly recommend that future travellers to this place or others must get in touch with him to have a hassle free genuine experience.",
     rating: 5,
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face"
+    image: "/clients/major.jpg"
   },
   {
     id: 2,
-    name: "Priya Sharma",
-    role: "Travel Blogger",
-    content: "Finding Fauna made my dream of seeing cheetahs in India come true! The Kuno Cheetah Safari was perfectly organized, and the guides shared fascinating insights about cheetah behavior and conservation.",
+    name: "Minakshi Sharma",
+    role: "Principal",
+    content: "The safari experience was fantastic! The gypsy ride was smooth, and Nived’s knowledge of flora and fauna was truly impressive. We especially appreciated the insights shared about future plans for other wildlife sanctuaries — made the journey even more enriching!",
     rating: 5,
-    image: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=100&h=100&fit=crop&crop=face"
+    image: "/clients/principal.jpg"
   },
   {
     id: 3,
-    name: "Amit Patel",
-    role: "Nature Enthusiast",
-    content: "The Wildlife Photography Package was worth every penny. The photography guide helped me improve my wildlife photography skills significantly. The small group size ensured personalized attention.",
+    name: "Aditya Arvind Manekar",
+    role: "Doctor",
+    content: "I had the absolute pleasure of experiencing a wildlife safari tour curated and guided by Nived Yadav and his brother Laabh, covering the breathtaking landscapes of Kuno National Park, Madhav Tiger Reserve, and the Chambal Gharial Sanctuary. From start to finish, their warm hospitality and seamless arrangements made the entire journey unforgettable.  The accommodations arranged were comfortable, ensuring that we had a restful stay. Anil ji, at the stay made sure we dont miss our homefood.",
     rating: 5,
-    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face"
+    image: "/clients/draditya.jpg"
   }
 ];
 
