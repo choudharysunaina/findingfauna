@@ -126,7 +126,7 @@ const PackagesSection = () => {
           transition={{ duration: 0.5, delay: 0.6 }}
           className="mt-16 text-center"
         >
-          <Link to="/packages" className="btn-primary">
+          <Link onClick={handleClick} to="/packages" className="btn-primary">
             View All Packages
           </Link>
         </motion.div>
