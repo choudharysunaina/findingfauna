@@ -34,6 +34,7 @@ import {
 } from 'lucide-react';
 import SectionHeading from '../components/ui/SectionHeading';
 import ContactSection from '../components/home/ContactSection';
+import { Link } from 'react-router-dom';
 
 interface ContactFormData {
   name: string;
