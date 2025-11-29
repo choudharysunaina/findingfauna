@@ -45,9 +45,9 @@ const ExperienceSection = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.5 }}
             >
-              <Link to="/about" className="btn-primary">
-                Watch Now
-              </Link>
+              <button onClick={() => window.open('https://www.youtube.com/@findingfauna', '_blank')} className="btn-primary">
+                Watch More
+              </button>
             </motion.div>
           </div>
 
