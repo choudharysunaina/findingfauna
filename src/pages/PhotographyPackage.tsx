@@ -638,94 +638,10 @@ const PhotographyPackage = () => {
         </div>
       </section>
 
-      {/* Contact Section */}
-      <section className="section bg-gray-50">
-        <div className="container">
-          <SectionHeading
-            title="Book Your Wildlife Adventure"
-            subtitle="Ready to experience the thrill of cheetah conservation? Get in touch with us to plan your perfect Kuno National Park adventure."
-            center
-          />
-          
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            {/* Contact Information */}
-            <div className="space-y-8">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5 }}
-                className="bg-white rounded-xl p-8 shadow-lg"
-              >
-                <h3 className="text-2xl font-bold text-gray-900 mb-6">Get In Touch</h3>
-                
-                <div className="space-y-6">
-                  <div className="flex items-start space-x-4">
-                    <div className="w-12 h-12 forest-600 text-white rounded-lg flex items-center justify-center flex-shrink-0">
-                      <Phone size={20} />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-gray-900">Phone</h4>
-                      <p className="text-gray-600">+91 6161671283</p>
-                      <p className="text-sm text-gray-500">Available 9 AM - 7 PM</p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-start space-x-4">
-                    <div className="w-12 h-12 forest-600 text-white rounded-lg flex items-center justify-center flex-shrink-0">
-                      <Mail size={20} />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-gray-900">Email</h4>
-                      <p className="text-gray-600">contact.findingfauna@gmail.com</p>
-                      <p className="text-sm text-gray-500">We'll respond within 24 hours</p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-start space-x-4">
-                    <div className="w-12 h-12 forest-600 text-white rounded-lg flex items-center justify-center flex-shrink-0">
-                      <MapPin size={20} />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-gray-900">Location</h4>
-                      <p className="text-gray-600">Kuno National Park</p>
-                      <p className="text-sm text-gray-500">Sheopur District, Madhya Pradesh</p>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-              
-              {/* Pricing Card */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-                className="bg-gradient-to-br from-forest-600 to-forest-700 text-white rounded-xl p-8"
-              >
-                <h3 className="text-2xl font-bold mb-4">Package Pricing</h3>
-                <div className="space-y-4">
-                  <div className="flex justify-between items-center">
-                    <span>Standard Accommodation</span>
-                    <span className="text-2xl font-bold">₹25,000</span>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span>Premium Accommodation</span>
-                    <span className="text-2xl font-bold">₹35,000</span>
-                  </div>
-                  <div className="border-t border-forest-500 pt-4 mt-4">
-                    <p className="text-sm opacity-90">*Per person for 3N/4D package</p>
-                    <p className="text-sm opacity-90">*Group discounts available</p>
-                  </div>
-                </div>
-              </motion.div>
-            </div>
-           {/* Contact Section */}
-           <ContactSection/>
-          </div>
-        </div>
-      </section>
 
+     {/* Contact Section */}
+     <ContactSection/>
+         
     </div>
   );
 };
