@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { ChevronRight, MapPin, Calendar, Users, Star, Phone, Mail, Send, CheckCircle } from 'lucide-react';
 import SectionHeading from '../components/ui/SectionHeading';
 import { packageData, Package } from '../data/packageData';
+import ContactSection from '../components/home/ContactSection';
 
 interface Testimonial {
   id: number;
@@ -397,94 +398,7 @@ const Packages: React.FC = () => {
           </div>
         </div>
       </section>
-
-      {/* Contact Section */}
-      <section className="section bg-gray-50">
-        <div className="container">
-          <SectionHeading
-            title="Ready to Book?"
-            subtitle="Get in touch with our team to plan your perfect wildlife adventure"
-            center
-          />
-          
-          <div className="max-w-4xl mx-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-              <div className="space-y-6">
-                <h3 className="text-2xl font-bold text-gray-900">Contact Information</h3>
-                <div className="space-y-4">
-                  <div className="flex items-center space-x-4">
-                    <div className="w-12 h-12 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center">
-                      <Phone className="w-6 h-6" />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-gray-900">Phone</h4>
-                      <p className="text-gray-600">+91 6161671283</p>
-                      <p className="text-sm text-gray-500">Available 9 AM - 7 PM</p>
-                    </div>
-                  </div>
-                  <div className="flex items-center space-x-4">
-                    <div className="w-12 h-12 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center">
-                      <Mail className="w-6 h-6" />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-gray-900">Email</h4>
-                      <p className="text-gray-600">contact.findingfauna@gmail.com</p>
-                      <p className="text-sm text-gray-500">We'll respond within 24 hours</p>
-                    </div>
-                  </div>
-                  <div className="flex items-center space-x-4">
-                    <div className="w-12 h-12 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center">
-                      <MapPin className="w-6 h-6" />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-gray-900">Location</h4>
-                      <p className="text-gray-600">Kuno National Park, Madhya Pradesh</p>
-                      <p className="text-sm text-gray-500">Sheopur district</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
-              <div className="bg-white rounded-xl p-8 shadow-lg">
-                <h3 className="text-xl font-bold text-gray-900 mb-4">Quick Inquiry</h3>
-                <p className="text-gray-600 mb-6">
-                  Have questions about our packages? Fill out the form below and we'll get back to you within 24 hours.
-                </p>
-                <form className="space-y-4">
-                  <div>
-                    <input
-                      type="text"
-                      placeholder="Your Name"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    />
-                  </div>
-                  <div>
-                    <input
-                      type="email"
-                      placeholder="Your Email"
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    />
-                  </div>
-                  <div>
-                    <textarea
-                      placeholder="Your Message"
-                      rows={4}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    />
-                  </div>
-                  <button
-                    type="submit"
-                    className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded-lg transition-colors duration-200 flex items-center justify-center"
-                  >
-                    Send Message
-                    <Send className="w-4 h-4 ml-2" />
-                  </button>
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <ContactSection />
     </div>
   );
 };
