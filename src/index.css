@@ -12,6 +12,7 @@
   
   body {
     @apply bg-neutral-50 text-neutral-900 antialiased;
+    background-color: #ffffff; /* Default background color */
   }
   
   h1, h2, h3, h4, h5, h6 {
@@ -36,6 +37,12 @@
   
   p {
     @apply leading-relaxed;
+  }
+}
+/* Background for mobile devices (screen width less than 768px) */
+@media (max-width: 768px) {
+  body {
+    background-color: #f9f9f9; /* Change this to your desired background color */
   }
 }
 
