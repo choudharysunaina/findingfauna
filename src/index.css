@@ -100,6 +100,11 @@ html, body {
   overflow-x: hidden;
 }
 
+const handleClick = () => {
+    window.scrollTo(0, 0);
+};
+
+
 /* Packages Page Styles */
 .packages-page {
   font-family: 'Arial', sans-serif;
