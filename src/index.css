@@ -100,11 +100,7 @@ html, body {
   overflow-x: hidden;
 }
 
-const handleClick = () => {
-    window.scrollTo(0, 0);
-};
-
-  .force-break {
+.force-break {
   word-wrap: break-word;
   word-break: break-all;
 }
