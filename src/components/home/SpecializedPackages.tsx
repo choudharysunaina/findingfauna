@@ -4,6 +4,10 @@ import { Link } from 'react-router-dom';
 import ResponsiveImage from '../ui/ResponsiveImage';
 import { useRef } from 'react';
 
+const handleClick = () => {
+  window.scrollTo(0, 0);
+};
+
 interface PackageCardProps {
   imageUrl: string;
   title: string;
