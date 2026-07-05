@@ -19,7 +19,7 @@ const SEOHead: React.FC<SEOHeadProps> = ({
   description,
   keywords = 'Kuno National Park, Cheetah Safari, Wildlife Safari, Madhya Pradesh, India, Wildlife Conservation, Safari Packages, Photography Safari',
   canonical,
-  ogImage = '/cheetah.jpg',
+  ogImage = '/home/cheetah.jpg',
   ogType = 'website',
   twitterCard = 'summary_large_image',
   structuredData,
@@ -36,8 +36,8 @@ const SEOHead: React.FC<SEOHeadProps> = ({
     "description": "Experience the thrill of spotting wild cheetahs, leopards, and diverse wildlife in India's premier national park.",
     "url": "https://kunosafari.com",
     "image": [
-      "https://kunosafari.com/cheetah.jpg",
-      "https://kunosafari.com/leopard.jpg",
+      "https://kunosafari.com/home/cheetah.jpg",
+      "https://kunosafari.com/home/leopard.jpg",
       "https://kunosafari.com/wildlife.jpg"
     ],
     "address": {
@@ -124,9 +124,9 @@ const SEOHead: React.FC<SEOHeadProps> = ({
       <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       
       {/* Favicon and App Icons */}
-      <link rel="icon" type="image/png" href="/ff_logo.png" />
-      <link rel="apple-touch-icon" href="/ff_logo.png" />
-      <link rel="manifest" href={`${import.meta.env.BASE_URL}site.webmanifest`} />
+      <link rel="icon" type="image/png" href="/icons/ff_logo.png" />
+      <link rel="apple-touch-icon" href="/icons/ff_logo.png" />
+      <link rel="manifest" href={`${import.meta.env.BASE_URL}icons/site.webmanifest`} />
     </Helmet>
   );
 };

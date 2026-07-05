@@ -1,0 +1,193 @@
+import { useEffect, useState } from 'react';
+import { BlogPost, blogData as fallbackPosts } from '../data/blogData';
+import { BLOG_SHEET_CSV_URL } from '../config/blogSheet';
+
+function parseCSV(text: string): string[][] {
+  const rows: string[][] = [];
+  let row: string[] = [];
+  let field = '';
+  let inQuotes = false;
+  let i = 0;
+
+  while (i < text.length) {
+    const char = text[i];
+
+    if (inQuotes) {
+      if (char === '"') {
+        if (text[i + 1] === '"') {
+          field += '"';
+          i += 2;
+          continue;
+        }
+        inQuotes = false;
+        i++;
+        continue;
+      }
+      field += char;
+      i++;
+      continue;
+    }
+
+    if (char === '"') {
+      inQuotes = true;
+      i++;
+      continue;
+    }
+    if (char === ',') {
+      row.push(field);
+      field = '';
+      i++;
+      continue;
+    }
+    if (char === '\r') {
+      i++;
+      continue;
+    }
+    if (char === '\n') {
+      row.push(field);
+      rows.push(row);
+      row = [];
+      field = '';
+      i++;
+      continue;
+    }
+    field += char;
+    i++;
+  }
+
+  if (field.length > 0 || row.length > 0) {
+    row.push(field);
+    rows.push(row);
+  }
+
+  return rows;
+}
+
+function rowsToObjects(rows: string[][]): Record<string, string>[] {
+  const [header, ...body] = rows;
+  if (!header) return [];
+
+  return body
+    .filter((r) => r.some((cell) => cell.trim() !== ''))
+    .map((r) => {
+      const obj: Record<string, string> = {};
+      header.forEach((h, idx) => {
+        obj[h.trim()] = (r[idx] ?? '').trim();
+      });
+      return obj;
+    });
+}
+
+function resolveBlogImage(filename: string): string {
+  if (!filename) return '';
+  if (filename.startsWith('http')) return filename;
+  const base = import.meta.env.BASE_URL || '/';
+  return `${base}blog-images/${filename.replace(/^\/+/, '')}`;
+}
+
+function toBlogPost(obj: Record<string, string>): BlogPost {
+  return {
+    slug: obj.slug,
+    title: obj.title,
+    category: obj.category,
+    author: obj.author,
+    date: obj.date,
+    readTime: obj.readTime,
+    excerpt: obj.excerpt,
+    coverImage: resolveBlogImage(obj.coverImage),
+    content: obj.content,
+    image1: obj.image1 ? resolveBlogImage(obj.image1) : undefined,
+    image2: obj.image2 ? resolveBlogImage(obj.image2) : undefined,
+    image3: obj.image3 ? resolveBlogImage(obj.image3) : undefined,
+  };
+}
+
+async function loadPosts(): Promise<BlogPost[]> {
+  try {
+    if (!BLOG_SHEET_CSV_URL.startsWith('http')) {
+      throw new Error('Blog sheet URL not configured');
+    }
+    const res = await fetch(BLOG_SHEET_CSV_URL, { cache: 'no-store' });
+    if (!res.ok) throw new Error(`Failed to fetch blog sheet: ${res.status}`);
+    const text = await res.text();
+    const posts = rowsToObjects(parseCSV(text))
+      .map(toBlogPost)
+      .filter((p) => p.slug && p.title);
+    return posts.length > 0 ? posts : fallbackPosts;
+  } catch (err) {
+    console.warn('Falling back to local blog data:', err);
+    return fallbackPosts;
+  }
+}
+
+const CACHE_KEY = 'ff_blog_posts_cache_v1';
+
+function readCache(): BlogPost[] | null {
+  try {
+    const raw = sessionStorage.getItem(CACHE_KEY);
+    return raw ? JSON.parse(raw) : null;
+  } catch {
+    return null;
+  }
+}
+
+function writeCache(posts: BlogPost[]) {
+  try {
+    sessionStorage.setItem(CACHE_KEY, JSON.stringify(posts));
+  } catch {
+    // storage unavailable or full — safe to skip caching
+  }
+}
+
+export function useBlogPosts() {
+  const [posts, setPosts] = useState<BlogPost[]>(() => readCache() ?? fallbackPosts);
+  const [hasFetched, setHasFetched] = useState(false);
+
+  useEffect(() => {
+    let active = true;
+    loadPosts().then((fresh) => {
+      if (active) {
+        setPosts(fresh);
+        writeCache(fresh);
+        setHasFetched(true);
+      }
+    });
+    return () => {
+      active = false;
+    };
+  }, []);
+
+  return { posts, hasFetched };
+}
+
+export interface ContentBlock {
+  type: 'paragraph' | 'image';
+  text?: string;
+  srcs?: string[];
+}
+
+export function parseContentBlocks(post: BlogPost): ContentBlock[] {
+  const imageMap: Record<string, string | undefined> = {
+    '1': post.image1,
+    '2': post.image2,
+    '3': post.image3,
+  };
+
+  return post.content
+    .split(/\n\s*\n/)
+    .map((c) => c.trim())
+    .filter(Boolean)
+    .reduce<ContentBlock[]>((blocks, chunk) => {
+      const match = chunk.match(/^\{\{image:([1-3](?:,[1-3]){0,2})\}\}$/);
+      if (match) {
+        const srcs = match[1]
+          .split(',')
+          .map((n) => imageMap[n])
+          .filter((src): src is string => Boolean(src));
+        if (srcs.length > 0) blocks.push({ type: 'image', srcs });
+        return blocks;
+      }
+      blocks.push({ type: 'paragraph', text: chunk });
+      return blocks;
+    }, []);
+}

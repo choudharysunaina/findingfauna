@@ -80,6 +80,11 @@ const Footer = () => {
                   Beyond Safari
                 </NavLink>
               </li>
+              <li>
+                <NavLink onClick={handleClick} to="/kuno-national-park" className="text-neutral-300 hover:text-white transition-colors">
+                  Kuno National Park
+                </NavLink>
+              </li>
             </ul>
           </div>
 

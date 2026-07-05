@@ -11,7 +11,7 @@ interface SectionHeadingProps {
 const SectionHeading = ({
   title,
   subtitle,
-  center = false,
+  center = true,
   children,
 }: SectionHeadingProps) => {
   return (
@@ -20,13 +20,13 @@ const SectionHeading = ({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-100px' }}
       transition={{ duration: 0.5 }}
-      className={`mb-12 ${center ? 'text-center' : 'text-center'}`}
+      className={`mb-12 ${center ? 'text-center' : 'text-left'}`}
     >
       <h2 className="font-bold text-3xl md:text-4xl lg:text-5xl tracking-tight mb-4">
         {title}
       </h2>
       {subtitle && (
-        <p className="text-neutral-600 text-lg md:text-xl max-w-3xl mx-auto">
+        <p className={`text-neutral-600 text-lg md:text-xl max-w-3xl ${center ? 'mx-auto' : ''}`}>
           {subtitle}
         </p>
       )}
