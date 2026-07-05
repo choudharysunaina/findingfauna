@@ -546,4 +546,4 @@ const KunoNationalPark = () => {
   );
 };
 
-export default KunoNationalPa
+export default KunoNationalPark;
