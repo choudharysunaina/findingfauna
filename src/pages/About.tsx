@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import SectionHeading from '../components/ui/SectionHeading';
-import { Check, Award, Users, Clock, Zap, Heart } from 'lucide-react';
+import TrackedSection from '../components/tracking/TrackedSection';
 
 const About = () => {
   useEffect(() => {
@@ -13,52 +13,19 @@ const About = () => {
     {
       name: 'Nived Yadav',
       role: 'Founder',
-      image: '/nived.png',
+      image: '/about/nived.png',
     },
     {
       name: 'Laabh Yadav',
       role: 'Co-Founder',
-      image: '/laabh.jpg',
-    },
-  ];
-
-  const values = [
-    {
-      icon: <Users size={24} />,
-      title: 'Compassion for Wildlife',
-      description: 'We treat all animals with care and dignity, ensuring their safety and well-being come first.',
-    },
-    {
-      icon: <Award size={24} />,
-      title: 'Ethical Exploration',
-      description: 'We promote safaris and photography that celebrate nature without disturbing its delicate balance.',
-    },
-    {
-      icon: <Zap size={24} />,
-      title: 'Community Engagement',
-      description: 'By educating and involving local communities, we create lasting change and harmonious coexistence.',
-    },
-    {
-      icon: <Heart size={24} />,
-      title: 'Authentic Storytelling',
-      description: 'Through photography, films, and experiences, we share real stories that inspire awareness and action.',
-    },
-    {
-      icon: <Clock size={24} />,
-      title: 'Conservation Impact',
-      description: 'Our work goes beyond observation—rescuing animals, restoring habitats, and supporting forest departments.',
-    },
-    {
-      icon: <Check size={24} />,
-      title: 'Sustainable Future',
-      description: 'We champion responsible tourism and mindful practices that safeguard the wild for generations to come.',
+      image: '/about/laabh.jpg',
     },
   ];
 
   return (
     <>
       {/* Hero Section */}
-      <section className="py-20 bg-gradient-to-br from-primary-50 to-secondary-50">
+      <TrackedSection category="about" label="hero" className="py-20 bg-gradient-to-br from-primary-50 to-secondary-50">
         <div className="container">
           <div className="max-w-3xl mx-auto text-center">
             <motion.h1
@@ -79,10 +46,10 @@ const About = () => {
             </motion.p>
           </div>
         </div>
-      </section>
+      </TrackedSection>
 
       {/* Our Story Section */}
-      <section className="section bg-white">
+      <TrackedSection category="about" label="our_story" className="section bg-white">
         <div className="container">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <motion.div
@@ -121,7 +88,7 @@ const About = () => {
               className="relative"
             >
               <img
-                src={`${import.meta.env.BASE_URL}ourstory.jpg`}
+                src={`${import.meta.env.BASE_URL}about/ourstory.jpg`}
                 alt="Our team collaborating"
                 className="rounded-lg shadow-md w-full"
               />
@@ -150,40 +117,10 @@ const About = () => {
             </motion.div>
           </div>
         </div>
-      </section>
-
-      {/* Our Values Section */}
-      <section className="section bg-neutral-50">
-        <div className="container">
-          <SectionHeading
-            title="Our Values"
-            subtitle="The principles that guide our work and relationships."
-            center
-          />
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {values.map((value, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-white p-6 rounded-lg shadow-sm"
-              >
-                <div className="w-12 h-12 flex items-center justify-center rounded-lg bg-primary-100 text-primary-600 mb-4">
-                  {value.icon}
-                </div>
-                <h3 className="text-xl font-semibold mb-2">{value.title}</h3>
-                <p className="text-neutral-600">{value.description}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+      </TrackedSection>
 
       {/* Our Team Section */}
-      <section className="section bg-white">
+      <TrackedSection category="about" label="team" className="section bg-white">
         <div className="container">
           <SectionHeading
             title="Meet Our Team"
@@ -205,9 +142,9 @@ const About = () => {
                   <img
                     src={`${import.meta.env.BASE_URL}${member.image.startsWith('/') ? member.image.slice(1) : member.image}`}
                     alt={member.name}
-                    className="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-110"
+                    className="w-full h-80 object-cover"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                  <div className="flex items-end">
                     <div className="p-4 w-full">
                       <div className="flex justify-center space-x-4">
                         {/* Social icons would go here */}
@@ -215,7 +152,7 @@ const About = () => {
                     </div>
                   </div>
                 </div>
-                <div className="p-4 text-center">
+                <div className="text-center">
                   <h3 className="font-semibold text-lg">{member.name}</h3>
                   <p className="text-neutral-600">{member.role}</p>
                 </div>
@@ -223,7 +160,7 @@ const About = () => {
             ))}
           </div>
         </div>
-      </section>
+      </TrackedSection>
 
     </>
   );

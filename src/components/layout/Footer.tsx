@@ -1,9 +1,17 @@
 import { Link, NavLink } from 'react-router-dom';
 import { Facebook, Instagram, Twitter, Linkedin, Mail, Phone, MapPin } from 'lucide-react';
+import { trackEvent } from '../../utils/analytics';
 
- const handleClick = () => {
-    window.scrollTo(0, 0);
-  };
+// Scrolls to top on internal nav and records a GA4 footer click.
+const handleClick = (label: string) => () => {
+  window.scrollTo(0, 0);
+  trackEvent({ category: 'footer', action: 'click', label });
+};
+
+// Records a GA4 footer click without scrolling (external / tel / mail links).
+const trackFooter = (label: string) => () => {
+  trackEvent({ category: 'footer', action: 'click', label });
+};
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -19,29 +27,32 @@ const Footer = () => {
               Exploring the wild, telling its stories, and preserving its future.
             </p>
             <div className="flex space-x-4">
-              <a 
-                href="https://www.facebook.com/share/1JGyQ8mZVS/?mibextid=wwXIfr" 
-                target="_blank" 
+              <a
+                href="https://www.facebook.com/share/1JGyQ8mZVS/?mibextid=wwXIfr"
+                target="_blank"
                 rel="noopener noreferrer"
+                onClick={trackFooter('social_facebook')}
                 className="text-neutral-300 hover:text-primary-400 transition-colors"
                 aria-label="Facebook"
               >
                 <Facebook size={20} />
               </a>
-              <a 
-                href="https://www.instagram.com/finding_fauna/" 
-                target="_blank" 
+              <a
+                href="https://www.instagram.com/finding_fauna/"
+                target="_blank"
                 rel="noopener noreferrer"
+                onClick={trackFooter('social_instagram')}
                 className="text-neutral-300 hover:text-primary-400 transition-colors"
                 aria-label="Instagram"
               >
                 <Instagram size={20} />
               </a>
 
-                     <a 
-                href="https://www.linkedin.com/in/finding-fauna-1820b934a" 
-                target="_blank" 
+                     <a
+                href="https://www.linkedin.com/in/finding-fauna-1820b934a"
+                target="_blank"
                 rel="noopener noreferrer"
+                onClick={trackFooter('social_linkedin')}
                 className="text-neutral-300 hover:text-primary-400 transition-colors"
                 aria-label="LinkedIn"
               >
@@ -56,28 +67,33 @@ const Footer = () => {
             <h4 className="text-xl font-bold mb-4">Quick Links</h4>
             <ul className="space-y-2">
               <li>
-                <NavLink onClick={handleClick} to="/" className="text-neutral-300 hover:text-white transition-colors">
+                <NavLink onClick={handleClick('quicklink_home')} to="/" className="text-neutral-300 hover:text-white transition-colors">
                   Home
                 </NavLink>
               </li>
               <li>
-                <NavLink onClick={handleClick} to="/about" className="text-neutral-300 hover:text-white transition-colors">
+                <NavLink onClick={handleClick('quicklink_about')} to="/about" className="text-neutral-300 hover:text-white transition-colors">
                   About
                 </NavLink>
               </li>
               <li>
-                <NavLink onClick={handleClick} to="/packages" className="text-neutral-300 hover:text-white transition-colors">
+                <NavLink onClick={handleClick('quicklink_packages')} to="/packages" className="text-neutral-300 hover:text-white transition-colors">
                   Packages
                 </NavLink>
               </li>
               <li>
-                <NavLink onClick={handleClick} to="/contact" className="text-neutral-300 hover:text-white transition-colors">
+                <NavLink onClick={handleClick('quicklink_contact')} to="/contact" className="text-neutral-300 hover:text-white transition-colors">
                   Contact
                 </NavLink>
               </li>
                <li>
-                <NavLink onClick={handleClick} to="/beyond-safari" className="text-neutral-300 hover:text-white transition-colors">
+                <NavLink onClick={handleClick('quicklink_beyond_safari')} to="/beyond-safari" className="text-neutral-300 hover:text-white transition-colors">
                   Beyond Safari
+                </NavLink>
+              </li>
+              <li>
+                <NavLink onClick={handleClick('quicklink_kuno_national_park')} to="/kuno-national-park" className="text-neutral-300 hover:text-white transition-colors">
+                  Kuno National Park
                 </NavLink>
               </li>
             </ul>
@@ -88,17 +104,17 @@ const Footer = () => {
             <h4 className="text-xl font-bold mb-4">Packages</h4>
             <ul className="space-y-2">
               <li>
-                <NavLink onClick={handleClick} to="/package/kuno-cheetah-safari-package" className="text-neutral-300 hover:text-white transition-colors">
+                <NavLink onClick={handleClick('package_kuno_cheetah')} to="/package/kuno-cheetah-safari-package" className="text-neutral-300 hover:text-white transition-colors">
                  Kuno Cheetah Safari
                 </NavLink>
               </li>
               <li>
-                <NavLink onClick={handleClick} to="/package/big-cat-safari-package" className="text-neutral-300 hover:text-white transition-colors">
+                <NavLink onClick={handleClick('package_big_cats')} to="/package/big-cat-safari-package" className="text-neutral-300 hover:text-white transition-colors">
                   3 Big Cats Safari
                 </NavLink>
               </li>
               <li>
-                <NavLink onClick={handleClick} to="/package/photography-package" className="text-neutral-300 hover:text-white transition-colors">
+                <NavLink onClick={handleClick('package_4in1')} to="/package/photography-package" className="text-neutral-300 hover:text-white transition-colors">
                   4 in 1 Safari
                 </NavLink>
               </li>
@@ -117,8 +133,9 @@ const Footer = () => {
               </li>
               <li className="flex items-center">
                 <Phone size={20} className="mr-2 text-primary-400 flex-shrink-0" />
-                <a 
-                  href="tel:+919893486893" 
+                <a
+                  href="tel:+919893486893"
+                  onClick={trackFooter('tel')}
                   className="text-neutral-300 hover:text-white transition-colors"
                 >
                   (+91)9893486893
@@ -126,8 +143,9 @@ const Footer = () => {
               </li>
               <li className="flex items-center">
                 <Mail size={20} className="mr-2 text-primary-400 flex-shrink-0" />
-                <a 
-                  href="mailto:contact.findingfauna@gmail.com" 
+                <a
+                  href="mailto:contact.findingfauna@gmail.com"
+                  onClick={trackFooter('mailto')}
                   className="text-neutral-300 hover:text-white transition-colors"
                 >
                   contact.findingfauna@gmail.com
@@ -142,10 +160,10 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row justify-between items-center text-neutral-400 text-sm">
           <p>&copy; {currentYear} Finding Fauna. All rights reserved.</p>
           <div className="mt-4 md:mt-0 flex space-x-6">
-             <Link onClick={handleClick} to="/privacy-policy" className="hover:text-white transition-colors">
+             <Link onClick={handleClick('privacy_policy')} to="/privacy-policy" className="hover:text-white transition-colors">
               Privacy Policy
             </Link>
-            <Link onClick={handleClick} to="/terms-and-conditions" className="text-sm hover:underline">
+            <Link onClick={handleClick('terms_and_conditions')} to="/terms-and-conditions" className="text-sm hover:underline">
             Terms and Conditions
           </Link>
           </div>

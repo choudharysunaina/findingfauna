@@ -1,8 +1,11 @@
-import { useState, useEffect } from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
-import ResponsiveImage from '../ui/ResponsiveImage';
+import { useState, useEffect } from "react";
+import { NavLink, useLocation } from "react-router-dom";
+import { Menu, X } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { trackEvent } from "../../utils/analytics";
+
+// Turn a nav label into a stable GA4 label slug, e.g. "Kuno National Park" -> "nav_kuno_national_park".
+const navLabel = (name: string) => `nav_${name.toLowerCase().replace(/\s+/g, "_")}`;
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -12,7 +15,7 @@ const Navbar = () => {
   const location = useLocation();
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
-  
+
   const closeMenu = () => setIsMenuOpen(false);
 
   // Close mobile menu when route changes
@@ -30,24 +33,29 @@ const Navbar = () => {
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const navLinks = [
-    { name: 'Home', path: '/' },
-    { name: 'About', path: '/about' },
-    { name: 'Beyond Safari', path: '/beyond-safari' },
-    { name: 'Contact', path: '/contact' },
+    { name: "Home", path: "/" },
+    { name: "Kuno National Park", path: "/kuno-national-park" },
+    { name: "Beyond Safari", path: "/beyond-safari" },
+    { name: "Blog", path: "/blogs" },
+    { name: "Contact", path: "/contact" },
     {
-      name: 'Packages',
-      path: '/packages',
+      name: "Packages",
+      path: "/packages",
       children: [
-        { name: 'Kuno Cheetah Safari', path: '/package/kuno-cheetah-safari-package' },
-        { name: '3 Big Cats Safari', path: '/package/big-cat-safari-package' },
-        { name: '4 in 1 Safari Package', path: '/package/photography-package' }
-      ]
+        {
+          name: "Kuno Cheetah Safari",
+          path: "/package/kuno-cheetah-safari-package",
+        },
+        { name: "3 Big Cats Safari", path: "/package/big-cat-safari-package" },
+        { name: "4 in 1 Safari Package", path: "/package/photography-package" },
+      ],
     },
+    { name: "About Us", path: "/about" },
   ];
 
   const handleDropdownEnter = () => {
@@ -61,22 +69,23 @@ const Navbar = () => {
 
   return (
     <header
-      className={`sticky top-0 z-50 w-full transition-all duration-0 ${
-        scrolled 
-          ? 'bg-white shadow-md py-0' 
-          : 'bg-transparent py-1'
+      className={`fixed top-0 left-0 z-50 w-full transition-all duration-0 ${
+        scrolled
+          ? "bg-white py-0 border-b border-neutral-200 shadow-[0_4px_20px_rgba(0,0,0,0.5)]"
+          : "bg-transparent py-1 border-b border-transparent"
       }`}
     >
       <div className="container flex items-center justify-between">
-
-        <NavLink to="/" className="text-2xl font-bold text-primary-600 flex items-center space-x-2">
-            <img 
-              src={`${import.meta.env.BASE_URL}logo.png`}
-              alt="Finding Fauna Logo"  
-              className="w-12 h-auto" 
-              style={{ maxHeight: '48px' }}
-            />
-          
+        <NavLink
+          to="/"
+          onClick={() => trackEvent({ category: "nav", action: "click", label: "nav_logo" })}
+          className="text-2xl font-bold text-primary-600 flex items-center space-x-2"
+        >
+          <img
+            src={`${import.meta.env.BASE_URL}icons/logo.png`}
+            alt="Finding Fauna Logo"
+            className="h-12 w-auto"
+          />
         </NavLink>
 
         {/* Desktop Navigation */}
@@ -91,9 +100,12 @@ const Navbar = () => {
               >
                 <NavLink
                   to={link.path}
+                  onClick={() => trackEvent({ category: "nav", action: "click", label: navLabel(link.name) })}
                   className={({ isActive }) =>
                     `relative font-medium transition-colors ${
-                      isActive ? 'text-primary-600' : 'text-neutral-700 hover:text-primary-600'
+                      isActive
+                        ? "text-primary-600"
+                        : "text-neutral-700 hover:text-primary-600"
                     }`
                   }
                 >
@@ -110,6 +122,7 @@ const Navbar = () => {
                       <NavLink
                         key={child.path}
                         to={child.path}
+                        onClick={() => trackEvent({ category: "nav", action: "click", label: `nav_dropdown_${navLabel(child.name).slice(4)}` })}
                         className="block px-4 py-2 text-neutral-700 hover:bg-primary-50 hover:text-primary-600 rounded-md"
                       >
                         {child.name}
@@ -122,21 +135,28 @@ const Navbar = () => {
               <NavLink
                 key={link.path}
                 to={link.path}
+                onClick={() => trackEvent({ category: "nav", action: "click", label: navLabel(link.name) })}
                 className={({ isActive }) =>
                   `relative font-medium transition-colors ${
-                    isActive ? 'text-primary-600' : 'text-neutral-700 hover:text-primary-600'
+                    isActive
+                      ? "text-primary-600"
+                      : "text-neutral-700 hover:text-primary-600"
                   }`
                 }
               >
                 {link.name}
               </NavLink>
-            )
+            ),
           )}
         </nav>
 
         {/* Contact Button (Desktop) */}
         <div className="hidden md:block">
-          <NavLink to="/contact" className="btn-primary">
+          <NavLink
+            to="/contact"
+            onClick={() => trackEvent({ category: "nav", action: "click", label: "get_in_touch" })}
+            className="btn-primary text-sm px-4 py-2"
+          >
             Get in Touch
           </NavLink>
         </div>
@@ -144,7 +164,10 @@ const Navbar = () => {
         {/* Mobile Menu Button */}
         <button
           className="md:hidden text-neutral-700 hover:text-primary-600 transition-colors"
-          onClick={toggleMenu}
+          onClick={() => {
+            trackEvent({ category: "nav", action: "click", label: isMenuOpen ? "mobile_menu_close" : "mobile_menu_open" });
+            toggleMenu();
+          }}
           aria-label="Toggle menu"
         >
           {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -156,7 +179,7 @@ const Navbar = () => {
         {isMenuOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
+            animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
             className="md:hidden bg-white"
@@ -166,11 +189,12 @@ const Navbar = () => {
                 <NavLink
                   key={link.path}
                   to={link.path}
+                  onClick={() => trackEvent({ category: "nav", action: "click", label: `mobile_${navLabel(link.name).slice(4)}` })}
                   className={({ isActive }) =>
                     `py-2 px-4 rounded-md transition-colors ${
                       isActive
-                        ? 'bg-primary-50 text-primary-600'
-                        : 'text-neutral-700 hover:bg-neutral-100'
+                        ? "bg-primary-50 text-primary-600"
+                        : "text-neutral-700 hover:bg-neutral-100"
                     }`
                   }
                 >
@@ -179,6 +203,7 @@ const Navbar = () => {
               ))}
               <NavLink
                 to="/contact"
+                onClick={() => trackEvent({ category: "nav", action: "click", label: "mobile_get_in_touch" })}
                 className="btn-primary mt-2 text-center"
               >
                 Get in Touch

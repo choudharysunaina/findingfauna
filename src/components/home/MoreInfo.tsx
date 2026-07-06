@@ -1,6 +1,30 @@
 
-import { Link } from 'react-router-dom';
-import ResponsiveImage from '../ui/ResponsiveImage';
+import ImageCarousel from '../ui/ImageCarousel';
+import TrackedSection from '../tracking/TrackedSection';
+import TrackedLink from '../tracking/TrackedLink';
+
+const carouselImages = [
+  {
+    src: '/homepagecorousel/1.jpg',
+    alt: 'Two radio-collared cheetahs resting together in Kuno National Park, Madhya Pradesh',
+  },
+  {
+    src: '/homepagecorousel/2.jpg',
+    alt: 'Cheetahs walking along a forest safari trail in Kuno National Park',
+  },
+  {
+    src: '/homepagecorousel/3.jpg',
+    alt: 'Radio-collared cheetah with its kill in the dry forest of Kuno National Park',
+  },
+  {
+    src: '/homepagecorousel/4.jpg',
+    alt: 'Cheetahs camouflaged in tall monsoon grass at Kuno National Park',
+  },
+  {
+    src: '/homepagecorousel/5.jpg',
+    alt: 'Cheetah resting beside its prey at dusk in Kuno National Park',
+  },
+];
 
 const handleClick = () => {
     window.scrollTo(0, 0);
@@ -8,7 +32,7 @@ const handleClick = () => {
 
 const MoreInfo = () => {
   return (
-    <section className="section bg-neutral-50">
+    <TrackedSection category="home_more_info" label="witness_indian_cheetah" className="section bg-neutral-50">
       <div className="container">
       {/* Text Section */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -19,28 +43,28 @@ const MoreInfo = () => {
         </p>
        
         <div className="mt-4">
-          <Link onClick={handleClick}
+          <TrackedLink onClick={handleClick}
+            category="home_more_info"
+            label="more_info"
             to="/contact"
             className="btn-primary"
           >
             More info
-          </Link>
+          </TrackedLink>
         </div>
          </div>
      
 
       {/* Image Section */}
       <div className="flex order-1 lg:order-2 relative">
-        <ResponsiveImage
-          src="/more_info_kb.jpg"
-          alt="Kuno National Park Wildlife"
-          className="rounded-tl-3xl rounded-bl-3xl shadow-lg object-cover w-full"
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 600px"
+        <ImageCarousel
+          images={carouselImages}
+          className="rounded-3xl shadow-lg w-full h-48 md:h-64 lg:h-[360px]"
         />
       </div>
        </div>
       </div>
-    </section>
+    </TrackedSection>
   );
 };
 

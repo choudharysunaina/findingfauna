@@ -34,7 +34,11 @@ import {
 } from 'lucide-react';
 import SectionHeading from '../components/ui/SectionHeading';
 import ContactSection from '../components/home/ContactSection';
-import { Link } from 'react-router-dom';
+import TrackedSection from '../components/tracking/TrackedSection';
+import TrackedButton from '../components/tracking/TrackedButton';
+import AccommodationOptions from '../components/packages/AccommodationOptions';
+
+const GA_CATEGORY = 'pkg_big_cat';
 
 interface ContactFormData {
   name: string;
@@ -172,28 +176,32 @@ const wildlifeStories: WildlifeStory[] = [
 
 const accommodationOptions = [
   {
+    id: "homestay",
     type: "Budget-Friendly Local Stay",
-    description: "Experience authentic rural Madhya Pradesh with comfortable homestays and local hospitality.",
+    subtitle: "Comfortable & Affordable",
     features: [
-      "Budget-Friendly: Affordable safari experience without compromising on thrill",
-      "Central Location: Perfect access to both Tiktoli and Ahera zones of Kuno",
-      "More Time in the Wild: Less travel time means more time for safaris and photography",
-      "Cultural Experience: Stay with locals, eat fresh home-cooked meals",
-      "Simple but Comfortable: Clean, quiet, and practical for wilderness lovers"
+      "Clean, comfortable rooms with basic amenities",
+      "Local homestay experience with fresh home-cooked meals",
+      "Perfect access to both Tiktoli and Ahera zones of Kuno",
+      "Exclusive vehicle, guide arrangements and photography guidance",
     ],
-    image: `${import.meta.env.BASE_URL}resort.png`
+    tags: ["Budget Travelers", "Solo Travelers", "Cultural Experience"],
+    image: `${import.meta.env.BASE_URL}packages/homestay.png`,
+    price: "₹32,000"
   },
   {
+    id: "resort",
     type: "Premium Safari Lodge",
-    description: "Luxury accommodation with modern amenities while staying close to nature.",
+    subtitle: "Luxury & Comfort",
     features: [
-      "Luxury Accommodation: Premium rooms with modern amenities",
-      "Gourmet Dining: Professional chefs preparing local and international cuisine",
+      "Premium rooms with modern amenities",
+      "Professional chefs preparing local and international cuisine",
       "Spa & Wellness: Relaxation facilities after exciting safari days",
-      "Private Safaris: Exclusive vehicle and guide arrangements",
-      "Photography Support: Professional equipment and guidance available"
+      "Exclusive vehicle, guide arrangements and photography guidance",
     ],
-    image: `${import.meta.env.BASE_URL}fort.jpg`
+    tags: ["Luxury Travelers", "Couples", "Families"],
+    image: `${import.meta.env.BASE_URL}packages/fort.jpg`,
+    price: "₹40,000"
   }
 ];
 
@@ -235,7 +243,7 @@ const BigCatSafariPackage = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
-      <section className="relative bg-white section">
+      <TrackedSection category={GA_CATEGORY} label="hero" className="relative bg-white py-8">
         <div className="container">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             {/* Content Column */}
@@ -297,9 +305,9 @@ const BigCatSafariPackage = () => {
                 transition={{ duration: 0.6, delay: 0.6 }}
                 className="flex flex-col sm:flex-row gap-4"
               >
-                <button className="btn-primary" onClick={scrollToItinerary}>
+                <TrackedButton category={GA_CATEGORY} label="get_details" className="btn-primary" onClick={scrollToItinerary}>
                   Get details
-                </button>
+                </TrackedButton>
               </motion.div>
             </div>
             
@@ -311,7 +319,7 @@ const BigCatSafariPackage = () => {
               className="relative"
             >
               <img
-                src={`${import.meta.env.BASE_URL}3bigcats.png`}
+                src={`${import.meta.env.BASE_URL}home/3bigcats.png`}
                 alt="Cheetah in Kuno National Park"
                 className="w-full h-96 lg:h-[500px] object-cover rounded-2xl shadow-2xl"
               />
@@ -338,12 +346,12 @@ const BigCatSafariPackage = () => {
             </motion.div>
           </div>
         </div>
-      </section>
+      </TrackedSection>
 
-     
+
       {/* Detailed Itinerary */}
-      <section className="section bg-gray-50"  ref={itineraryRef}>
-        <div className="container">
+      <TrackedSection category={GA_CATEGORY} label="itinerary" className="section bg-gray-50">
+        <div className="container" ref={itineraryRef}>
           <SectionHeading
             title="Detailed Itinerary"
             subtitle="Experience the perfect blend of wildlife exploration, cultural immersion, and conservation education across four unforgettable days."
@@ -477,82 +485,15 @@ const BigCatSafariPackage = () => {
             </div>
           </div>
         </div>
-      </section>
-      
+      </TrackedSection>
+
             {/* Accommodation and Package Cost Section */}
-      <section className="section bg-white">
-        <div className="container">
-          <SectionHeading
-            title="Accommodation Options & Package Cost"
-            subtitle="Choose the accommodation style that best suits your adventure preferences and budget."
-            center
-          />
-          
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            {accommodationOptions.map((option, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
-                className="bg-gray-50 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300"
-              >
-                <div className="relative h-64 overflow-hidden">
-                  <img
-                    src={option.image}
-                    alt={option.type}
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-black bg-opacity-20"></div>
-                  <div className="absolute bottom-4 left-4 right-4">
-                    <h3 className="text-2xl font-bold text-white mb-2">
-                      {option.type}
-                    </h3>
-                  </div>
-                </div>
-                
-                <div className="p-8">
-                  <p className="text-gray-600 mb-6 leading-relaxed">
-                    {option.description}
-                  </p>
-                  
-                  <div className="space-y-4">
-                    <h4 className="text-lg font-semibold text-gray-900 mb-4">
-                      Why Choose This Package?
-                    </h4>
-                    <ul className="space-y-3">
-                      {option.features.map((feature, featureIndex) => (
-                        <li key={featureIndex} className="flex items-start">
-                          <CheckCircle className="text-forest-500 mr-3 mt-1 flex-shrink-0" size={18} />
-                          <span className="text-gray-700 text-sm leading-relaxed">
-                            {feature}
-                          </span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  
-                  <div className="mt-8 pt-6 border-t border-gray-200">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="text-sm text-gray-500">Packages starting from</p>
-                        <p className="text-2xl font-bold text-forest-600">
-                          {index === 0 ? '₹32,000' : '₹40,000'}
-                          <span className="text-sm font-normal text-gray-500">/person</span>
-                        </p>
-                      </div>
-                       <Link to="/contact" className="btn-primary">
-                        Book now
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <AccommodationOptions
+        category={GA_CATEGORY}
+        title="Accommodation Options & Package Cost"
+        subtitle="Choose the accommodation style that best suits your adventure preferences and budget."
+        options={accommodationOptions}
+      />
 
      {/* Contact Section */}
       <ContactSection/>

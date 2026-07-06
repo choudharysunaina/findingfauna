@@ -1,18 +1,16 @@
-import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
-import SectionHeading from '../ui/SectionHeading';
 import ResponsiveImage from '../ui/ResponsiveImage';
+import TrackedSection from '../tracking/TrackedSection';
 
 const MomentsSection = () => {
   return (
-    <section id="moments" className="section bg-white">
+    <TrackedSection id="moments" category="home_moments" label="moments" className="section bg-white">
       <div className="container">
         {/* Two-column layout: image left, box right */}
         <div className="relative flex flex-col lg:flex-row items-center justify-center gap-10 mt-16">
           {/* Image Column */}
           <div className="flex-[3] w-full max-w-5xl relative">
             <ResponsiveImage
-              src="/overlay1.jpg"
+              src="/home/overlay1.jpg"
               alt="Kuno National Park Moment"
               className="w-full h-[450px] object-cover shadow-lg"
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 60vw, 800px"
@@ -77,7 +75,7 @@ const MomentsSection = () => {
           {/* Image Column */}
           <div className="flex-[3] w-full max-w-5xl relative">
             <ResponsiveImage
-              src="/overlay2.jpg"
+              src="/home/overlay2.jpg"
               alt="Kuno National Park Moment"
               className="w-full h-[450px] object-cover shadow-lg"
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 60vw, 800px"
@@ -103,7 +101,7 @@ const MomentsSection = () => {
           </div>
         </div>
       </div>
-    </section>
+    </TrackedSection>
   );
 };
 
