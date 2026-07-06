@@ -1,7 +1,8 @@
 import { motion } from "framer-motion";
 import SectionHeading from "../ui/SectionHeading";
-import { Link } from "react-router-dom";
 import ResponsiveImage from "../ui/ResponsiveImage";
+import TrackedSection from "../tracking/TrackedSection";
+import TrackedLink from "../tracking/TrackedLink";
 
 const images = [
   "/home/cheetah.jpg",
@@ -13,7 +14,7 @@ const images = [
 
 const SurpriseSection = () => {
   return (
-    <section id="services" className="section bg-white">
+    <TrackedSection id="services" category="home_wildlife" label="wildlife_encounter" className="section bg-white">
       <div className="container">
         <SectionHeading
           title="Wildlife You May Encounter on a Kuno Safari"
@@ -54,13 +55,13 @@ const SurpriseSection = () => {
             transition={{ duration: 0.5, delay: 0.6 }}
             className="mt-8 text-center"
           >
-            <Link to="/contact" className="btn-primary">
+            <TrackedLink category="home_wildlife" label="book_now" to="/contact" className="btn-primary">
               Book Now
-            </Link>
+            </TrackedLink>
           </motion.div>
         </div>
       </div>
-    </section>
+    </TrackedSection>
   );
 };
 

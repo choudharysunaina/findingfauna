@@ -99,6 +99,13 @@ function toBlogPost(obj: Record<string, string>): BlogPost {
     image1: obj.image1 ? resolveBlogImage(obj.image1) : undefined,
     image2: obj.image2 ? resolveBlogImage(obj.image2) : undefined,
     image3: obj.image3 ? resolveBlogImage(obj.image3) : undefined,
+    image4: obj.image4 ? resolveBlogImage(obj.image4) : undefined,
+    image5: obj.image5 ? resolveBlogImage(obj.image5) : undefined,
+    image6: obj.image6 ? resolveBlogImage(obj.image6) : undefined,
+    image7: obj.image7 ? resolveBlogImage(obj.image7) : undefined,
+    image8: obj.image8 ? resolveBlogImage(obj.image8) : undefined,
+    image9: obj.image9 ? resolveBlogImage(obj.image9) : undefined,
+    image10: obj.image10 ? resolveBlogImage(obj.image10) : undefined,
   };
 }
 
@@ -171,6 +178,13 @@ export function parseContentBlocks(post: BlogPost): ContentBlock[] {
     '1': post.image1,
     '2': post.image2,
     '3': post.image3,
+    '4': post.image4,
+    '5': post.image5,
+    '6': post.image6,
+    '7': post.image7,
+    '8': post.image8,
+    '9': post.image9,
+    '10': post.image10,
   };
 
   return post.content
@@ -178,7 +192,7 @@ export function parseContentBlocks(post: BlogPost): ContentBlock[] {
     .map((c) => c.trim())
     .filter(Boolean)
     .reduce<ContentBlock[]>((blocks, chunk) => {
-      const match = chunk.match(/^\{\{image:([1-3](?:,[1-3]){0,2})\}\}$/);
+      const match = chunk.match(/^\{\{image:(\d{1,2}(?:,\d{1,2}){0,9})\}\}$/);
       if (match) {
         const srcs = match[1]
           .split(',')

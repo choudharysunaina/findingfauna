@@ -1,6 +1,7 @@
 
-import { Link } from 'react-router-dom';
 import ImageCarousel from '../ui/ImageCarousel';
+import TrackedSection from '../tracking/TrackedSection';
+import TrackedLink from '../tracking/TrackedLink';
 
 const carouselImages = [
   {
@@ -31,7 +32,7 @@ const handleClick = () => {
 
 const MoreInfo = () => {
   return (
-    <section className="section bg-neutral-50">
+    <TrackedSection category="home_more_info" label="witness_indian_cheetah" className="section bg-neutral-50">
       <div className="container">
       {/* Text Section */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -42,12 +43,14 @@ const MoreInfo = () => {
         </p>
        
         <div className="mt-4">
-          <Link onClick={handleClick}
+          <TrackedLink onClick={handleClick}
+            category="home_more_info"
+            label="more_info"
             to="/contact"
             className="btn-primary"
           >
             More info
-          </Link>
+          </TrackedLink>
         </div>
          </div>
      
@@ -61,7 +64,7 @@ const MoreInfo = () => {
       </div>
        </div>
       </div>
-    </section>
+    </TrackedSection>
   );
 };
 

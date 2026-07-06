@@ -1,10 +1,12 @@
 import { useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Link, useParams, Navigate } from 'react-router-dom';
+import { useParams, Navigate } from 'react-router-dom';
 import { Calendar, Clock, User, ArrowLeft, ArrowRight } from 'lucide-react';
 import SEOHead from '../components/ui/SEOHead';
 import Loader from '../components/ui/Loader';
 import { useBlogPosts, parseContentBlocks } from '../utils/blogPosts';
+import TrackedSection from '../components/tracking/TrackedSection';
+import TrackedLink from '../components/tracking/TrackedLink';
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -35,7 +37,7 @@ const BlogPost = () => {
       />
 
       {/* Hero */}
-      <section className="relative h-[50vh] min-h-[360px] flex items-end">
+      <TrackedSection category="blog_post" label="hero" className="relative h-[50vh] min-h-[360px] flex items-end">
         <img
           src={post.coverImage}
           alt={post.title}
@@ -60,7 +62,7 @@ const BlogPost = () => {
             {post.title}
           </motion.h1>
         </div>
-      </section>
+      </TrackedSection>
 
       {/* Meta bar */}
       <div className="border-b border-neutral-100 bg-neutral-50">
@@ -81,43 +83,58 @@ const BlogPost = () => {
       </div>
 
       {/* Content */}
-      <section className="section">
+      <TrackedSection category="blog_post" label="content" className="section">
         <div className="container">
           <div className="max-w-3xl mx-auto">
-            <Link
+            <TrackedLink
+              category="blog_post"
+              label="back_to_blog"
               to="/blogs"
               className="inline-flex items-center text-primary-600 font-medium hover:text-primary-700 transition-colors mb-8"
             >
               <ArrowLeft size={18} className="mr-2" />
               Back to Blog
-            </Link>
+            </TrackedLink>
 
             <div className="prose-content">
               {contentBlocks.map((block, index) =>
                 block.type === 'image' ? (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, y: 15 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: '-60px' }}
-                    transition={{ duration: 0.5 }}
-                    className={`my-8 grid gap-3 ${
-                      block.srcs?.length === 3
-                        ? 'grid-cols-3'
-                        : block.srcs?.length === 2
-                        ? 'grid-cols-2'
-                        : 'grid-cols-1 max-w-sm mx-auto'
-                    }`}
-                  >
-                    {block.srcs?.map((src, i) => (
+                  block.srcs?.length === 1 ? (
+                    <motion.div
+                      key={index}
+                      initial={{ opacity: 0, y: 15 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, margin: '-60px' }}
+                      transition={{ duration: 0.5 }}
+                      className="my-8 -mx-4 sm:-mx-6 md:mx-0"
+                    >
                       <img
-                        key={i}
-                        src={src}
+                        src={block.srcs[0]}
                         alt={post.title}
-                        className="w-full h-44 md:h-56 rounded-xl object-cover"
+                        className="w-full aspect-[16/9] rounded-xl object-cover"
                       />
-                    ))}
-                  </motion.div>
+                    </motion.div>
+                  ) : (
+                    <motion.div
+                      key={index}
+                      initial={{ opacity: 0, y: 15 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, margin: '-60px' }}
+                      transition={{ duration: 0.5 }}
+                      className={`my-8 grid gap-3 ${
+                        block.srcs && block.srcs.length === 2 ? 'grid-cols-2' : 'grid-cols-2 sm:grid-cols-3'
+                      }`}
+                    >
+                      {block.srcs?.map((src, i) => (
+                        <img
+                          key={i}
+                          src={src}
+                          alt={post.title}
+                          className="w-full aspect-square rounded-xl object-cover"
+                        />
+                      ))}
+                    </motion.div>
+                  )
                 ) : (
                   <motion.p
                     key={index}
@@ -126,19 +143,18 @@ const BlogPost = () => {
                     viewport={{ once: true, margin: '-60px' }}
                     transition={{ duration: 0.5, delay: index * 0.05 }}
                     className="text-neutral-700 text-lg mb-6 leading-relaxed"
-                  >
-                    {block.text}
-                  </motion.p>
+                    dangerouslySetInnerHTML={{ __html: block.text ?? '' }}
+                  />
                 )
               )}
             </div>
           </div>
         </div>
-      </section>
+      </TrackedSection>
 
       {/* More posts */}
       {morePosts.length > 0 && (
-        <section className="section bg-neutral-50">
+        <TrackedSection category="blog_post" label="more_posts" className="section bg-neutral-50">
           <div className="container">
             <h2 className="font-bold text-2xl md:text-3xl tracking-tight mb-8 text-center">
               More Stories
@@ -153,7 +169,7 @@ const BlogPost = () => {
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   className="card overflow-hidden group"
                 >
-                  <Link to={`/blog/${p.slug}`}>
+                  <TrackedLink category="blog_post" label={`more_card_${p.slug}`} to={`/blog/${p.slug}`}>
                     <div className="relative h-48 overflow-hidden">
                       <img
                         src={p.coverImage}
@@ -165,21 +181,23 @@ const BlogPost = () => {
                         <h3 className="text-lg font-bold text-white leading-snug">{p.title}</h3>
                       </div>
                     </div>
-                  </Link>
+                  </TrackedLink>
                   <div className="p-5">
-                    <Link
+                    <TrackedLink
+                      category="blog_post"
+                      label={`more_read_${p.slug}`}
                       to={`/blog/${p.slug}`}
                       className="text-primary-600 font-medium flex items-center hover:text-primary-700 transition-colors group"
                     >
                       Read More
                       <ArrowRight className="ml-1.5 group-hover:translate-x-1 transition-transform" size={16} />
-                    </Link>
+                    </TrackedLink>
                   </div>
                 </motion.div>
               ))}
             </div>
           </div>
-        </section>
+        </TrackedSection>
       )}
     </div>
   );

@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import Layout from './components/layout/Layout';
 import Loader from './components/ui/Loader';
+import ScrollToTop from './components/layout/ScrollToTop';
 
 // Lazy load pages for better performance
 const Home = lazy(() => import('./pages/Home'));
@@ -23,6 +24,7 @@ function App() {
   return (
     <HelmetProvider>
       <Router>
+        <ScrollToTop />
         <Layout>
           <Suspense fallback={<Loader />}>
             <Routes>

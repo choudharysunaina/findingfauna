@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Link } from "react-router-dom";
 import {
   Sun,
   CloudRain,
@@ -16,8 +15,9 @@ import SectionHeading from "../components/ui/SectionHeading";
 import ResponsiveImage from "../components/ui/ResponsiveImage";
 import PlacesCarousel from "../components/ui/PlacesCarousel";
 import { generateFAQSchema } from "../utils/seoUtils";
-
-const THINGS_TO_DO_INITIAL_COUNT = 6;
+import TrackedSection from "../components/tracking/TrackedSection";
+import TrackedLink from "../components/tracking/TrackedLink";
+import { trackEvent } from "../utils/analytics";
 
 const thingsToDo = [
   {
@@ -29,8 +29,12 @@ const thingsToDo = [
     image: "/kuno-national-park/BIRDWATCHING1.jpg",
   },
   {
+    name: "Night Drive",
+    image: "/kuno-national-park/NightDrive.jpg",
+  },
+  {
     name: "Herping",
-    image: "/kuno-national-park/HERPING.jpg",
+    image: "/kuno-national-park/HERPING.png",
   },
   {
     name: "River Side Dinner",
@@ -48,34 +52,42 @@ const popularPlaces = [
     image: "/kuno-national-park/DEVKHO.png",
     description:
       "Dev Kho is a scenic eco-tourism and pilgrimage spot in the Karahal region of Sheopur district, Madhya Pradesh.",
-    link: "/blog/dev-kho",
+    link: "/blog/nearby-places",
   },
   {
     name: "Kuno River",
     image: "/kuno-national-park/KunoRiver.jpeg",
     description:
       "The lifeline of the park, flowing through its heart and supporting riverine forests, marsh crocodiles and a rich diversity of birdlife.",
-    link: "/blog/kuno-river",
+    link: "/blog/nearby-places",
+  },
+  {
+    name: "Madhav National Park",
+    image: "/kuno-national-park/MadhavPark.png",
+    description:
+      "Madhav National Park is India's 58th Tiger Reserve, the sanctuary is home to tigers, leopards, nilgai, chinkara, sambar, and barking deer.",
+    link: "/blog/nearby-places",
   },
   {
     name: "Jal Mandir",
     image: "/kuno-national-park/JalMandir.jpg",
     description:
       "The Jal Mandir in Pohari, located about 35 km from Shivpuri in Madhya Pradesh, is a unique 3-story shrine constructed in 1811.",
+    link: "/blog/nearby-places",
   },
   {
     name: "Chhatri",
     image: "/kuno-national-park/Chhatri.JPG",
     description:
       "The Chhatris of Shivpuri are a magnificent set of marble cenotaphs built by the Scindia dynasty in Madhya Pradesh.",
-    link: "/blog/chhatri",
+    link: "/blog/nearby-places",
   },
   {
     name: "Ganesh Temple",
     image: "/kuno-national-park/GaneshTemple.png",
     description:
       "200 years old Lord Ganesh temple known as 'Pohari Ganesh Temple.",
-    link: "/blog/ganesh-temple",
+    link: "/blog/nearby-places",
   },
 ];
 
@@ -132,7 +144,7 @@ const nearbyPlaces = [
   },
   {
     name: "Sawai Madhopur",
-    image: "/kuno-national-park/sawaimadhopur.png",
+    image: "/kuno-national-park/SawaiMadhopur.png",
   },
   {
     name: "Agra",
@@ -205,7 +217,14 @@ interface FAQItemProps {
 const FAQItem = ({ faq, isOpen, onToggle }: FAQItemProps) => (
   <div className="bg-white rounded-lg shadow-md overflow-hidden">
     <button
-      onClick={onToggle}
+      onClick={() => {
+        trackEvent({
+          category: "kuno_park",
+          action: "click",
+          label: `faq_toggle: ${faq.question}`,
+        });
+        onToggle();
+      }}
       aria-expanded={isOpen}
       className="w-full flex items-center justify-between text-left px-6 py-4 font-semibold text-neutral-800 hover:text-primary-600 transition-colors"
     >
@@ -237,12 +256,7 @@ const FAQItem = ({ faq, isOpen, onToggle }: FAQItemProps) => (
 );
 
 const KunoNationalPark = () => {
-  const [showAllThings, setShowAllThings] = useState(false);
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
-
-  const visibleThings = showAllThings
-    ? thingsToDo
-    : thingsToDo.slice(0, THINGS_TO_DO_INITIAL_COUNT);
 
   return (
     <>
@@ -255,7 +269,11 @@ const KunoNationalPark = () => {
         structuredData={generateFAQSchema(faqs)}
       />
 
-      <section className="relative min-h-[100vh] flex items-center overflow-hidden -mt-14">
+      <TrackedSection
+        category="kuno_park"
+        label="hero"
+        className="relative min-h-[100vh] flex items-center overflow-hidden -mt-14"
+      >
         <img
           src={`${import.meta.env.BASE_URL}kuno-national-park/cheetah.jpg`}
           alt="Safari Background"
@@ -285,10 +303,14 @@ const KunoNationalPark = () => {
             </motion.div>
           </div>
         </div>
-      </section>
+      </TrackedSection>
 
       {/* Overview */}
-      <section className="section bg-white">
+      <TrackedSection
+        category="kuno_park"
+        label="overview"
+        className="section bg-white"
+      >
         <div className="container">
           <SectionHeading title="Overview" />
           <motion.div
@@ -315,10 +337,14 @@ const KunoNationalPark = () => {
             </p>
           </motion.div>
         </div>
-      </section>
+      </TrackedSection>
 
       {/* History */}
-      <section className="section bg-neutral-50">
+      <TrackedSection
+        category="kuno_park"
+        label="history"
+        className="section bg-neutral-50"
+      >
         <div className="container">
           <SectionHeading title="History of Kuno National Park" />
           <motion.div
@@ -341,8 +367,10 @@ const KunoNationalPark = () => {
               decades. Today, Kuno stands as a symbol of successful wildlife
               conservation and ecological restoration.
             </p>
-            <Link
-              to="/blog/history-of-kuno-national-park"
+            <TrackedLink
+              category="kuno_park"
+              label="history_read_more"
+              to="/blog/park-history"
               className="inline-flex items-center text-primary-600 font-medium hover:text-primary-700 transition-colors group"
             >
               Read More
@@ -350,53 +378,29 @@ const KunoNationalPark = () => {
                 size={18}
                 className="ml-1 transition-transform group-hover:translate-x-1"
               />
-            </Link>
+            </TrackedLink>
           </motion.div>
         </div>
-      </section>
+      </TrackedSection>
 
       {/* Top Things to Do */}
-      <section className="section bg-white">
+      <TrackedSection
+        category="kuno_park"
+        label="things_to_do"
+        className="section bg-white"
+      >
         <div className="container">
           <SectionHeading title="Top Things to Do in Kuno National Park" />
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6">
-            {visibleThings.map((item, index) => (
-              <motion.div
-                key={item.name}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="relative h-56 md:h-64 rounded-lg overflow-hidden shadow-md group"
-              >
-                <ResponsiveImage
-                  src={item.image}
-                  alt={item.name}
-                  className="w-full h-full transition-transform duration-300 group-hover:scale-105"
-                  sizes="(max-width: 768px) 50vw, 20vw"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent pointer-events-none" />
-                <span className="absolute bottom-4 left-4 right-4 text-white font-semibold text-lg drop-shadow">
-                  {item.name}
-                </span>
-              </motion.div>
-            ))}
-          </div>
-          {thingsToDo.length > THINGS_TO_DO_INITIAL_COUNT && (
-            <div className="text-center mt-10">
-              <button
-                onClick={() => setShowAllThings(!showAllThings)}
-                className="btn-primary"
-              >
-                {showAllThings ? "Show Less" : "View All"}
-              </button>
-            </div>
-          )}
+          <PlacesCarousel places={thingsToDo} />
         </div>
-      </section>
+      </TrackedSection>
 
       {/* Popular Places Near Kuno */}
-      <section className="section bg-neutral-50">
+      <TrackedSection
+        category="kuno_park"
+        label="popular_places"
+        className="section bg-neutral-50"
+      >
         <div className="container">
           <SectionHeading
             title="Popular Attractions in Kuno"
@@ -437,7 +441,9 @@ const KunoNationalPark = () => {
                     {place.description}
                   </p>
                   {place.link && (
-                    <Link
+                    <TrackedLink
+                      category="kuno_park"
+                      label={`place_read_more: ${place.name}`}
                       to={place.link}
                       className="inline-flex items-center text-primary-600 text-sm font-semibold uppercase tracking-wide hover:text-primary-700 transition-colors"
                     >
@@ -446,17 +452,21 @@ const KunoNationalPark = () => {
                         size={16}
                         className="ml-1 transition-transform group-hover:translate-x-1"
                       />
-                    </Link>
+                    </TrackedLink>
                   )}
                 </div>
               </motion.div>
             ))}
           </div>
         </div>
-      </section>
+      </TrackedSection>
 
       {/* Best Time to Visit */}
-      <section className="section bg-white">
+      <TrackedSection
+        category="kuno_park"
+        label="best_time"
+        className="section bg-white"
+      >
         <div className="container">
           <SectionHeading title="Best Time to Visit Kuno National Park" />
           <div className="grid md:grid-cols-3 gap-8">
@@ -480,10 +490,14 @@ const KunoNationalPark = () => {
             ))}
           </div>
         </div>
-      </section>
+      </TrackedSection>
 
       {/* How to Reach */}
-      <section className="section bg-neutral-50">
+      <TrackedSection
+        category="kuno_park"
+        label="how_to_reach"
+        className="section bg-neutral-50"
+      >
         <div className="container">
           <SectionHeading title="How to Reach Kuno National Park?" />
           <div className="grid md:grid-cols-3 gap-8">
@@ -507,18 +521,26 @@ const KunoNationalPark = () => {
             ))}
           </div>
         </div>
-      </section>
+      </TrackedSection>
 
       {/* Top Places to Visit Near Kuno */}
-      <section className="section bg-white">
+      <TrackedSection
+        category="kuno_park"
+        label="nearby_places"
+        className="section bg-white"
+      >
         <div className="container">
           <SectionHeading title="Top Places to Visit Near Kuno National Park" />
           <PlacesCarousel places={nearbyPlaces} />
         </div>
-      </section>
+      </TrackedSection>
 
       {/* FAQs */}
-      <section className="section bg-neutral-50">
+      <TrackedSection
+        category="kuno_park"
+        label="faqs"
+        className="section bg-neutral-50"
+      >
         <div className="container">
           <SectionHeading title="People Also Ask About Kuno" />
           <div className="max-w-3xl mx-auto space-y-4">
@@ -541,7 +563,7 @@ const KunoNationalPark = () => {
             ))}
           </div>
         </div>
-      </section>
+      </TrackedSection>
     </>
   );
 };

@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import SectionHeading from '../components/ui/SectionHeading';
+import TrackedSection from '../components/tracking/TrackedSection';
 
 const About = () => {
   useEffect(() => {
@@ -24,7 +25,7 @@ const About = () => {
   return (
     <>
       {/* Hero Section */}
-      <section className="py-20 bg-gradient-to-br from-primary-50 to-secondary-50">
+      <TrackedSection category="about" label="hero" className="py-20 bg-gradient-to-br from-primary-50 to-secondary-50">
         <div className="container">
           <div className="max-w-3xl mx-auto text-center">
             <motion.h1
@@ -45,10 +46,10 @@ const About = () => {
             </motion.p>
           </div>
         </div>
-      </section>
+      </TrackedSection>
 
       {/* Our Story Section */}
-      <section className="section bg-white">
+      <TrackedSection category="about" label="our_story" className="section bg-white">
         <div className="container">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <motion.div
@@ -116,10 +117,10 @@ const About = () => {
             </motion.div>
           </div>
         </div>
-      </section>
+      </TrackedSection>
 
       {/* Our Team Section */}
-      <section className="section bg-white">
+      <TrackedSection category="about" label="team" className="section bg-white">
         <div className="container">
           <SectionHeading
             title="Meet Our Team"
@@ -159,7 +160,7 @@ const About = () => {
             ))}
           </div>
         </div>
-      </section>
+      </TrackedSection>
 
     </>
   );

@@ -1,10 +1,11 @@
 import { ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import TrackedSection from '../tracking/TrackedSection';
+import TrackedLink from '../tracking/TrackedLink';
 
 const HeroSection = () => {
   return (
-     <section className="relative min-h-[100vh] flex items-center overflow-hidden -mt-14">
+     <TrackedSection category="home_hero" label="hero" className="relative min-h-[100vh] flex items-center overflow-hidden -mt-14">
       {/* Background GIF */}
       <img
         src={`${import.meta.env.BASE_URL}home/home_background2.webp`}
@@ -30,16 +31,16 @@ const HeroSection = () => {
             </p>*/}
             
             <div className="flex flex-wrap gap-4">
-              <Link to="/contact" className="btn-primary group">
+              <TrackedLink category="home_hero" label="book_now" to="/contact" className="btn-primary group">
                 Book now
                 <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" size={20} />
-              </Link>
+              </TrackedLink>
             </div>
           </motion.div>
 
         </div>
       </div>
-    </section>
+    </TrackedSection>
   );
 };
 

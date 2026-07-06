@@ -1,10 +1,11 @@
 import { useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
 import { Calendar, Clock, User, ArrowRight } from 'lucide-react';
 import SectionHeading from '../components/ui/SectionHeading';
 import SEOHead from '../components/ui/SEOHead';
 import { useBlogPosts } from '../utils/blogPosts';
+import TrackedSection from '../components/tracking/TrackedSection';
+import TrackedLink from '../components/tracking/TrackedLink';
 
 const Blogs = () => {
   useEffect(() => {
@@ -24,7 +25,7 @@ const Blogs = () => {
       />
 
       {/* Hero */}
-      <section className="relative py-20 md:py-28 bg-gradient-to-br from-primary-900 to-primary-700 overflow-hidden">
+      <TrackedSection category="blog" label="blogs_hero" className="relative py-20 md:py-28 bg-gradient-to-br from-primary-900 to-primary-700 overflow-hidden">
         <div className="absolute inset-0 opacity-10 bg-[url('/home/cheetah.jpg')] bg-cover bg-center" aria-hidden="true" />
         <div className="container relative z-10 text-center">
           <motion.p
@@ -52,11 +53,11 @@ const Blogs = () => {
             Conservation updates, safari tips, and field notes from Kuno National Park.
           </motion.p>
         </div>
-      </section>
+      </TrackedSection>
 
       {/* Featured Post */}
       {featured && (
-        <section className="section pb-0 bg-white">
+        <TrackedSection category="blog" label="featured_post" className="section pb-0 bg-white">
           <div className="container">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -99,18 +100,18 @@ const Blogs = () => {
                     {featured.readTime}
                   </span>
                 </div>
-                <Link to={`/blog/${featured.slug}`} className="btn-primary group self-start">
+                <TrackedLink category="blog" label={`featured_${featured.slug}`} to={`/blog/${featured.slug}`} className="btn-primary group self-start">
                   Read Full Story
                   <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform" size={18} />
-                </Link>
+                </TrackedLink>
               </div>
             </motion.div>
           </div>
-        </section>
+        </TrackedSection>
       )}
 
       {/* Rest of Posts */}
-      <section className="section bg-white">
+      <TrackedSection category="blog" label="more_posts" className="section bg-white">
         <div className="container">
           <SectionHeading
             title="More from the Blog"
@@ -128,7 +129,7 @@ const Blogs = () => {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className="card overflow-hidden group"
               >
-                <Link to={`/blog/${post.slug}`}>
+                <TrackedLink category="blog" label={`card_image_${post.slug}`} to={`/blog/${post.slug}`}>
                   <div className="relative h-56 overflow-hidden">
                     <img
                       src={post.coverImage}
@@ -145,7 +146,7 @@ const Blogs = () => {
                       </h3>
                     </div>
                   </div>
-                </Link>
+                </TrackedLink>
                 <div className="p-6">
                   <div className="flex flex-wrap items-center gap-3 text-xs text-neutral-500 mb-3">
                     <span className="flex items-center">
@@ -158,19 +159,21 @@ const Blogs = () => {
                     </span>
                   </div>
                   <p className="text-neutral-600 mb-4">{post.excerpt}</p>
-                  <Link
+                  <TrackedLink
+                    category="blog"
+                    label={`read_more_${post.slug}`}
                     to={`/blog/${post.slug}`}
                     className="text-primary-600 font-medium flex items-center hover:text-primary-700 transition-colors group"
                   >
                     Read More
                     <ArrowRight className="ml-1.5 group-hover:translate-x-1 transition-transform" size={16} />
-                  </Link>
+                  </TrackedLink>
                 </div>
               </motion.article>
             ))}
           </div>
         </div>
-      </section>
+      </TrackedSection>
     </div>
   );
 };

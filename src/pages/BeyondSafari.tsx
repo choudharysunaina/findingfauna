@@ -3,6 +3,7 @@ import ResponsiveImage from "../components/ui/ResponsiveImage";
 import SEOHead from "../components/ui/SEOHead";
 import { Check, Award, Users, Clock, Zap, Heart } from "lucide-react";
 import SectionHeading from "../components/ui/SectionHeading";
+import TrackedSection from "../components/tracking/TrackedSection";
 
 const highlights = [
   {
@@ -115,7 +116,7 @@ const BeyondSafari = () => (
     />
     <main className="bg-neutral-50">
       {/* Highlights Section */}
-      <section className="pb-16 pt-8">
+      <TrackedSection category="beyond_safari" label="highlights" className="pb-16 pt-8">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-12">Highlights</h2>
           <div className="grid md:grid-cols-3 gap-8">
@@ -142,10 +143,10 @@ const BeyondSafari = () => (
             ))}
           </div>
         </div>
-      </section>
+      </TrackedSection>
 
       {/* Stories Section */}
-      <section className="pt-16 pb-4 bg-white">
+      <TrackedSection category="beyond_safari" label="stories" className="pt-16 pb-4 bg-white">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-12">
             Our Groundbreaking Moments
@@ -174,9 +175,9 @@ const BeyondSafari = () => (
             ))}
           </div>
         </div>
-      </section>
+      </TrackedSection>
       {/* Our Values Section */}
-      <section className="section bg-neutral-50">
+      <TrackedSection category="beyond_safari" label="values" className="section bg-neutral-50">
         <div className="container">
           <SectionHeading
             title="Our Values"
@@ -202,7 +203,7 @@ const BeyondSafari = () => (
             ))}
           </div>
         </div>
-      </section>
+      </TrackedSection>
     </main>
   </>
 );

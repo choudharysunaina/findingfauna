@@ -1,8 +1,8 @@
 import { motion } from 'framer-motion';
 import SectionHeading from '../ui/SectionHeading';
-import { Link } from 'react-router-dom';
 import ResponsiveImage from '../ui/ResponsiveImage';
-import { useRef } from 'react';
+import TrackedSection from '../tracking/TrackedSection';
+import TrackedLink from '../tracking/TrackedLink';
 
 const handleClick = () => {
   window.scrollTo(0, 0);
@@ -34,7 +34,9 @@ const PackageCard = ({ imageUrl, title, description, delay }: PackageCardProps) 
       </div>
       <p className="text-xl font-semibold mb-2 mt-4 ">{title}</p>
       <p className="text-neutral-600">{description}</p>
-      <Link
+      <TrackedLink
+        category="home_packages"
+        label={`book_now_${title.toLowerCase()}`}
         to="/packages"
         className="text-primary-600 font-medium mt-4 flex items-center hover:text-primary-700 transition-colors"
       >
@@ -62,7 +64,7 @@ const PackageCard = ({ imageUrl, title, description, delay }: PackageCardProps) 
             strokeLinejoin="round"
           />
         </svg>
-      </Link>
+      </TrackedLink>
     </motion.div>
   );
 };
@@ -87,7 +89,7 @@ const PackagesSection = () => {
   ];
   
   return (
-    <section id="packages" className="section bg-white">
+    <TrackedSection id="packages" category="home_packages" label="specialized_packages" className="section bg-white">
       <div className="container">
         <SectionHeading
           title="Discover Kuno National Park"
@@ -130,12 +132,12 @@ const PackagesSection = () => {
           transition={{ duration: 0.5, delay: 0.6 }}
           className="mt-16 text-center"
         >
-          <Link onClick={handleClick} to="/packages" className="btn-primary">
+          <TrackedLink onClick={handleClick} category="home_packages" label="view_all_packages" to="/packages" className="btn-primary">
             View All Packages
-          </Link>
+          </TrackedLink>
         </motion.div>
       </div>
-    </section>
+    </TrackedSection>
   );
 };
 

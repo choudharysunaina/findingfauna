@@ -2,6 +2,10 @@ import { useState, useEffect } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { trackEvent } from "../../utils/analytics";
+
+// Turn a nav label into a stable GA4 label slug, e.g. "Kuno National Park" -> "nav_kuno_national_park".
+const navLabel = (name: string) => `nav_${name.toLowerCase().replace(/\s+/g, "_")}`;
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -74,6 +78,7 @@ const Navbar = () => {
       <div className="container flex items-center justify-between">
         <NavLink
           to="/"
+          onClick={() => trackEvent({ category: "nav", action: "click", label: "nav_logo" })}
           className="text-2xl font-bold text-primary-600 flex items-center space-x-2"
         >
           <img
@@ -95,6 +100,7 @@ const Navbar = () => {
               >
                 <NavLink
                   to={link.path}
+                  onClick={() => trackEvent({ category: "nav", action: "click", label: navLabel(link.name) })}
                   className={({ isActive }) =>
                     `relative font-medium transition-colors ${
                       isActive
@@ -116,6 +122,7 @@ const Navbar = () => {
                       <NavLink
                         key={child.path}
                         to={child.path}
+                        onClick={() => trackEvent({ category: "nav", action: "click", label: `nav_dropdown_${navLabel(child.name).slice(4)}` })}
                         className="block px-4 py-2 text-neutral-700 hover:bg-primary-50 hover:text-primary-600 rounded-md"
                       >
                         {child.name}
@@ -128,6 +135,7 @@ const Navbar = () => {
               <NavLink
                 key={link.path}
                 to={link.path}
+                onClick={() => trackEvent({ category: "nav", action: "click", label: navLabel(link.name) })}
                 className={({ isActive }) =>
                   `relative font-medium transition-colors ${
                     isActive
@@ -144,7 +152,11 @@ const Navbar = () => {
 
         {/* Contact Button (Desktop) */}
         <div className="hidden md:block">
-          <NavLink to="/contact" className="btn-primary text-sm px-4 py-2">
+          <NavLink
+            to="/contact"
+            onClick={() => trackEvent({ category: "nav", action: "click", label: "get_in_touch" })}
+            className="btn-primary text-sm px-4 py-2"
+          >
             Get in Touch
           </NavLink>
         </div>
@@ -152,7 +164,10 @@ const Navbar = () => {
         {/* Mobile Menu Button */}
         <button
           className="md:hidden text-neutral-700 hover:text-primary-600 transition-colors"
-          onClick={toggleMenu}
+          onClick={() => {
+            trackEvent({ category: "nav", action: "click", label: isMenuOpen ? "mobile_menu_close" : "mobile_menu_open" });
+            toggleMenu();
+          }}
           aria-label="Toggle menu"
         >
           {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -174,6 +189,7 @@ const Navbar = () => {
                 <NavLink
                   key={link.path}
                   to={link.path}
+                  onClick={() => trackEvent({ category: "nav", action: "click", label: `mobile_${navLabel(link.name).slice(4)}` })}
                   className={({ isActive }) =>
                     `py-2 px-4 rounded-md transition-colors ${
                       isActive
@@ -185,7 +201,11 @@ const Navbar = () => {
                   {link.name}
                 </NavLink>
               ))}
-              <NavLink to="/contact" className="btn-primary mt-2 text-center">
+              <NavLink
+                to="/contact"
+                onClick={() => trackEvent({ category: "nav", action: "click", label: "mobile_get_in_touch" })}
+                className="btn-primary mt-2 text-center"
+              >
                 Get in Touch
               </NavLink>
             </nav>

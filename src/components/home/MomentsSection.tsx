@@ -1,11 +1,9 @@
-import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
-import SectionHeading from '../ui/SectionHeading';
 import ResponsiveImage from '../ui/ResponsiveImage';
+import TrackedSection from '../tracking/TrackedSection';
 
 const MomentsSection = () => {
   return (
-    <section id="moments" className="section bg-white">
+    <TrackedSection id="moments" category="home_moments" label="moments" className="section bg-white">
       <div className="container">
         {/* Two-column layout: image left, box right */}
         <div className="relative flex flex-col lg:flex-row items-center justify-center gap-10 mt-16">
@@ -103,7 +101,7 @@ const MomentsSection = () => {
           </div>
         </div>
       </div>
-    </section>
+    </TrackedSection>
   );
 };
 

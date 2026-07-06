@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight, Quote } from 'lucide-react';
 import SectionHeading from '../ui/SectionHeading';
+import TrackedSection from '../tracking/TrackedSection';
+import TrackedButton from '../tracking/TrackedButton';
 
 interface Testimonial {
   id: number;
@@ -102,7 +104,7 @@ const TestimonialsSection = () => {
   };
 
   return (
-    <section className="section bg-gradient-to-b from-white to-primary-50">
+    <TrackedSection category="home_testimonials" label="testimonials" className="section bg-gradient-to-b from-white to-primary-50">
       <div className="container">
         <SectionHeading
           title="What Our Clients Say"
@@ -157,17 +159,21 @@ const TestimonialsSection = () => {
 
               {/* Navigation buttons */}
               <div className="flex justify-center mt-8 gap-4">
-                <button
+                <TrackedButton
+                  category="home_testimonials"
+                  label="prev"
                   onClick={handlePrev}
                   className="w-10 h-10 rounded-full bg-white border border-neutral-200 flex items-center justify-center text-neutral-600 hover:bg-primary-50 hover:text-primary-600 transition-colors"
                   aria-label="Previous testimonial"
                 >
                   <ChevronLeft size={20} />
-                </button>
+                </TrackedButton>
                 <div className="flex space-x-2">
                   {testimonials.map((_, index) => (
-                    <button
+                    <TrackedButton
                       key={index}
+                      category="home_testimonials"
+                      label={`dot_${index + 1}`}
                       onClick={() => setCurrentIndex(index)}
                       className={`w-3 h-3 rounded-full transition-colors ${
                         index === currentIndex ? 'bg-primary-600' : 'bg-neutral-300'
@@ -176,19 +182,21 @@ const TestimonialsSection = () => {
                     />
                   ))}
                 </div>
-                <button
+                <TrackedButton
+                  category="home_testimonials"
+                  label="next"
                   onClick={handleNext}
                   className="w-10 h-10 rounded-full bg-white border border-neutral-200 flex items-center justify-center text-neutral-600 hover:bg-primary-50 hover:text-primary-600 transition-colors"
                   aria-label="Next testimonial"
                 >
                   <ChevronRight size={20} />
-                </button>
+                </TrackedButton>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </section>
+    </TrackedSection>
   );
 };
 

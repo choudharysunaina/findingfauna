@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import SectionHeading from "../ui/SectionHeading";
-import { Link } from "react-router-dom";
+import TrackedSection from "../tracking/TrackedSection";
+import TrackedButton from "../tracking/TrackedButton";
 
 const ExperienceSection = () => {
   const benefits = [
@@ -12,7 +13,7 @@ const ExperienceSection = () => {
   ];
 
   return (
-    <section className="section bg-neutral-50">
+    <TrackedSection category="home_experiences" label="videos" className="section bg-neutral-50">
       <div className="container">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="order-2 lg:order-1">
@@ -39,7 +40,9 @@ const ExperienceSection = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.5 }}
             >
-              <button
+              <TrackedButton
+                category="home_experiences"
+                label="watch_youtube"
                 onClick={() =>
                   window.open("https://www.youtube.com/@findingfauna", "_blank")
                 }
@@ -62,7 +65,7 @@ const ExperienceSection = () => {
                 </svg>
 
                 <span>Watch on YouTube</span>
-              </button>
+              </TrackedButton>
             </motion.div>
           </div>
 
@@ -81,7 +84,9 @@ const ExperienceSection = () => {
                 className="w-full h-auto object-cover cursor-pointer transition-opacity duration-300 group-hover:opacity-80"
               />
               {/* Play Button Overlay */}
-              <button
+              <TrackedButton
+                category="home_experiences"
+                label="play_video"
                 className="absolute inset-0 flex items-center justify-center text-white text-5xl bg-black bg-opacity-5 transition group-hover:bg-opacity-60"
                 aria-label="Play Video"
                 onClick={() =>
@@ -93,7 +98,7 @@ const ExperienceSection = () => {
                   <circle cx="32" cy="32" r="32" fill="rgba(0,0,0,0.6)" />
                   <polygon points="26,20 48,32 26,44" fill="white" />
                 </svg>
-              </button>
+              </TrackedButton>
             </div>
 
             {/* Decorative elements */}
@@ -120,7 +125,7 @@ const ExperienceSection = () => {
           </motion.div>
         </div>
       </div>
-    </section>
+    </TrackedSection>
   );
 };
 
