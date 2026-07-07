@@ -78,8 +78,8 @@ const ExperienceSection = () => {
           >
             <div className="relative z-10 rounded-lg overflow-hidden shadow-xl group">
               {/* Video Thumbnail */}
-              <img
-                src={`${import.meta.env.BASE_URL}home/cheetahandme.jpg`}
+              <img loading="lazy" decoding="async"
+                src={`${import.meta.env.BASE_URL}home/cheetahandme.webp`}
                 alt="Kuno Safari Experience Video"
                 className="w-full h-auto object-cover cursor-pointer transition-opacity duration-300 group-hover:opacity-80"
               />

@@ -38,7 +38,7 @@ const BlogPost = () => {
 
       {/* Hero */}
       <TrackedSection category="blog_post" label="hero" className="relative h-[50vh] min-h-[360px] flex items-end">
-        <img
+        <img loading="lazy" decoding="async"
           src={post.coverImage}
           alt={post.title}
           className="absolute inset-0 w-full h-full object-cover"
@@ -108,7 +108,7 @@ const BlogPost = () => {
                       transition={{ duration: 0.5 }}
                       className="my-8 -mx-4 sm:-mx-6 md:mx-0"
                     >
-                      <img
+                      <img loading="lazy" decoding="async"
                         src={block.srcs[0]}
                         alt={post.title}
                         className="w-full aspect-[16/9] rounded-xl object-cover"
@@ -126,7 +126,7 @@ const BlogPost = () => {
                       }`}
                     >
                       {block.srcs?.map((src, i) => (
-                        <img
+                        <img loading="lazy" decoding="async"
                           key={i}
                           src={src}
                           alt={post.title}
@@ -171,7 +171,7 @@ const BlogPost = () => {
                 >
                   <TrackedLink category="blog_post" label={`more_card_${p.slug}`} to={`/blog/${p.slug}`}>
                     <div className="relative h-48 overflow-hidden">
-                      <img
+                      <img loading="lazy" decoding="async"
                         src={p.coverImage}
                         alt={p.title}
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"

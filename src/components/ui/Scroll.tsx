@@ -30,7 +30,7 @@ const Scroll = () => {
        >
         {FEATURES.map(scroll => (
             <div key={scroll.id} className=" bg-gray-100 min-w-[300px] p-4 rounded-lg shadow-md flex flex-col items-center text-center">
-                <img src={scroll.image} alt={scroll.title} width={50} height={50} className="mb-4"/>
+                <img loading="lazy" decoding="async" src={scroll.image} alt={scroll.title} width={50} height={50} className="mb-4"/>
                 <h2 className="text-lg font-bold mb-2">{scroll.title}</h2>
                 <p className="text-sm text-gray-700 mb-4">{scroll.subtitle}</p>
                 <button className="px-4 py-2 bg-blue-500 text-white rounded-lg">{scroll.link}</button>

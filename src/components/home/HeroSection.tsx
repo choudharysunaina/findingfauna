@@ -10,6 +10,8 @@ const HeroSection = () => {
       <img
         src={`${import.meta.env.BASE_URL}home/home_background2.webp`}
         alt="Safari Background"
+        fetchpriority="high"
+        decoding="async"
         className="absolute inset-0 w-full h-full object-cover z-0"
         style={{ pointerEvents: "none" }}
         aria-hidden="true"

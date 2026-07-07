@@ -52,53 +52,18 @@ const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
   const normalizedSrc = normalizeSrc(src);
   const normalizedFallbackSrc = fallbackSrc ? normalizeSrc(fallbackSrc) : undefined;
 
-  // Generate WebP version path
-  const getWebPSrc = (originalSrc: string) => {
-    const lastDotIndex = originalSrc.lastIndexOf('.');
-    if (lastDotIndex === -1) return originalSrc;
-    
-    const basePath = originalSrc.substring(0, lastDotIndex);
-    const extension = originalSrc.substring(lastDotIndex);
-    
-    // Only convert common image formats to WebP
-    if (['.jpg', '.jpeg', '.png'].includes(extension.toLowerCase())) {
-      return `${basePath}.webp`;
-    }
-    
-    return originalSrc;
-  };
-
-  const webpSrc = getWebPSrc(normalizedSrc);
-  const isWebPSupported = typeof window !== 'undefined' && 'WebP' in window;
-
+  // Assets in public/ are pre-optimized WebP, so no <picture>/<source> switching is needed
   return (
-    <picture>
-      {/* WebP format for modern browsers */}
-      {isWebPSupported && webpSrc !== src && (
-        <source
-          src={webpSrc}
-          type="image/webp"
-        />
-      )}
-      
-      {/* Original format as fallback */}
-      <source
-        src={normalizedSrc}
-        type={normalizedSrc.endsWith('.jpg') || normalizedSrc.endsWith('.jpeg') ? 'image/jpeg' : 'image/png'}
-      />
-      
-      {/* Fallback img element */}
-      <OptimizedImage
-        src={normalizedSrc}
-        alt={alt}
-        className={className}
-        sizes={sizes}
-        priority={priority}
-        fallbackSrc={normalizedFallbackSrc}
-        onLoad={onLoad}
-        onError={onError}
-      />
-    </picture>
+    <OptimizedImage
+      src={normalizedSrc}
+      alt={alt}
+      className={className}
+      sizes={sizes}
+      priority={priority}
+      fallbackSrc={normalizedFallbackSrc}
+      onLoad={onLoad}
+      onError={onError}
+    />
   );
 };
 

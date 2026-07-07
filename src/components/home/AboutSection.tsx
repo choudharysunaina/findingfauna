@@ -84,7 +84,7 @@ const AboutSection = () => {
             className="order-1 lg:order-2 relative"
           >
             <div className="relative z-10 rounded-lg overflow-hidden shadow-xl">
-              <img
+              <img loading="lazy" decoding="async"
                 src="https://images.pexels.com/photos/3182812/pexels-photo-3182812.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
                 alt="Our team collaborating"
                 className="w-full h-auto"

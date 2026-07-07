@@ -13,12 +13,12 @@ const About = () => {
     {
       name: 'Nived Yadav',
       role: 'Founder',
-      image: '/about/nived.png',
+      image: '/about/nived.webp',
     },
     {
       name: 'Laabh Yadav',
       role: 'Co-Founder',
-      image: '/about/laabh.jpg',
+      image: '/about/laabh.webp',
     },
   ];
 
@@ -87,8 +87,8 @@ const About = () => {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="relative"
             >
-              <img
-                src={`${import.meta.env.BASE_URL}about/ourstory.jpg`}
+              <img loading="lazy" decoding="async"
+                src={`${import.meta.env.BASE_URL}about/ourstory.webp`}
                 alt="Our team collaborating"
                 className="rounded-lg shadow-md w-full"
               />
@@ -139,7 +139,7 @@ const About = () => {
                 className="bg-white rounded-lg overflow-hidden shadow-sm group"
               >
                 <div className="relative overflow-hidden">
-                  <img
+                  <img loading="lazy" decoding="async"
                     src={`${import.meta.env.BASE_URL}${member.image.startsWith('/') ? member.image.slice(1) : member.image}`}
                     alt={member.name}
                     className="w-full h-80 object-cover"

@@ -20,7 +20,7 @@ export const packageData: Package[] = [
     location: 'Kuno National Park, MP',
     duration: '4 Days 3 Nights',
     price: 28000,
-    image: `${import.meta.env.BASE_URL}packages/cheetah-package.jpg`,
+    image: `${import.meta.env.BASE_URL}packages/cheetah-package.webp`,
     highlights: [
       'Spot cheetahs in India for the first time',
       'Explore Kuno National Park Safari',
@@ -45,7 +45,7 @@ export const packageData: Package[] = [
     location: 'Kuno and Madhav National Park, MP',
     duration: '4 Days 3 Nights',
     price: 32000,
-    image: `${import.meta.env.BASE_URL}home/3bigcats.png`,
+    image: `${import.meta.env.BASE_URL}home/3bigcats.webp`,
     highlights: [
       'Spot cheetahs, tigers, and leopards',
       'Safaris across Kuno and Madhav National Parks',
@@ -70,7 +70,7 @@ export const packageData: Package[] = [
     location: 'Kuno, Madhav & Chambal, MP',
     duration: '4 Days 3 Nights',
     price: 35000,
-    image: `${import.meta.env.BASE_URL}packages/4in1safari.jpeg`,
+    image: `${import.meta.env.BASE_URL}packages/4in1safari.webp`,
     highlights: [
       'Spot tigers, leopards, cheetahs, and gharials',
       'Experience thrilling jungle and boat safaris',
@@ -115,7 +115,7 @@ export const accommodationOptions: AccommodationOption[] = [
       '24/7 hot water and WiFi'
     ],
     perfectFor: ['Budget Travelers', 'Solo Travelers', 'Cultural Experience'],
-    image: `${import.meta.env.BASE_URL}packages/homestay.png`,
+    image: `${import.meta.env.BASE_URL}packages/homestay.webp`,
     description: 'Comfortable and affordable accommodation option perfect for budget-conscious travelers seeking authentic local experiences.'
   },
   {

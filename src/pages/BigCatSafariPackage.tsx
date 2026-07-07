@@ -186,7 +186,7 @@ const accommodationOptions = [
       "Exclusive vehicle, guide arrangements and photography guidance",
     ],
     tags: ["Budget Travelers", "Solo Travelers", "Cultural Experience"],
-    image: `${import.meta.env.BASE_URL}packages/homestay.png`,
+    image: `${import.meta.env.BASE_URL}packages/homestay.webp`,
     price: "₹32,000"
   },
   {
@@ -200,7 +200,7 @@ const accommodationOptions = [
       "Exclusive vehicle, guide arrangements and photography guidance",
     ],
     tags: ["Luxury Travelers", "Couples", "Families"],
-    image: `${import.meta.env.BASE_URL}packages/fort.jpg`,
+    image: `${import.meta.env.BASE_URL}packages/fort.webp`,
     price: "₹40,000"
   }
 ];
@@ -319,8 +319,10 @@ const BigCatSafariPackage = () => {
               className="relative"
             >
               <img
-                src={`${import.meta.env.BASE_URL}home/3bigcats.png`}
+                src={`${import.meta.env.BASE_URL}home/3bigcats.webp`}
                 alt="Cheetah in Kuno National Park"
+                fetchpriority="high"
+                decoding="async"
                 className="w-full h-96 lg:h-[500px] object-cover rounded-2xl shadow-2xl"
               />
               

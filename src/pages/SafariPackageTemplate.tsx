@@ -207,6 +207,8 @@ export const SafariPackageTemplate = ({
               <img
                 src={heroImage}
                 alt={packageName}
+                fetchpriority="high"
+                decoding="async"
                 className="w-full h-96 lg:h-[500px] object-cover rounded-2xl shadow-2xl"
               />
               
@@ -398,7 +400,7 @@ export const SafariPackageTemplate = ({
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className="bg-neutral-50 rounded-lg overflow-hidden shadow-sm"
               >
-                <img 
+                <img loading="lazy" decoding="async" 
                   src={story.image} 
                   alt={story.title}
                   className="w-full h-48 object-cover"
@@ -432,7 +434,7 @@ export const SafariPackageTemplate = ({
               className="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100"
             >
               <div className="relative h-64 overflow-hidden">
-                <img
+                <img loading="lazy" decoding="async"
                   src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=800&h=600"
                   alt="Budget-Friendly Local Stay"
                   className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
@@ -498,7 +500,7 @@ export const SafariPackageTemplate = ({
               className="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100"
             >
               <div className="relative h-64 overflow-hidden">
-                <img
+                <img loading="lazy" decoding="async"
                   src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=800&h=600"
                   alt="Premium Safari Lodge"
                   className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
@@ -564,7 +566,7 @@ export const SafariPackageTemplate = ({
               className="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100"
             >
               <div className="relative h-64 overflow-hidden">
-                <img
+                <img loading="lazy" decoding="async"
                   src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=800&h=600"
                   alt="Premium Safari Lodge"
                   className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
@@ -649,7 +651,7 @@ export const SafariPackageTemplate = ({
                   "{testimonials[currentTestimonial].text}"
                 </p>
                 <div className="flex items-center">
-                  <img
+                  <img loading="lazy" decoding="async"
                     src={testimonials[currentTestimonial].image}
                     alt={testimonials[currentTestimonial].name}
                     className="w-16 h-16 rounded-full mr-4 object-cover"

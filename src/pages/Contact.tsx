@@ -65,7 +65,7 @@ const Contact = () => {
         description="Get in touch with us to book your Kuno National Park safari adventure. Contact our expert team for safari packages, wildlife photography tours, and conservation experiences."
         keywords="Contact Kuno Safari, Safari Booking, Wildlife Tour Contact, Safari Packages, Photography Safari, Conservation Tours"
         canonical="https://kunosafari.com/contact"
-        ogImage="/home/cheetah.jpg"
+        ogImage="/home/cheetah.webp"
         ogType="website"
       />
       {/* Hero Section */}

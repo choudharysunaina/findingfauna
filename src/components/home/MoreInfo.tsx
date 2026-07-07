@@ -5,23 +5,23 @@ import TrackedLink from '../tracking/TrackedLink';
 
 const carouselImages = [
   {
-    src: '/homepagecorousel/1.jpg',
+    src: '/homepagecorousel/1.webp',
     alt: 'Two radio-collared cheetahs resting together in Kuno National Park, Madhya Pradesh',
   },
   {
-    src: '/homepagecorousel/2.jpg',
+    src: '/homepagecorousel/2.webp',
     alt: 'Cheetahs walking along a forest safari trail in Kuno National Park',
   },
   {
-    src: '/homepagecorousel/3.jpg',
+    src: '/homepagecorousel/3.webp',
     alt: 'Radio-collared cheetah with its kill in the dry forest of Kuno National Park',
   },
   {
-    src: '/homepagecorousel/4.jpg',
+    src: '/homepagecorousel/4.webp',
     alt: 'Cheetahs camouflaged in tall monsoon grass at Kuno National Park',
   },
   {
-    src: '/homepagecorousel/5.jpg',
+    src: '/homepagecorousel/5.webp',
     alt: 'Cheetah resting beside its prey at dusk in Kuno National Park',
   },
 ];

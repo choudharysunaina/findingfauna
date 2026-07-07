@@ -47,7 +47,7 @@ const AccommodationOptions = ({
               className="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100"
             >
               <div className="relative h-64 overflow-hidden">
-                <img
+                <img loading="lazy" decoding="async"
                   src={option.image}
                   alt={option.type}
                   className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"

@@ -19,7 +19,7 @@ const SEOHead: React.FC<SEOHeadProps> = ({
   description,
   keywords = 'Kuno National Park, Cheetah Safari, Wildlife Safari, Madhya Pradesh, India, Wildlife Conservation, Safari Packages, Photography Safari',
   canonical,
-  ogImage = '/home/cheetah.jpg',
+  ogImage = '/home/cheetah.webp',
   ogType = 'website',
   twitterCard = 'summary_large_image',
   structuredData,

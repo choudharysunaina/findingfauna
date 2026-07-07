@@ -22,69 +22,69 @@ import { trackEvent } from "../utils/analytics";
 const thingsToDo = [
   {
     name: "Jungle Safari",
-    image: "/kuno-national-park/junglesafari.jpg",
+    image: "/kuno-national-park/junglesafari.webp",
   },
   {
     name: "Birds Watching",
-    image: "/kuno-national-park/BIRDWATCHING1.jpg",
+    image: "/kuno-national-park/BIRDWATCHING1.webp",
   },
   {
     name: "Night Drive",
-    image: "/kuno-national-park/NightDrive.jpg",
+    image: "/kuno-national-park/NightDrive.webp",
   },
   {
     name: "Herping",
-    image: "/kuno-national-park/HERPING.png",
+    image: "/kuno-national-park/HERPING.webp",
   },
   {
     name: "River Side Dinner",
-    image: "/kuno-national-park/dinner.png",
+    image: "/kuno-national-park/dinner.webp",
   },
   {
     name: "Trekking",
-    image: "/kuno-national-park/trekking.JPG",
+    image: "/kuno-national-park/trekking.webp",
   },
 ];
 
 const popularPlaces = [
   {
     name: "Dev Kho",
-    image: "/kuno-national-park/DEVKHO.png",
+    image: "/kuno-national-park/DEVKHO.webp",
     description:
       "Dev Kho is a scenic eco-tourism and pilgrimage spot in the Karahal region of Sheopur district, Madhya Pradesh.",
     link: "/blog/nearby-places",
   },
   {
     name: "Kuno River",
-    image: "/kuno-national-park/KunoRiver.jpeg",
+    image: "/kuno-national-park/KunoRiver.webp",
     description:
       "The lifeline of the park, flowing through its heart and supporting riverine forests, marsh crocodiles and a rich diversity of birdlife.",
     link: "/blog/nearby-places",
   },
   {
     name: "Madhav National Park",
-    image: "/kuno-national-park/MadhavPark.png",
+    image: "/kuno-national-park/MadhavPark.webp",
     description:
       "Madhav National Park is India's 58th Tiger Reserve, the sanctuary is home to tigers, leopards, nilgai, chinkara, sambar, and barking deer.",
     link: "/blog/nearby-places",
   },
   {
     name: "Jal Mandir",
-    image: "/kuno-national-park/JalMandir.jpg",
+    image: "/kuno-national-park/JalMandir.webp",
     description:
       "The Jal Mandir in Pohari, located about 35 km from Shivpuri in Madhya Pradesh, is a unique 3-story shrine constructed in 1811.",
     link: "/blog/nearby-places",
   },
   {
     name: "Chhatri",
-    image: "/kuno-national-park/Chhatri.JPG",
+    image: "/kuno-national-park/Chhatri.webp",
     description:
       "The Chhatris of Shivpuri are a magnificent set of marble cenotaphs built by the Scindia dynasty in Madhya Pradesh.",
     link: "/blog/nearby-places",
   },
   {
     name: "Ganesh Temple",
-    image: "/kuno-national-park/GaneshTemple.png",
+    image: "/kuno-national-park/GaneshTemple.webp",
     description:
       "200 years old Lord Ganesh temple known as 'Pohari Ganesh Temple.",
     link: "/blog/nearby-places",
@@ -136,31 +136,31 @@ const reachOptions = [
 const nearbyPlaces = [
   {
     name: "Gwalior",
-    image: "/kuno-national-park/gwalior.png",
+    image: "/kuno-national-park/gwalior.webp",
   },
   {
     name: "Shivpuri",
-    image: "/kuno-national-park/shivpuri.png",
+    image: "/kuno-national-park/shivpuri.webp",
   },
   {
     name: "Sawai Madhopur",
-    image: "/kuno-national-park/SawaiMadhopur.png",
+    image: "/kuno-national-park/SawaiMadhopur.webp",
   },
   {
     name: "Agra",
-    image: "/kuno-national-park/agra.png",
+    image: "/kuno-national-park/agra.webp",
   },
   {
     name: "Jaipur",
-    image: "/kuno-national-park/jaipur.png",
+    image: "/kuno-national-park/jaipur.webp",
   },
   {
     name: "Orchha",
-    image: "/kuno-national-park/orcha.png",
+    image: "/kuno-national-park/orcha.webp",
   },
   {
     name: "Khajuraho",
-    image: "/kuno-national-park/khajuraho.png",
+    image: "/kuno-national-park/khajuraho.webp",
   },
 ];
 
@@ -265,7 +265,7 @@ const KunoNationalPark = () => {
         description="Explore Kuno National Park in Sheopur, Madhya Pradesh - India's only free-ranging cheetah landscape. Discover its history, wildlife, best time to visit, how to reach and everything you need to plan your safari."
         keywords="Kuno National Park, Project Cheetah, Cheetah Safari India, Sheopur Madhya Pradesh, Kuno Safari Booking, Kuno Wildlife, Palpur Fort, Kuno River"
         canonical="https://kunosafari.com/kuno-national-park"
-        ogImage="/home/cheetah.jpg"
+        ogImage="/home/cheetah.webp"
         structuredData={generateFAQSchema(faqs)}
       />
 
@@ -275,8 +275,10 @@ const KunoNationalPark = () => {
         className="relative min-h-[100vh] flex items-center overflow-hidden -mt-14"
       >
         <img
-          src={`${import.meta.env.BASE_URL}kuno-national-park/cheetah.jpg`}
+          src={`${import.meta.env.BASE_URL}kuno-national-park/cheetah.webp`}
           alt="Safari Background"
+          fetchpriority="high"
+          decoding="async"
           className="absolute inset-0 w-full h-full object-cover z-0"
           style={{ pointerEvents: "none" }}
           aria-hidden="true"
