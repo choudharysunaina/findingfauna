@@ -33,7 +33,7 @@ const testimonials: Testimonial[] = [
     content:
       "My visit to Kuno was planned at a very short notice and relevant searches on the internet did not help me much except that I happened to watch videos posted on YouTube by Mr Nived...I reached out to him and he was way too courteous to explain all that I needed to have my experience of the place a memorable one. Overall I highly recommend that future travellers to this place or others must get in touch with him to have a hassle free genuine experience.",
     rating: 5,
-    image: "/clients/major.jpg",
+    image: "/clients/major.webp",
   },
   {
     id: 2,
@@ -42,7 +42,7 @@ const testimonials: Testimonial[] = [
     content:
       "The safari experience was fantastic! The gypsy ride was smooth, and Nived’s knowledge of flora and fauna was truly impressive. We especially appreciated the insights shared about future plans for other wildlife sanctuaries — made the journey even more enriching!",
     rating: 5,
-    image: "/clients/principal.jpg",
+    image: "/clients/principal.webp",
   },
   {
     id: 3,
@@ -51,7 +51,7 @@ const testimonials: Testimonial[] = [
     content:
       "I had the absolute pleasure of experiencing a wildlife safari tour curated and guided by Nived Yadav and his brother Laabh, covering the breathtaking landscapes of Kuno National Park, Madhav Tiger Reserve, and the Chambal Gharial Sanctuary. From start to finish, their warm hospitality and seamless arrangements made the entire journey unforgettable.  The accommodations arranged were comfortable, ensuring that we had a restful stay. Anil ji, at the stay made sure we dont miss our homefood.",
     rating: 5,
-    image: "/clients/draditya.jpg",
+    image: "/clients/draditya.webp",
   },
 ];
 
@@ -130,7 +130,7 @@ const Packages: React.FC = () => {
                 className="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100"
               >
                 <div className="relative h-64 overflow-hidden">
-                  <img
+                  <img loading="lazy" decoding="async"
                     src={pkg.image}
                     alt={pkg.title}
                     className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
@@ -214,7 +214,7 @@ const Packages: React.FC = () => {
             id: "homestay",
             type: "Budget-Friendly Local Stay",
             subtitle: "Comfortable & Affordable",
-            image: `${import.meta.env.BASE_URL}packages/homestay.png`,
+            image: `${import.meta.env.BASE_URL}packages/homestay.webp`,
             features: [
               "Clean, comfortable rooms with basic amenities",
               "Local homestay experience with fresh home-cooked meals",
@@ -229,7 +229,7 @@ const Packages: React.FC = () => {
             id: "resort",
             type: "Premium Safari Lodge",
             subtitle: "Luxury & Comfort",
-            image: `${import.meta.env.BASE_URL}packages/fort.jpg`,
+            image: `${import.meta.env.BASE_URL}packages/fort.webp`,
             features: [
               "Premium rooms with modern amenities",
               "Professional chefs preparing local and international cuisine",
@@ -333,7 +333,7 @@ const Packages: React.FC = () => {
                 className="bg-gray-50 rounded-xl p-6"
               >
                 <div className="flex items-center mb-4">
-                  <img
+                  <img loading="lazy" decoding="async"
                     src={testimonial.image}
                     alt={testimonial.name}
                     className="w-12 h-12 rounded-full mr-4"

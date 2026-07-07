@@ -72,17 +72,17 @@ const PackageCard = ({ imageUrl, title, description, delay }: PackageCardProps) 
 const PackagesSection = () => {
   const packages = [
     {
-        imageUrl: '/home/family.jpg',
+        imageUrl: '/home/family.webp',
         title: 'Family',
         description: 'Customized best jungle experiences, Expert guide and family-friendly driver, Diverse outdoor activities, Detailed Kuno history sessions'
     },
    {
-        imageUrl: '/home/photographer.jpg',
+        imageUrl: '/home/photographer.webp',
         title: 'Photographers',
         description: 'Customized photo-focused itineraries, On-field photography tips and hacks, Dedicated expert guide and driver, Post-processing session after safari'
     },
    {
-        imageUrl: '/home/couple.jpg',
+        imageUrl: '/home/couple.webp',
         title: 'Couples',
         description: 'Romantic, customized itineraries, Expert guide and private driver, Luxury, intimate accommodations, Serene nature walks'
     }

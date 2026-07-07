@@ -165,7 +165,7 @@ const Services = () => {
                 
                 <div className={`relative ${index % 2 !== 0 ? 'order-2 lg:order-1' : ''}`}>
                   <div className="rounded-lg overflow-hidden shadow-lg relative z-10">
-                    <img
+                    <img loading="lazy" decoding="async"
                       src={`https://images.pexels.com/photos/${3000 + index}/pexels-photo-${3000 + index}.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2`}
                       alt={service.title}
                       className="w-full h-auto"

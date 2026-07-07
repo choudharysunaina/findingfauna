@@ -82,7 +82,9 @@ function resolveBlogImage(filename: string): string {
   if (!filename) return '';
   if (filename.startsWith('http')) return filename;
   const base = import.meta.env.BASE_URL || '/';
-  return `${base}blog-images/${filename.replace(/^\/+/, '')}`;
+  // files in public/blog-images/ are stored as .webp; sheet cells may still say .jpg/.png
+  const normalized = filename.replace(/^\/+/, '').replace(/\.(jpe?g|png)$/i, '.webp');
+  return `${base}blog-images/${normalized}`;
 }
 
 function toBlogPost(obj: Record<string, string>): BlogPost {

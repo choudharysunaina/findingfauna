@@ -5,11 +5,11 @@ import TrackedSection from "../tracking/TrackedSection";
 import TrackedLink from "../tracking/TrackedLink";
 
 const images = [
-  "/home/cheetah.jpg",
-  "/home/leopard.jpg",
-  "/home/hyena.jpg",
-  "/home/tiger.jpg",
-  "/home/slothbear.jpg",
+  "/home/cheetah.webp",
+  "/home/leopard.webp",
+  "/home/hyena.webp",
+  "/home/tiger.webp",
+  "/home/slothbear.webp",
 ];
 
 const SurpriseSection = () => {

@@ -1,8 +1,9 @@
 // Google Sheet setup:
 // 1. Create a sheet with header row: slug, title, category, author, date, readTime, excerpt, coverImage, content, image1, image2, image3
 // 2. One row = one blog post. Add a row to publish a new post.
-// 3. coverImage / image1 / image2 / image3 hold filenames only (e.g. "cheetah-cub.jpg"),
-//    matching a file uploaded to public/blog-images/ in this repo.
+// 3. coverImage / image1 / image2 / image3 hold filenames only (e.g. "cheetah-cub.webp"),
+//    matching a file uploaded to public/blog-images/ in this repo. Upload images as
+//    compressed .webp (max ~1200px wide); .jpg/.png names in the sheet are auto-mapped to .webp.
 // 4. In the "content" cell, separate paragraphs with a blank line. To place image(s) after
 //    a paragraph, put a marker alone on its own line: {{image:1}} for one image, {{image:1,2}}
 //    for two side by side, or {{image:1,2,3}} for three side by side. Only image numbers with

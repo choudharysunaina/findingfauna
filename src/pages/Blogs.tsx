@@ -26,7 +26,7 @@ const Blogs = () => {
 
       {/* Hero */}
       <TrackedSection category="blog" label="blogs_hero" className="relative py-20 md:py-28 bg-gradient-to-br from-primary-900 to-primary-700 overflow-hidden">
-        <div className="absolute inset-0 opacity-10 bg-[url('/home/cheetah.jpg')] bg-cover bg-center" aria-hidden="true" />
+        <div className="absolute inset-0 opacity-10 bg-[url('/home/cheetah.webp')] bg-cover bg-center" aria-hidden="true" />
         <div className="container relative z-10 text-center">
           <motion.p
             initial={{ opacity: 0, y: 10 }}
@@ -67,7 +67,7 @@ const Blogs = () => {
               className="card overflow-hidden grid grid-cols-1 lg:grid-cols-2"
             >
               <div className="relative h-72 lg:h-full min-h-[320px]">
-                <img
+                <img loading="lazy" decoding="async"
                   src={featured.coverImage}
                   alt={featured.title}
                   className="w-full h-full object-cover"
@@ -131,7 +131,7 @@ const Blogs = () => {
               >
                 <TrackedLink category="blog" label={`card_image_${post.slug}`} to={`/blog/${post.slug}`}>
                   <div className="relative h-56 overflow-hidden">
-                    <img
+                    <img loading="lazy" decoding="async"
                       src={post.coverImage}
                       alt={post.title}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
