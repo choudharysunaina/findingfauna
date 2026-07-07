@@ -127,7 +127,7 @@ const Packages: React.FC = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100"
+                className="bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col"
               >
                 <div className="relative h-64 overflow-hidden">
                   <img loading="lazy" decoding="async"
@@ -149,7 +149,7 @@ const Packages: React.FC = () => {
                   </div>
                 </div>
 
-                <div className="p-6">
+                <div className="p-6 flex flex-col flex-1">
                   <div className="mb-4">
                     <div className="flex items-center justify-between mb-2">
                       <span className="text-sm text-gray-600">
@@ -171,7 +171,7 @@ const Packages: React.FC = () => {
                     </div>
                   </div>
 
-                  <div className="mb-4">
+                  <div className="mb-4 flex-1">
                     <h4 className="font-semibold text-gray-900 mb-2">
                       Highlights:
                     </h4>
