@@ -725,7 +725,7 @@ export const SafariPackageTemplate = ({
                     </div>
                     <div>
                       <h4 className="font-semibold text-gray-900">Email</h4>
-                      <p className="text-gray-600">contact.findingfauna@gmail.com</p>
+                      <p className="text-gray-600">contact@cheetahsafarikuno</p>
                       <p className="text-sm text-gray-500">We'll respond within 24 hours</p>
                     </div>
                   </div>

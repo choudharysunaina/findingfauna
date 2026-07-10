@@ -6,16 +6,19 @@ import TrackedLink from '../tracking/TrackedLink';
 const HeroSection = () => {
   return (
      <TrackedSection category="home_hero" label="hero" className="relative min-h-[100vh] flex items-center overflow-hidden -mt-14">
-      {/* Background GIF */}
-      <img
-        src={`${import.meta.env.BASE_URL}home/home_background2.webp`}
-        alt="Safari Background"
-        fetchpriority="high"
-        decoding="async"
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        poster={`${import.meta.env.BASE_URL}home/home_background2.webp`}
         className="absolute inset-0 w-full h-full object-cover z-0"
         style={{ pointerEvents: "none" }}
         aria-hidden="true"
-      />
+      >
+        <source src={`${import.meta.env.BASE_URL}home/home_background2.webm`} type="video/webm" />
+        <source src={`${import.meta.env.BASE_URL}home/home_background2.mp4`} type="video/mp4" />
+      </video>
 
       <div className="container relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">

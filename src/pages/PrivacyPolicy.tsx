@@ -81,7 +81,7 @@ const PrivacyPolicy = () => {
           </p>
           <h2 className="text-2xl font-semibold">Contact Us</h2>
           <p>
-            📧 Email: <a href="mailto:contact.findingfauna@gmail.com" className="text-primary-600 hover:underline">contact.findingfauna@gmail.com</a>
+            📧 Email: <a href="mailto:contact@cheetahsafarikuno" className="text-primary-600 hover:underline">contact@cheetahsafarikuno</a>
           </p>
         </div>
       </div>

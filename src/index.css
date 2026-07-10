@@ -68,7 +68,7 @@
   }
   
   .section {
-    @apply py-16 md:py-24;
+    @apply my-16 md:my-24;
   }
   
   .card {

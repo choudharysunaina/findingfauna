@@ -127,10 +127,10 @@ const Contact = () => {
                       <TrackedButton
                         category="contact_page"
                         label="mailto"
-                        href="mailto:contact.findingfauna@gmail.com"
+                        href="mailto:contact@cheetahsafarikuno"
                         className="text-neutral-600 hover:text-primary-600 transition-colors"
                       >
-                        contact.findingfauna@gmail.com
+                        contact@cheetahsafarikuno
                       </TrackedButton>
                     </div>
                   </div>

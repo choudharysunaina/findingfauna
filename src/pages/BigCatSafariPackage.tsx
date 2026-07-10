@@ -245,20 +245,10 @@ const BigCatSafariPackage = () => {
       {/* Hero Section */}
       <TrackedSection category={GA_CATEGORY} label="hero" className="relative bg-white py-8">
         <div className="container">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
             {/* Content Column */}
             <div className="space-y-8">
-              <div className="space-y-6">
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6 }}
-                  className="inline-flex items-center px-4 py-2 forest-100 text-forest-600 rounded-full text-sm font-medium"
-                >
-                  <Leaf className="mr-2" size={16} />
-                  Wildlife Conservation Experience
-                </motion.div>
-                
+              <div className="space-y-6 pt-6">              
                 <motion.h1
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -417,7 +407,10 @@ const BigCatSafariPackage = () => {
                 <ul className="space-y-4">
                   <li className="flex items-start">
                     <Eye className="text-forest-500 mr-3 mt-1" size={20} />
-                    <span className="text-gray-700">6 open Gypsy cheetah tracking safaris in Kuno National Park</span>
+                    <ul className="text-gray-700">
+                      <li>4 open gypsy safaris in Kuno National Park</li>
+                      <li>2 open gypsy safaris in Madhav National Park</li>
+                    </ul>
                   </li>
                   <li className="flex items-start">
                     <Bed className="text-forest-500 mr-3 mt-1" size={20} />

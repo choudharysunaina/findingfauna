@@ -76,7 +76,7 @@ const tourDays: TourDay[] = [
   },
   {
     day: 4,
-    title: "Day 04 :Final Safari & Departure",
+    title: "Day 04 : Final Safari & Departure",
     description:
       "Early morning safari for final wildlife encounters, breakfast, and departure transfer.",
     includes: "Final safari, Breakfast, Airport transfer",
@@ -136,20 +136,10 @@ const KunoCheetahSafariPackage = () => {
         className="relative bg-white py-8"
       >
         <div className="container">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
             {/* Content Column */}
             <div className="space-y-8">
-              <div className="space-y-6">
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6 }}
-                  className="inline-flex items-center px-4 py-2 forest-100 text-forest-600 rounded-full text-sm font-medium"
-                >
-                  <Leaf className="mr-2" size={16} />
-                  Wildlife Conservation Experience
-                </motion.div>
-
+              <div className="space-y-6 pt-4">
                 <motion.h1
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}

@@ -130,7 +130,7 @@ const PackagesSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.6 }}
-          className="mt-16 text-center"
+          className="mt-8 text-center"
         >
           <TrackedLink onClick={handleClick} category="home_packages" label="view_all_packages" to="/packages" className="btn-primary">
             View All Packages

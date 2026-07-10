@@ -5,7 +5,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { trackEvent } from "../../utils/analytics";
 
 // Turn a nav label into a stable GA4 label slug, e.g. "Kuno National Park" -> "nav_kuno_national_park".
-const navLabel = (name: string) => `nav_${name.toLowerCase().replace(/\s+/g, "_")}`;
+const navLabel = (name: string) =>
+  `nav_${name.toLowerCase().replace(/\s+/g, "_")}`;
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -42,7 +43,6 @@ const Navbar = () => {
     { name: "Kuno National Park", path: "/kuno-national-park" },
     { name: "Beyond Safari", path: "/beyond-safari" },
     { name: "Blog", path: "/blogs" },
-    { name: "Contact", path: "/contact" },
     {
       name: "Packages",
       path: "/packages",
@@ -78,7 +78,9 @@ const Navbar = () => {
       <div className="container flex items-center justify-between">
         <NavLink
           to="/"
-          onClick={() => trackEvent({ category: "nav", action: "click", label: "nav_logo" })}
+          onClick={() =>
+            trackEvent({ category: "nav", action: "click", label: "nav_logo" })
+          }
           className="text-2xl font-bold text-primary-600 flex items-center space-x-2"
         >
           <img
@@ -100,7 +102,13 @@ const Navbar = () => {
               >
                 <NavLink
                   to={link.path}
-                  onClick={() => trackEvent({ category: "nav", action: "click", label: navLabel(link.name) })}
+                  onClick={() =>
+                    trackEvent({
+                      category: "nav",
+                      action: "click",
+                      label: navLabel(link.name),
+                    })
+                  }
                   className={({ isActive }) =>
                     `relative font-medium transition-colors ${
                       isActive
@@ -122,7 +130,13 @@ const Navbar = () => {
                       <NavLink
                         key={child.path}
                         to={child.path}
-                        onClick={() => trackEvent({ category: "nav", action: "click", label: `nav_dropdown_${navLabel(child.name).slice(4)}` })}
+                        onClick={() =>
+                          trackEvent({
+                            category: "nav",
+                            action: "click",
+                            label: `nav_dropdown_${navLabel(child.name).slice(4)}`,
+                          })
+                        }
                         className="block px-4 py-2 text-neutral-700 hover:bg-primary-50 hover:text-primary-600 rounded-md"
                       >
                         {child.name}
@@ -135,7 +149,13 @@ const Navbar = () => {
               <NavLink
                 key={link.path}
                 to={link.path}
-                onClick={() => trackEvent({ category: "nav", action: "click", label: navLabel(link.name) })}
+                onClick={() =>
+                  trackEvent({
+                    category: "nav",
+                    action: "click",
+                    label: navLabel(link.name),
+                  })
+                }
                 className={({ isActive }) =>
                   `relative font-medium transition-colors ${
                     isActive
@@ -154,10 +174,16 @@ const Navbar = () => {
         <div className="hidden md:block">
           <NavLink
             to="/contact"
-            onClick={() => trackEvent({ category: "nav", action: "click", label: "get_in_touch" })}
+            onClick={() =>
+              trackEvent({
+                category: "nav",
+                action: "click",
+                label: "get_in_touch",
+              })
+            }
             className="btn-primary text-sm px-4 py-2"
           >
-            Get in Touch
+            Contact Us
           </NavLink>
         </div>
 
@@ -165,7 +191,11 @@ const Navbar = () => {
         <button
           className="md:hidden text-neutral-700 hover:text-primary-600 transition-colors"
           onClick={() => {
-            trackEvent({ category: "nav", action: "click", label: isMenuOpen ? "mobile_menu_close" : "mobile_menu_open" });
+            trackEvent({
+              category: "nav",
+              action: "click",
+              label: isMenuOpen ? "mobile_menu_close" : "mobile_menu_open",
+            });
             toggleMenu();
           }}
           aria-label="Toggle menu"
@@ -189,7 +219,13 @@ const Navbar = () => {
                 <NavLink
                   key={link.path}
                   to={link.path}
-                  onClick={() => trackEvent({ category: "nav", action: "click", label: `mobile_${navLabel(link.name).slice(4)}` })}
+                  onClick={() =>
+                    trackEvent({
+                      category: "nav",
+                      action: "click",
+                      label: `mobile_${navLabel(link.name).slice(4)}`,
+                    })
+                  }
                   className={({ isActive }) =>
                     `py-2 px-4 rounded-md transition-colors ${
                       isActive
@@ -203,10 +239,16 @@ const Navbar = () => {
               ))}
               <NavLink
                 to="/contact"
-                onClick={() => trackEvent({ category: "nav", action: "click", label: "mobile_get_in_touch" })}
+                onClick={() =>
+                  trackEvent({
+                    category: "nav",
+                    action: "click",
+                    label: "mobile_get_in_touch",
+                  })
+                }
                 className="btn-primary mt-2 text-center"
               >
-                Get in Touch
+                Contact Us
               </NavLink>
             </nav>
           </motion.div>

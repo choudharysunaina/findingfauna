@@ -144,11 +144,11 @@ const Footer = () => {
               <li className="flex items-center">
                 <Mail size={20} className="mr-2 text-primary-400 flex-shrink-0" />
                 <a
-                  href="mailto:contact.findingfauna@gmail.com"
+                  href="mailto:contact@cheetahsafarikuno"
                   onClick={trackFooter('mailto')}
                   className="text-neutral-300 hover:text-white transition-colors"
                 >
-                  contact.findingfauna@gmail.com
+                  contact@cheetahsafarikuno
                 </a>
               </li>
             </ul>

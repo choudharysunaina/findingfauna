@@ -286,7 +286,7 @@ const Packages: React.FC = () => {
                 Small Groups
               </h3>
               <p className="text-gray-600">
-                Maximum 6 people per safari ensures personalized attention and
+                Maximum 4 people per safari ensures personalized attention and
                 better wildlife viewing opportunities.
               </p>
             </motion.div>

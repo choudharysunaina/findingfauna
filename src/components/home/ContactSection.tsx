@@ -94,10 +94,10 @@ const ContactSection = () => {
                              <TrackedButton
                                category="home_contact"
                                label="mailto"
-                               href="mailto:contact.findingfauna@gmail.com"
+                               href="mailto:contact@cheetahsafarikuno"
                                className="text-neutral-600 hover:text-primary-600 transition-colors force-break"
                              >
-                               contact.findingfauna@gmail.com
+                               contact@cheetahsafarikuno
                              </TrackedButton>
                            </div>
                          </div>

@@ -123,13 +123,13 @@ const reachOptions = [
     icon: <Train size={26} />,
     title: "By Rail",
     description:
-      "The nearest railway station is Shivpuri Railway Station, situated approximately 110 km from Kuno National Park. Gwalior Junction, around 165 km away, is the nearest major railway station with excellent connectivity to Delhi, Mumbai, Jaipur and other major Indian cities. Taxis and private vehicles are easily available from both railway stations.",
+      "The nearest railway station is Shivpuri Railway Station, situated approximately 35 km from Kuno National Park. Gwalior Junction, around 165 km away, is the nearest major railway station with excellent connectivity to Delhi, Mumbai, Jaipur and other major Indian cities. Taxis and private vehicles are easily available from both railway stations.",
   },
   {
     icon: <Car size={26} />,
     title: "By Road",
     description:
-      "Kuno National Park is well connected by road to major cities in Madhya Pradesh and Rajasthan. The park is approximately 165 km from Gwalior, 110 km from Shivpuri, 290 km from Jaipur, 390 km from Bhopal, and 480 km from Agra. Well-maintained highways make travelling by private vehicle, taxi or bus a convenient option.",
+      "Kuno National Park is well connected by road to major cities in Madhya Pradesh and Rajasthan. The park is approximately 165 km from Gwalior, 35 km from Shivpuri, 290 km from Jaipur, 390 km from Bhopal, and 480 km from Agra. Well-maintained highways make travelling by private vehicle, taxi or bus a convenient option.",
   },
 ];
 
@@ -406,7 +406,7 @@ const KunoNationalPark = () => {
         <div className="container">
           <SectionHeading
             title="Popular Attractions in Kuno"
-            subtitle="Explore the forts, rivers and wildlife sanctuaries that surround Kuno National Park."
+            subtitle="The forts, rivers and wildlife sanctuaries that surround Kuno National Park."
           />
           <div className="grid lg:grid-cols-2 gap-x-14 gap-y-10">
             {popularPlaces.map((place, index) => (

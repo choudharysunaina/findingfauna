@@ -15,7 +15,6 @@ const images = [
 const SurpriseSection = () => {
   return (
     <TrackedSection id="services" category="home_wildlife" label="wildlife_encounter" className="section bg-white">
-      <div className="container">
         <SectionHeading
           title="Wildlife You May Encounter on a Kuno Safari"
           subtitle="Explore the remarkable biodiversity of Kuno National Park through these incredible wildlife sightings."
@@ -46,21 +45,7 @@ const SurpriseSection = () => {
               ))}
             </div>
           </div>
-
-          {/* ...rest of your section (buttons, overlays, etc.) */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.6 }}
-            className="mt-8 text-center"
-          >
-            <TrackedLink category="home_wildlife" label="book_now" to="/contact" className="btn-primary">
-              Book Now
-            </TrackedLink>
-          </motion.div>
         </div>
-      </div>
     </TrackedSection>
   );
 };
