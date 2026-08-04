@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useForm } from 'react-hook-form';
 import { Mail, Phone, MapPin, Send } from 'lucide-react';
@@ -9,6 +8,7 @@ import FormfacadeEmbed from "@formfacade/embed-react";
 import TrackedSection from '../components/tracking/TrackedSection';
 import TrackedButton from '../components/tracking/TrackedButton';
 import { trackEvent } from '../utils/analytics';
+import { SITE_URL, CONTACT_EMAIL } from '../config/site';
 
 interface ContactFormData {
   name: string;
@@ -21,11 +21,6 @@ interface ContactFormData {
 }
 
 const Contact = () => {
-  useEffect(() => {
-    // Update page title
-    document.title = 'Contact Us | Kuno National Park Safari';
-  }, []);
-
   const FORMFACADE_URL = "https://formfacade.com/include/108217203793621386131/form/1FAIpQLSdYTQ283Kn0n8jhT99GdpS4AWoPZN5N6JuiJh5O-0wL50QfYg/classic.js/?div=ff-compose";
   const {
     register,
@@ -64,7 +59,7 @@ const Contact = () => {
         title="Contact Us"
         description="Get in touch with us to book your Kuno National Park safari adventure. Contact our expert team for safari packages, wildlife photography tours, and conservation experiences."
         keywords="Contact Kuno Safari, Safari Booking, Wildlife Tour Contact, Safari Packages, Photography Safari, Conservation Tours"
-        canonical="https://kunosafari.com/contact"
+        canonical={`${SITE_URL}/contact`}
         ogImage="/home/cheetah.webp"
         ogType="website"
       />
@@ -127,10 +122,10 @@ const Contact = () => {
                       <TrackedButton
                         category="contact_page"
                         label="mailto"
-                        href="mailto:contact@cheetahsafarikuno"
+                        href={`mailto:${CONTACT_EMAIL}`}
                         className="text-neutral-600 hover:text-primary-600 transition-colors"
                       >
-                        contact@cheetahsafarikuno
+                        {CONTACT_EMAIL}
                       </TrackedButton>
                     </div>
                   </div>

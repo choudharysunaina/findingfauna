@@ -4,6 +4,7 @@ import SEOHead from "../components/ui/SEOHead";
 import { Check, Award, Users, Clock, Zap, Heart } from "lucide-react";
 import SectionHeading from "../components/ui/SectionHeading";
 import TrackedSection from "../components/tracking/TrackedSection";
+import { SITE_URL } from "../config/site";
 
 const highlights = [
   {
@@ -110,11 +111,33 @@ const BeyondSafari = () => (
       title="Beyond Safari - Wildlife Conservation & Community"
       description="Discover our wildlife rescue initiatives, community education programs, and conservation efforts at Kuno National Park. Learn about our groundbreaking moments and conservation success stories."
       keywords="Wildlife Conservation, Community Education, Wildlife Rescue, Kuno National Park, Conservation Awareness, Forest Department, Wildlife Rehabilitation"
-      canonical="https://kunosafari.com/beyond-safari"
+      canonical={`${SITE_URL}/beyond-safari`}
       ogImage="/home/more_info.webp"
       ogType="article"
     />
-    <main className="bg-neutral-50">
+    <div className="bg-neutral-50">
+      {/* Hero Section */}
+      <TrackedSection category="beyond_safari" label="hero" className="pt-16 pb-8 bg-neutral-50">
+        <div className="container mx-auto px-4 text-center">
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4"
+          >
+            Beyond the Safari
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="text-lg text-neutral-700 max-w-2xl mx-auto"
+          >
+            Wildlife rescue, community education, and conservation stories from Kuno National Park.
+          </motion.p>
+        </div>
+      </TrackedSection>
+
       {/* Highlights Section */}
       <TrackedSection category="beyond_safari" label="highlights" className="pb-16 pt-8">
         <div className="container mx-auto px-4">
@@ -204,7 +227,7 @@ const BeyondSafari = () => (
           </div>
         </div>
       </TrackedSection>
-    </main>
+    </div>
   </>
 );
 

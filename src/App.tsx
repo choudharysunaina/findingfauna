@@ -12,9 +12,7 @@ import BeyondSafari from './pages/BeyondSafari';
 import Blogs from './pages/Blogs';
 import BlogPost from './pages/BlogPost';
 import TermsAndConditions from './pages/TermsAndConditions';
-import KunoCheetahSafariPackage from './pages/KunoCheetahSafariPackage';
-import BigCatSafariPackage from './pages/BigCatSafariPackage';
-import PhotographyPackage from './pages/PhotographyPackage';
+import PackageDetailPage from './pages/PackageDetailPage';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 
 function App() {
@@ -33,9 +31,7 @@ function App() {
             <Route path="/blogs" element={<Blogs />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
             <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
-            <Route path="/package/kuno-cheetah-safari-package" element={<KunoCheetahSafariPackage />} />
-            <Route path="/package/big-cat-safari-package" element={<BigCatSafariPackage />} />
-            <Route path="/package/photography-package" element={<PhotographyPackage />} />
+            <Route path="/package/:packageId" element={<PackageDetailPage />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           </Routes>
         </Layout>

@@ -1,4 +1,5 @@
 // SEO utility functions
+import { SITE_URL } from '../config/site';
 
 /**
  * Generate page title with brand suffix
@@ -23,7 +24,7 @@ export const generateMetaDescription = (description: string, maxLength: number =
 /**
  * Generate Open Graph image URL
  */
-export const generateOGImageUrl = (imagePath: string, domain: string = 'https://kunosafari.com'): string => {
+export const generateOGImageUrl = (imagePath: string, domain: string = SITE_URL): string => {
   if (imagePath.startsWith('http')) return imagePath;
   return `${domain}${imagePath}`;
 };
@@ -31,7 +32,7 @@ export const generateOGImageUrl = (imagePath: string, domain: string = 'https://
 /**
  * Generate canonical URL
  */
-export const generateCanonicalUrl = (path: string, domain: string = 'https://kunosafari.com'): string => {
+export const generateCanonicalUrl = (path: string, domain: string = SITE_URL): string => {
   const cleanPath = path.startsWith('/') ? path : `/${path}`;
   return `${domain}${cleanPath}`;
 };
@@ -62,7 +63,7 @@ export const generateTouristDestinationSchema = (data: {
     "@type": "TouristDestination",
     "name": data.name,
     "description": data.description,
-    "url": "https://kunosafari.com",
+    "url": SITE_URL,
     "image": generateOGImageUrl(data.image),
     "address": {
       "@type": "PostalAddress",
@@ -112,9 +113,7 @@ export const generateSafariPackageSchema = (data: {
       "priceCurrency": "INR",
       "availability": "https://schema.org/InStock"
     },
-    "touristType": "Wildlife Safari",
-    "touristType": "Nature Tour",
-    "touristType": "Photography Tour",
+    "touristType": ["Wildlife Safari", "Nature Tour", "Photography Tour"],
     "itinerary": {
       "@type": "ItemList",
       "itemListElement": data.highlights.map((highlight, index) => ({
@@ -256,8 +255,8 @@ export const generateOrganizationSchema = () => {
     "@context": "https://schema.org",
     "@type": "Organization",
     "name": "Kuno National Park Safari",
-    "url": "https://kunosafari.com",
-    "logo": "https://kunosafari.com/black_logo.png",
+    "url": SITE_URL,
+    "logo": `${SITE_URL}/icons/logo.png`,
     "description": "Premier wildlife safari operator in Kuno National Park, offering guided tours, photography packages, and conservation experiences.",
     "address": {
       "@type": "PostalAddress",

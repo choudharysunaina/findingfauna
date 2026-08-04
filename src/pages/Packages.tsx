@@ -15,6 +15,8 @@ import ContactSection from "../components/home/ContactSection";
 import TrackedSection from "../components/tracking/TrackedSection";
 import TrackedLink from "../components/tracking/TrackedLink";
 import AccommodationOptions from "../components/packages/AccommodationOptions";
+import SEOHead from "../components/ui/SEOHead";
+import { SITE_URL } from "../config/site";
 
 interface Testimonial {
   id: number;
@@ -62,6 +64,11 @@ const Packages: React.FC = () => {
   };
   return (
     <div className="min-h-screen bg-gray-50">
+      <SEOHead
+        title="Safari Packages"
+        description="Compare our Kuno Cheetah Safari, 3 Big Cat Safari, and 4-in-1 Photography safari packages — pricing, itineraries, and accommodation options."
+        canonical={`${SITE_URL}/packages`}
+      />
       {/* Hero Section */}
       <TrackedSection category="packages_page" label="hero" className="relative h-[60vh] bg-gradient-to-r from-blue-900 to-green-800 flex items-center justify-center">
         <div className="absolute inset-0 bg-black/40"></div>

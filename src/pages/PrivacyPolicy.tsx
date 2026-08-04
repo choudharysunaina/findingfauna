@@ -1,16 +1,20 @@
 import { useEffect } from 'react';
+import SEOHead from '../components/ui/SEOHead';
+import { SITE_URL, CONTACT_EMAIL } from '../config/site';
 
 const PrivacyPolicy = () => {
   useEffect(() => {
-    // Update page title
-    document.title = 'Privacy Policy | Kuno Cheetah Safari';
-
     // Scroll to top of the page
     window.scrollTo(0, 0);
   }, []);
 
   return (
     <div className="min-h-screen bg-gray-50">
+      <SEOHead
+        title="Privacy Policy"
+        description="How Finding Fauna collects, uses, and protects your personal information when you book a Kuno National Park safari."
+        canonical={`${SITE_URL}/privacy-policy`}
+      />
       <div className="container py-20">
         <h1 className="text-4xl font-bold text-center mb-8">Privacy Policy</h1>
         <div className="max-w-4xl mx-auto space-y-6 text-neutral-700">
@@ -81,7 +85,7 @@ const PrivacyPolicy = () => {
           </p>
           <h2 className="text-2xl font-semibold">Contact Us</h2>
           <p>
-            📧 Email: <a href="mailto:contact@cheetahsafarikuno" className="text-primary-600 hover:underline">contact@cheetahsafarikuno</a>
+            📧 Email: <a href={`mailto:${CONTACT_EMAIL}`} className="text-primary-600 hover:underline">{CONTACT_EMAIL}</a>
           </p>
         </div>
       </div>

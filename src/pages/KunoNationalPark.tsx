@@ -15,6 +15,7 @@ import SectionHeading from "../components/ui/SectionHeading";
 import ResponsiveImage from "../components/ui/ResponsiveImage";
 import PlacesCarousel from "../components/ui/PlacesCarousel";
 import { generateFAQSchema } from "../utils/seoUtils";
+import { SITE_URL } from "../config/site";
 import TrackedSection from "../components/tracking/TrackedSection";
 import TrackedLink from "../components/tracking/TrackedLink";
 import { trackEvent } from "../utils/analytics";
@@ -264,7 +265,7 @@ const KunoNationalPark = () => {
         title="Kuno National Park - Home of India's Cheetahs"
         description="Explore Kuno National Park in Sheopur, Madhya Pradesh - India's only free-ranging cheetah landscape. Discover its history, wildlife, best time to visit, how to reach and everything you need to plan your safari."
         keywords="Kuno National Park, Project Cheetah, Cheetah Safari India, Sheopur Madhya Pradesh, Kuno Safari Booking, Kuno Wildlife, Palpur Fort, Kuno River"
-        canonical="https://kunosafari.com/kuno-national-park"
+        canonical={`${SITE_URL}/kuno-national-park`}
         ogImage="/home/cheetah.webp"
         structuredData={generateFAQSchema(faqs)}
       />

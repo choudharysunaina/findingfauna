@@ -1,14 +1,10 @@
-import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import SectionHeading from '../components/ui/SectionHeading';
 import TrackedSection from '../components/tracking/TrackedSection';
+import SEOHead from '../components/ui/SEOHead';
+import { SITE_URL } from '../config/site';
 
 const About = () => {
-  useEffect(() => {
-    // Update page title
-    document.title = 'About Us | Finding Fauna';
-  }, []);
-
   const team = [
     {
       name: 'Nived Yadav',
@@ -24,6 +20,12 @@ const About = () => {
 
   return (
     <>
+      <SEOHead
+        title="About Us"
+        description="Meet the Finding Fauna team behind Kuno National Park's cheetah safaris — our story, our conservation work, and the people leading every expedition."
+        canonical={`${SITE_URL}/about`}
+        ogImage="/about/ourstory.webp"
+      />
       {/* Hero Section */}
       <TrackedSection category="about" label="hero" className="py-20 bg-gradient-to-br from-primary-50 to-secondary-50">
         <div className="container">

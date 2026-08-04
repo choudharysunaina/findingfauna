@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useParams, Navigate } from 'react-router-dom';
 import { Calendar, Clock, User, ArrowLeft, ArrowRight } from 'lucide-react';
@@ -7,17 +6,12 @@ import Loader from '../components/ui/Loader';
 import { useBlogPosts, parseContentBlocks } from '../utils/blogPosts';
 import TrackedSection from '../components/tracking/TrackedSection';
 import TrackedLink from '../components/tracking/TrackedLink';
+import { SITE_URL } from '../config/site';
 
 const BlogPost = () => {
   const { slug } = useParams<{ slug: string }>();
   const { posts, hasFetched } = useBlogPosts();
   const post = posts.find((p) => p.slug === slug);
-
-  useEffect(() => {
-    if (post) {
-      document.title = `${post.title} | Finding Fauna`;
-    }
-  }, [post]);
 
   if (!post) {
     return hasFetched ? <Navigate to="/blogs" replace /> : <Loader />;
@@ -31,7 +25,7 @@ const BlogPost = () => {
       <SEOHead
         title={post.title}
         description={post.excerpt}
-        canonical={`https://kunosafari.com/blog/${post.slug}`}
+        canonical={`${SITE_URL}/blog/${post.slug}`}
         ogImage={post.coverImage}
         ogType="article"
       />

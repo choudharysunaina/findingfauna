@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Calendar, Clock, User, ArrowRight } from 'lucide-react';
 import SectionHeading from '../components/ui/SectionHeading';
@@ -6,12 +5,9 @@ import SEOHead from '../components/ui/SEOHead';
 import { useBlogPosts } from '../utils/blogPosts';
 import TrackedSection from '../components/tracking/TrackedSection';
 import TrackedLink from '../components/tracking/TrackedLink';
+import { SITE_URL } from '../config/site';
 
 const Blogs = () => {
-  useEffect(() => {
-    document.title = 'Blog | Finding Fauna';
-  }, []);
-
   const { posts } = useBlogPosts();
   const [featured, ...rest] = posts;
 
@@ -20,7 +16,7 @@ const Blogs = () => {
       <SEOHead
         title="Blog"
         description="Stories, conservation updates, and safari tips from the Finding Fauna team at Kuno National Park."
-        canonical="https://kunosafari.com/blogs"
+        canonical={`${SITE_URL}/blogs`}
         ogImage={featured.coverImage}
       />
 

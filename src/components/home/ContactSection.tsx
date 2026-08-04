@@ -7,6 +7,7 @@ import FormfacadeEmbed from "@formfacade/embed-react";
 import TrackedSection from '../tracking/TrackedSection';
 import TrackedButton from '../tracking/TrackedButton';
 import { trackEvent } from '../../utils/analytics';
+import { CONTACT_EMAIL } from '../../config/site';
 
 interface ContactFormData {
   name: string;
@@ -94,10 +95,10 @@ const ContactSection = () => {
                              <TrackedButton
                                category="home_contact"
                                label="mailto"
-                               href="mailto:contact@cheetahsafarikuno"
+                               href={`mailto:${CONTACT_EMAIL}`}
                                className="text-neutral-600 hover:text-primary-600 transition-colors force-break"
                              >
-                               contact@cheetahsafarikuno
+                               {CONTACT_EMAIL}
                              </TrackedButton>
                            </div>
                          </div>

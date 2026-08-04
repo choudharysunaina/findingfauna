@@ -1,6 +1,7 @@
 import { Link, NavLink } from 'react-router-dom';
 import { Facebook, Instagram, Twitter, Linkedin, Mail, Phone, MapPin } from 'lucide-react';
 import { trackEvent } from '../../utils/analytics';
+import { CONTACT_EMAIL } from '../../config/site';
 
 // Scrolls to top on internal nav and records a GA4 footer click.
 const handleClick = (label: string) => () => {
@@ -144,11 +145,11 @@ const Footer = () => {
               <li className="flex items-center">
                 <Mail size={20} className="mr-2 text-primary-400 flex-shrink-0" />
                 <a
-                  href="mailto:contact@cheetahsafarikuno"
+                  href={`mailto:${CONTACT_EMAIL}`}
                   onClick={trackFooter('mailto')}
                   className="text-neutral-300 hover:text-white transition-colors"
                 >
-                  contact@cheetahsafarikuno
+                  {CONTACT_EMAIL}
                 </a>
               </li>
             </ul>

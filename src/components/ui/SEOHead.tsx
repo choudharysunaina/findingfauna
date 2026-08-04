@@ -1,5 +1,6 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
+import { SITE_URL, SITE_NAME } from '../../config/site';
 
 interface SEOHeadProps {
   title: string;
@@ -26,7 +27,7 @@ const SEOHead: React.FC<SEOHeadProps> = ({
   noindex = false,
   nofollow = false,
 }) => {
-  const fullTitle = `${title} | Kuno National Park Safari`;
+  const fullTitle = `${title} | ${SITE_NAME}`;
   const fullDescription = `${description} Experience the thrill of spotting wild cheetahs, leopards, and diverse wildlife in India's premier national park.`;
   
   const defaultStructuredData = {
@@ -34,11 +35,11 @@ const SEOHead: React.FC<SEOHeadProps> = ({
     "@type": "TouristDestination",
     "name": "Kuno National Park",
     "description": "Experience the thrill of spotting wild cheetahs, leopards, and diverse wildlife in India's premier national park.",
-    "url": "https://kunosafari.com",
+    "url": SITE_URL,
     "image": [
-      "https://kunosafari.com/home/cheetah.jpg",
-      "https://kunosafari.com/home/leopard.jpg",
-      "https://kunosafari.com/wildlife.jpg"
+      `${SITE_URL}/home/cheetah.webp`,
+      `${SITE_URL}/home/leopard.webp`,
+      `${SITE_URL}/home/tiger.webp`
     ],
     "address": {
       "@type": "PostalAddress",
@@ -79,7 +80,7 @@ const SEOHead: React.FC<SEOHeadProps> = ({
       <title>{fullTitle}</title>
       <meta name="description" content={fullDescription} />
       <meta name="keywords" content={keywords} />
-      <meta name="author" content="Kuno National Park Safari" />
+      <meta name="author" content={SITE_NAME} />
       <meta name="robots" content={noindex ? 'noindex' : nofollow ? 'nofollow' : 'index, follow'} />
       
       {/* Canonical URL */}
@@ -93,7 +94,7 @@ const SEOHead: React.FC<SEOHeadProps> = ({
       <meta property="og:image" content={ogImage.startsWith('http') ? ogImage : `${window.location.origin}${import.meta.env.BASE_URL}${ogImage.startsWith('/') ? ogImage.slice(1) : ogImage}`} />
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
-      <meta property="og:site_name" content="Kuno National Park Safari" />
+      <meta property="og:site_name" content={SITE_NAME} />
       <meta property="og:locale" content="en_US" />
       
       {/* Twitter Card Meta Tags */}

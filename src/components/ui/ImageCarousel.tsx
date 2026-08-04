@@ -25,7 +25,7 @@ const slideVariants = {
   }),
 };
 
-const ImageCarousel = ({ images, className = '', intervalMs = 3000 }: ImageCarouselProps) => {
+const ImageCarousel = ({ images, className = '', intervalMs = 5000 }: ImageCarouselProps) => {
   const [[index, direction], setSlide] = useState<[number, number]>([0, 1]);
 
   const goTo = (newIndex: number, dir: number) => {
