@@ -1,4 +1,4 @@
-import { ReactNode, useState, useEffect } from 'react';
+import { ReactNode, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import Navbar from './Navbar';
 import Footer from './Footer';
@@ -10,12 +10,7 @@ interface LayoutProps {
 }
 
 const Layout = ({ children }: LayoutProps) => {
-  const [isLoaded, setIsLoaded] = useState(false);
   const location = useLocation();
-
-  useEffect(() => {
-    setIsLoaded(true);
-  }, []);
 
   // Fire a GA4 page_view on every client-side route change (BrowserRouter
   // navigation does not trigger this automatically).
@@ -27,17 +22,15 @@ const Layout = ({ children }: LayoutProps) => {
     <div className="flex flex-col min-h-screen">
       <Navbar />
       <AnimatePresence mode="wait">
-        {isLoaded && (
-          <motion.main
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 15 }}
-            transition={{ duration: 0.3 }}
-            className="flex-grow pt-14"
-          >
-            {children}
-          </motion.main>
-        )}
+        <motion.main
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 15 }}
+          transition={{ duration: 0.3 }}
+          className="flex-grow pt-14"
+        >
+          {children}
+        </motion.main>
       </AnimatePresence>
       <Footer />
     </div>

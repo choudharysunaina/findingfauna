@@ -6,24 +6,18 @@
     <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
     <link rel="manifest" href="/icons/site.webmanifest" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Book your Cheetah Safari in Kuno National Park and explore India’s only cheetah habitat. Online jeep safari booking, timings, tickets, and wildlife tour packages available." />
-    <title>Kuno National Park Cheetah Safari | Online Safari Booking India</title>
-    <link rel="canonical" href="https://cheetahsafarikuno.com/" />
-
-    <!-- Open Graph -->
-    <meta property="og:title" content="Kuno National Park Cheetah Safari | Online Safari Booking India" />
-    <meta property="og:description" content="Book your Cheetah Safari in Kuno National Park and explore India’s only cheetah habitat. Online jeep safari booking, timings, tickets, and wildlife tour packages available." />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://cheetahsafarikuno.com/" />
-    <meta property="og:image" content="https://cheetahsafarikuno.com/home/cheetah.webp" />
-    <meta property="og:site_name" content="Kuno National Park Safari" />
-    <meta property="og:locale" content="en_US" />
-
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Kuno National Park Cheetah Safari | Online Safari Booking India" />
-    <meta name="twitter:description" content="Book your Cheetah Safari in Kuno National Park and explore India’s only cheetah habitat. Online jeep safari booking, timings, tickets, and wildlife tour packages available." />
-    <meta name="twitter:image" content="https://cheetahsafarikuno.com/home/cheetah.webp" />
+    <!--
+      No static title/description/canonical/og/twitter tags here on purpose:
+      SEOHead.tsx (react-helmet-async) renders page-specific versions of all
+      of these on every route (see src/pages/*.tsx), and the prerender step
+      (scripts/prerender.mjs) bakes that per-page output into each route's
+      built HTML file. Static duplicates here would double up with Helmet's
+      tags in the prerendered output — worse, since Helmet doesn't remove
+      tags it didn't create itself, every non-home route would ship an extra
+      canonical link pointing at the homepage, which Google explicitly says
+      makes it ignore canonical signals entirely for that page.
+    -->
+    <title>Kuno National Park Safari</title>
 
     <script type="application/ld+json">
       {
