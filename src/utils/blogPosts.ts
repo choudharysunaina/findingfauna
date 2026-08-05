@@ -197,6 +197,16 @@ export function parseContentBlocks(post: BlogPost): ContentBlock[] {
     '8': post.image8,
     '9': post.image9,
     '10': post.image10,
+    '11': post.image11,
+    '12': post.image12,
+    '13': post.image13,
+    '14': post.image14,
+    '15': post.image15,
+    '16': post.image16,
+    '17': post.image17,
+    '18': post.image18,
+    '19': post.image19,
+    '20': post.image20,
   };
 
   return post.content
