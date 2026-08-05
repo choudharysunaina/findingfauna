@@ -14,6 +14,16 @@ export interface BlogPost {
   image8?: string;
   image9?: string;
   image10?: string;
+  image11?: string;
+  image12?: string;
+  image13?: string;
+  image14?: string;
+  image15?: string;
+  image16?: string;
+  image17?: string;
+  image18?: string;
+  image19?: string;
+  image20?: string;
   category: string;
   author: string;
   date: string;
