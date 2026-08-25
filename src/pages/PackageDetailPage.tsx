@@ -292,7 +292,7 @@ const PackageDetailPage = () => {
       />
 
       {/* Contact Section */}
-      <ContactSection />
+      <ContactSection defaultPackage={pkg.title} />
     </div>
   );
 };

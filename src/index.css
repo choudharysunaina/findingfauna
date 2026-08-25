@@ -271,48 +271,6 @@ html, body {
   font-weight: bold;
 }
 
-/* Enquiry Form */
-.enquiry-form {
-  background: white;
-  border-radius: 10px;
-  padding: 30px;
-  margin-bottom: 40px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.enquiry-form h2 {
-  color: #3498db;
-  margin-top: 0;
-  margin-bottom: 20px;
-}
-
-.enquiry-form input,
-.enquiry-form select,
-.enquiry-form textarea {
-  width: 100%;
-  padding: 12px;
-  margin-bottom: 15px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 1rem;
-}
-
-.enquiry-form button {
-  background: #3498db;
-  color: white;
-  border: none;
-  padding: 12px 30px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 1rem;
-  font-weight: bold;
-  transition: background 0.3s;
-}
-
-.enquiry-form button:hover {
-  background: #2980b9;
-}
-
 /* Extension Tours */
 .extension-tours {
   background: white;
