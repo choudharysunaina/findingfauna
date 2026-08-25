@@ -14,46 +14,55 @@ import { packageData, Package } from "../data/packageData";
 import ContactSection from "../components/home/ContactSection";
 import TrackedSection from "../components/tracking/TrackedSection";
 import TrackedLink from "../components/tracking/TrackedLink";
+import TrackedButton from "../components/tracking/TrackedButton";
 import AccommodationOptions from "../components/packages/AccommodationOptions";
 import SEOHead from "../components/ui/SEOHead";
+import Breadcrumbs from "../components/ui/Breadcrumbs";
+import FaqSection from "../components/ui/FaqSection";
 import { SITE_URL } from "../config/site";
+import { featuredTestimonials } from "../data/testimonials";
+import {
+  generateCanonicalUrl,
+  generateBreadcrumbSchema,
+  generateFAQSchema,
+  generateReviewSchema,
+} from "../utils/seoUtils";
 
-interface Testimonial {
-  id: number;
-  name: string;
-  role: string;
-  content: string;
-  rating: number;
-  image: string;
-}
+const breadcrumbs = [
+  { name: "Home", url: SITE_URL },
+  { name: "Safari Packages", url: `${SITE_URL}/packages` },
+];
 
-const testimonials: Testimonial[] = [
+const faqs = [
   {
-    id: 1,
-    name: "Dr.Manish Ranjan",
-    role: "Army Major",
-    content:
-      "My visit to Kuno was planned at a very short notice and relevant searches on the internet did not help me much except that I happened to watch videos posted on YouTube by Mr Nived...I reached out to him and he was way too courteous to explain all that I needed to have my experience of the place a memorable one. Overall I highly recommend that future travellers to this place or others must get in touch with him to have a hassle free genuine experience.",
-    rating: 5,
-    image: "/clients/major.webp",
+    question: "How much does a Kuno safari package cost?",
+    answer:
+      "Our 4 days / 3 nights packages start at ₹28,000 per person on a budget homestay and ₹37,000 per person at a premium safari lodge. The price covers accommodation, all meals, a professional naturalist, all park permits and Gypsy charges, and return transfers from Gwalior.",
   },
   {
-    id: 2,
-    name: "Minakshi Sharma",
-    role: "Principal",
-    content:
-      "The safari experience was fantastic! The gypsy ride was smooth, and Nived’s knowledge of flora and fauna was truly impressive. We especially appreciated the insights shared about future plans for other wildlife sanctuaries — made the journey even more enriching!",
-    rating: 5,
-    image: "/clients/principal.webp",
+    question: "How many safaris are included in a package?",
+    answer:
+      "Six safari sessions across the stay. The Cheetah Safari package runs all six inside Kuno National Park; the 3 Big Cat package splits four in Kuno and two in Madhav National Park; the 4 in 1 package covers three in Kuno, two in Madhav and one gharial boat safari at Palighat.",
   },
   {
-    id: 3,
-    name: "Aditya Arvind Manekar",
-    role: "Doctor",
-    content:
-      "I had the absolute pleasure of experiencing a wildlife safari tour curated and guided by Nived Yadav and his brother Laabh, covering the breathtaking landscapes of Kuno National Park, Madhav Tiger Reserve, and the Chambal Gharial Sanctuary. From start to finish, their warm hospitality and seamless arrangements made the entire journey unforgettable.  The accommodations arranged were comfortable, ensuring that we had a restful stay. Anil ji, at the stay made sure we dont miss our homefood.",
-    rating: 5,
-    image: "/clients/draditya.webp",
+    question: "How many people share a safari vehicle?",
+    answer:
+      "A maximum of four guests per Gypsy. Everyone gets a window seat and a clear line of sight, which matters for both photography and spotting.",
+  },
+  {
+    question: "What is not included in the package price?",
+    answer:
+      "Airfare and travel to Gwalior, travel insurance, alcohol, shopping, tips, meals and snacks beyond the fixed menu, and any extra safaris or professional camera fees you choose to add.",
+  },
+  {
+    question: "Which package should I choose?",
+    answer:
+      "Pick the Cheetah Safari if Kuno's cheetahs are the whole reason for the trip. Pick the 3 Big Cat Safari if you want a chance at tiger, leopard and cheetah on one trip. Pick the 4 in 1 if you are a photographer or want gharials and the Chambal river added.",
+  },
+  {
+    question: "Can the itinerary be customised?",
+    answer:
+      "Yes. Trip length, number of safaris, accommodation tier and pickup point are all adjustable — tell us your dates and what you most want to see and we will rework the plan around it.",
   },
 ];
 
@@ -65,21 +74,38 @@ const Packages: React.FC = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       <SEOHead
-        title="Safari Packages"
-        description="Compare our Kuno Cheetah Safari, 3 Big Cat Safari, and 4-in-1 Photography safari packages — pricing, itineraries, and accommodation options."
-        canonical={`${SITE_URL}/packages`}
+        title="Kuno Safari Packages & Prices — 4 Days / 3 Nights"
+        description="Compare our three Kuno safari packages: Cheetah Safari (₹28,000), 3 Big Cat Safari (₹32,000) and the 4 in 1 photography safari. Six safaris, permits, meals and Gwalior transfers included."
+        canonical={generateCanonicalUrl('/packages')}
+        ogImage="/packages/cheetah-package.webp"
+        ogImageAlt="Cheetah photographed on a Gypsy safari in Kuno National Park"
+        structuredData={[
+          generateBreadcrumbSchema(breadcrumbs),
+          generateFAQSchema(faqs),
+          generateReviewSchema(
+            featuredTestimonials.map((t) => ({
+              author: t.name,
+              rating: t.rating,
+              reviewBody: t.shortQuote ?? t.quote,
+            }))
+          ),
+        ]}
       />
       {/* Hero Section */}
-      <TrackedSection category="packages_page" label="hero" className="relative h-[60vh] bg-gradient-to-r from-blue-900 to-green-800 flex items-center justify-center">
-        <div className="absolute inset-0 bg-black/40"></div>
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{
-            backgroundImage:
-              'url("https://images.unsplash.com/photo-1549366021-9f761d040a94?auto=format&fit=crop&w=1920&h=1080")',
-            opacity: 0.6,
-          }}
-        ></div>
+      <TrackedSection category="packages_page" label="hero" className="relative h-[60vh] bg-primary-900 flex items-center justify-center">
+        {/* Our own photograph, not the stock Unsplash background this used to
+            pull in from an external host on every page load. */}
+        <img
+          src="/packages/cheetah-package.webp"
+          alt=""
+          aria-hidden="true"
+          width={1600}
+          height={900}
+          fetchPriority="high"
+          decoding="async"
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-black/50"></div>
         <div className="relative z-10 text-center text-white px-4">
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
@@ -87,7 +113,7 @@ const Packages: React.FC = () => {
             transition={{ duration: 0.8 }}
             className="text-4xl md:text-6xl font-bold mb-4"
           >
-            Wildlife Safari Packages
+            Kuno Safari Packages & Prices
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 30 }}
@@ -95,27 +121,32 @@ const Packages: React.FC = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-lg md:text-xl mb-8 max-w-2xl mx-auto"
           >
-            Experience the thrill of India's most exciting wildlife destinations
-            with our expertly crafted safari packages
+            Naturalist-led safaris in Kuno, Madhav and Chambal — from ₹28,000
+            per person for four days, three nights and six safari sessions.
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            <TrackedLink
+            {/* A plain in-page anchor, not a router Link: react-router treats
+                to="#packages" as a path and navigates to /#packages. */}
+            <TrackedButton
               category="packages_page"
               label="explore_packages"
-              to="#packages"
               onClick={scrollToItinerary}
-              className="inline-flex items-center bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg transition-colors duration-200"
+              className="inline-flex items-center bg-primary-600 hover:bg-primary-700 text-white font-semibold py-3 px-8 rounded-lg transition-colors duration-200"
             >
               Explore Packages
               <ChevronRight className="w-5 h-5 ml-2" />
-            </TrackedLink>
+            </TrackedButton>
           </motion.div>
         </div>
       </TrackedSection>
+
+      <div className="container">
+        <Breadcrumbs items={breadcrumbs} className="pt-5" />
+      </div>
 
       {/* Packages Grid */}
       <TrackedSection id="packages" category="packages_page" label="packages_grid" className="section bg-white">
@@ -139,7 +170,9 @@ const Packages: React.FC = () => {
                 <div className="relative h-64 overflow-hidden">
                   <img loading="lazy" decoding="async"
                     src={pkg.image}
-                    alt={pkg.title}
+                    alt={pkg.heroImageAlt}
+                    width={600}
+                    height={400}
                     className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
@@ -330,7 +363,7 @@ const Packages: React.FC = () => {
           />
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {testimonials.map((testimonial, index) => (
+            {featuredTestimonials.map((testimonial, index) => (
               <motion.div
                 key={testimonial.id}
                 initial={{ opacity: 0, y: 30 }}
@@ -341,9 +374,11 @@ const Packages: React.FC = () => {
               >
                 <div className="flex items-center mb-4">
                   <img loading="lazy" decoding="async"
+                    width={48}
+                    height={48}
                     src={testimonial.image}
-                    alt={testimonial.name}
-                    className="w-12 h-12 rounded-full mr-4"
+                    alt={`${testimonial.name}, Kuno safari guest`}
+                    className="w-12 h-12 rounded-full mr-4 object-cover"
                   />
                   <div>
                     <h4 className="font-bold text-gray-900">
@@ -362,12 +397,23 @@ const Packages: React.FC = () => {
                   ))}
                 </div>
 
-                <p className="text-gray-700 italic">"{testimonial.content}"</p>
+                <p className="text-gray-700 italic">
+                  "{testimonial.shortQuote ?? testimonial.quote}"
+                </p>
               </motion.div>
             ))}
           </div>
         </div>
       </TrackedSection>
+
+      <FaqSection
+        category="packages_page"
+        faqs={faqs}
+        title="Kuno Safari Package FAQs"
+        subtitle="Costs, inclusions, group sizes and how to pick between the three packages"
+        className="section bg-gray-50"
+      />
+
       <ContactSection />
     </div>
   );

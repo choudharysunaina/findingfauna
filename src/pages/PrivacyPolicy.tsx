@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import SEOHead from '../components/ui/SEOHead';
-import { SITE_URL, CONTACT_EMAIL } from '../config/site';
+import { CONTACT_EMAIL } from '../config/site';
+import { generateCanonicalUrl } from '../utils/seoUtils';
 
 const PrivacyPolicy = () => {
   useEffect(() => {
@@ -13,13 +14,13 @@ const PrivacyPolicy = () => {
       <SEOHead
         title="Privacy Policy"
         description="How Finding Fauna collects, uses, and protects your personal information when you book a Kuno National Park safari."
-        canonical={`${SITE_URL}/privacy-policy`}
+        canonical={generateCanonicalUrl('/privacy-policy')}
       />
       <div className="container py-20">
         <h1 className="text-4xl font-bold text-center mb-8">Privacy Policy</h1>
         <div className="max-w-4xl mx-auto space-y-6 text-neutral-700">
           <p>
-            At Kuno Cheetah Safari, your privacy is important to us. This Privacy Policy explains how we collect, use, and protect your personal information when you visit our website or use our services.
+            At Finding Fauna (Kuno Cheetah Safari), your privacy is important to us. This Privacy Policy explains how we collect, use, and protect your personal information when you visit our website or use our services.
           </p>
           <h2 className="text-2xl font-semibold">1. Information We Collect</h2>
           <p>

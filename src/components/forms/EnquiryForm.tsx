@@ -56,6 +56,26 @@ const EnquiryForm = ({ gaCategory, defaultPackage }: EnquiryFormProps) => {
 
   const phoneCountryCode = watch('phoneCountryCode');
 
+  // The 176-country dial-code list is ~380 words of country names. Rendered up
+  // front it lands in the prerendered HTML of every page carrying this form
+  // (home, contact, packages and all three package pages), diluting the actual
+  // page text with a list that has nothing to do with the topic. So render only
+  // the selected option until the user actually reaches for the control.
+  //
+  // Deliberately triggered by input events, not by an effect: the prerenderer
+  // waits for the page to settle before snapshotting, so anything populated in
+  // a mount effect still ends up in the captured HTML. mousedown/touchstart/
+  // focus are discrete events, which React flushes synchronously — the options
+  // are in the DOM before the browser opens the native dropdown.
+  const [countryListReady, setCountryListReady] = useState(false);
+  const revealCountryList = () => {
+    if (!countryListReady) setCountryListReady(true);
+  };
+
+  const countryOptions = countryListReady
+    ? countryCodes
+    : countryCodes.filter((c) => c.dialCode === phoneCountryCode).slice(0, 1);
+
   const onSubmit = async ({ phoneCountryCode, phoneNumber, ...rest }: EnquiryFormValues) => {
     setStatus('submitting');
     const { ok } = await submitEnquiry({ ...rest, phone: `${phoneCountryCode} ${phoneNumber}` });
@@ -178,9 +198,13 @@ const EnquiryForm = ({ gaCategory, defaultPackage }: EnquiryFormProps) => {
                 aria-label="Country code"
                 disabled={submitting}
                 className="absolute inset-0 w-full h-full opacity-0 disabled:cursor-not-allowed cursor-pointer"
+                onMouseDown={revealCountryList}
+                onTouchStart={revealCountryList}
+                onFocus={revealCountryList}
+                onKeyDown={revealCountryList}
                 {...register('phoneCountryCode')}
               >
-                {countryCodes.map((c) => (
+                {countryOptions.map((c) => (
                   <option key={c.iso2} value={c.dialCode}>
                     {c.name} ({c.dialCode})
                   </option>

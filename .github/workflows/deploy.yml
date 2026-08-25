@@ -5,6 +5,12 @@ on:
     branches:
       - main
   workflow_dispatch:
+  # Blog posts live in a Google Sheet and are snapshotted into the bundle at
+  # build time (scripts/fetch-blog.mjs), so a new sheet row only goes live on a
+  # build. This nightly run means "add a row to publish" still works, with at
+  # most a day's delay — or trigger "Run workflow" above to publish immediately.
+  schedule:
+    - cron: '30 20 * * *' # 02:00 IST daily
 
 permissions:
   contents: read
@@ -36,6 +42,12 @@ jobs:
 
       - name: Build
         run: npm run build
+
+      # Fails the deploy on duplicate titles/canonicals, over-long or repeated
+      # meta descriptions, placeholder values, missing alt text or broken
+      # JSON-LD in the prerendered output.
+      - name: Check SEO invariants
+        run: npm run check:seo
 
       - name: Setup Pages
         uses: actions/configure-pages@v4

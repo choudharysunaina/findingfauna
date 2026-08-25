@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import SEOHead from '../components/ui/SEOHead';
-import { SITE_URL } from '../config/site';
+import { generateCanonicalUrl } from '../utils/seoUtils';
 
 const TermsAndConditions = () => {
   useEffect(() => {
@@ -13,7 +13,7 @@ const TermsAndConditions = () => {
       <SEOHead
         title="Terms and Conditions"
         description="Booking terms, cancellation and refund policy, and safari conduct guidelines for Finding Fauna's Kuno National Park safaris."
-        canonical={`${SITE_URL}/terms-and-conditions`}
+        canonical={generateCanonicalUrl('/terms-and-conditions')}
       />
       <div className="container py-20">
         <h1 className="text-4xl font-bold text-center mb-8">Terms and Conditions</h1>

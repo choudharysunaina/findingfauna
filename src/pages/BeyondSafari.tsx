@@ -5,6 +5,7 @@ import { Check, Award, Users, Clock, Zap, Heart } from "lucide-react";
 import SectionHeading from "../components/ui/SectionHeading";
 import TrackedSection from "../components/tracking/TrackedSection";
 import { SITE_URL } from "../config/site";
+import { generateCanonicalUrl, generateBreadcrumbSchema } from "../utils/seoUtils";
 
 const highlights = [
   {
@@ -31,38 +32,56 @@ const stories = [
   {
     title: "Cheetahs Return to India: A Historic First Glimpse",
     description:
-      "We proudly captured India's first wild cheetah photos—a milestone in conservation showcasing these majestic animals in their natural home.",
+      "When Project Cheetah released the first animals from their enclosures into the wider Kuno landscape, we were in the field for it — and came away with what are, to our knowledge, the first photographs of a free-ranging cheetah in India since the species was declared extinct here in 1952.",
+    detail:
+      "Kuno had been prepared for large-carnivore reintroduction for two decades. Standing in a grassland watching the world's fastest land animal move across it, in India, is the single moment that shaped what Finding Fauna does now.",
     image: "/beyond-safari/cheetah-close-up.webp",
+    alt: "One of India's first free-ranging cheetahs photographed in Kuno National Park",
   },
   {
     title: "Dhole Spotted in Kuno After 15 Years",
     description:
-      "A remarkable sighting—capturing the elusive Dhole in Kuno National Park after 15 years highlighted the return of this endangered wild dog to the landscape.",
+      "The Indian wild dog, or dhole, had not been recorded in Kuno for roughly fifteen years. Our team documented one in the park — evidence that the species is moving back into a landscape it had effectively vanished from.",
+    detail:
+      "Dholes are pack hunters that need large, connected, prey-rich habitat. Their reappearance says something about the state of the wider Kuno landscape that no single cheetah sighting can.",
     image: "/beyond-safari/dhole.webp",
+    alt: "Dhole, or Indian wild dog, recorded in Kuno National Park after fifteen years",
   },
   {
-    title: "Rare Melanistic Indian Wolf Puppies Spotted",
+    title: "Rare Melanistic Indian Wolf Pups",
     description:
-      "An extraordinary discovery—capturing the rare black-furred wolf pups thriving in the wild was a breathtaking experience.",
+      "Black-furred Indian wolf pups, photographed in the wild. Melanism in Indian wolves is genuinely rare and is documented only a handful of times — finding a litter of them was extraordinary.",
+    detail:
+      "Indian wolves are among the most threatened large carnivores in the country and are far harder to see than any of Kuno's big cats. We do not disclose den locations.",
     image: "/beyond-safari/wolf_puppies.webp",
+    alt: "Rare melanistic Indian wolf pups photographed in the Kuno landscape",
   },
   {
-    title: "Rare Melanistic Jungle Cat Captured in Kuno",
+    title: "Rare Melanistic Jungle Cat in Kuno",
     description:
-      "A remarkable discovery of this elusive, dark-coated jungle cat reveals the hidden marvels of India's forests.",
+      "A dark-coated jungle cat — another melanistic record from the same landscape, and an animal most visitors never see in its ordinary colouring, let alone this one.",
+    detail:
+      "Jungle cats are common across India but nocturnal, wary and easy to miss. Records like this one come from the night drives rather than the safari slots.",
     image: "/beyond-safari/junglecat.webp",
+    alt: "Melanistic jungle cat with a dark coat, recorded in Kuno National Park",
   },
   {
     title: "Forest Owlet Rediscovered in Kuno After 123 Years",
     description:
-      "A landmark discovery—our team documented the Forest Owlet in Kuno National Park after 123 years, marking a historic rediscovery of this critically important bird.",
+      "The Forest Owlet was thought lost for most of the twentieth century and remains one of India's most threatened birds. Our team documented it in Kuno — the first record here in 123 years.",
+    detail:
+      "This is the discovery we are proudest of. It is also the clearest argument for why Kuno matters beyond Project Cheetah: the landscape holds species nobody was looking for.",
     image: "/beyond-safari/forrestowlet.webp",
+    alt: "Critically threatened Forest Owlet, rediscovered in Kuno National Park after 123 years",
   },
   {
-    title: "Indian Rock Python Hatchlings Spotted",
+    title: "Indian Rock Python Hatchlings",
     description:
-      "A rare glimpse of hatchlings emerging—offering a powerful reminder of nature's delicate balance and the wonder of new life.",
+      "A clutch of Indian rock python hatchlings emerging, photographed without disturbing the nest. Rock pythons are protected and slow-breeding, and a successful clutch is a good sign for the habitat around it.",
+    detail:
+      "Reptiles are the part of Kuno almost nobody comes for and the part our rescue work touches most often. They are also the easiest to harm through careless photography, which is why we keep our distance.",
     image: "/rock_python.webp",  // shared with blog CMS, stays at public root
+    alt: "Indian rock python hatchlings emerging from a nest near Kuno National Park",
   },
 ];
 
@@ -108,12 +127,16 @@ const values = [
 const BeyondSafari = () => (
   <>
     <SEOHead
-      title="Beyond Safari - Wildlife Conservation & Community"
-      description="Discover our wildlife rescue initiatives, community education programs, and conservation efforts at Kuno National Park. Learn about our groundbreaking moments and conservation success stories."
-      keywords="Wildlife Conservation, Community Education, Wildlife Rescue, Kuno National Park, Conservation Awareness, Forest Department, Wildlife Rehabilitation"
-      canonical={`${SITE_URL}/beyond-safari`}
+      title="Wildlife Rescue & Conservation at Kuno"
+      description="150+ rescues, community education with the MP Forest Department, and the discoveries our team documented at Kuno — dholes after 15 years, the Forest Owlet after 123."
+      canonical={generateCanonicalUrl('/beyond-safari')}
       ogImage="/home/more_info.webp"
+      ogImageAlt="Finding Fauna team on a wildlife rescue near Kuno National Park"
       ogType="article"
+      structuredData={generateBreadcrumbSchema([
+        { name: 'Home', url: SITE_URL },
+        { name: 'Beyond Safari', url: `${SITE_URL}/beyond-safari` },
+      ])}
     />
     <div className="bg-neutral-50">
       {/* Hero Section */}
@@ -154,6 +177,8 @@ const BeyondSafari = () => (
               >
                 <ResponsiveImage
                   src={item.image}
+                  width={400}
+                  height={224}
                   alt={item.title}
                   className="h-56 w-full object-cover"
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 33vw, 400px"
@@ -186,13 +211,16 @@ const BeyondSafari = () => (
               >
                 <ResponsiveImage
                   src={story.image}
-                  alt={story.title}
+                  alt={story.alt}
+                  width={400}
+                  height={224}
                   className="h-56 w-full object-cover"
                   sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 300px"
                 />
                 <div className="p-6 flex-1 flex flex-col">
                   <h3 className="text-xl font-semibold mb-2">{story.title}</h3>
-                  <p className="text-neutral-600 flex-1">{story.description}</p>
+                  <p className="text-neutral-600 mb-3">{story.description}</p>
+                  <p className="text-neutral-600 text-sm flex-1">{story.detail}</p>
                 </div>
               </motion.div>
             ))}

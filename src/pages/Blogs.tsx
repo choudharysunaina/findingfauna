@@ -2,22 +2,27 @@ import { motion } from 'framer-motion';
 import { Calendar, Clock, User, ArrowRight } from 'lucide-react';
 import SectionHeading from '../components/ui/SectionHeading';
 import SEOHead from '../components/ui/SEOHead';
-import { useBlogPosts } from '../utils/blogPosts';
+import { blogPosts, blogCategories } from '../utils/blogPosts';
 import TrackedSection from '../components/tracking/TrackedSection';
 import TrackedLink from '../components/tracking/TrackedLink';
 import { SITE_URL } from '../config/site';
+import { generateCanonicalUrl, generateBreadcrumbSchema } from '../utils/seoUtils';
 
 const Blogs = () => {
-  const { posts } = useBlogPosts();
-  const [featured, ...rest] = posts;
+  const [featured, ...rest] = blogPosts;
 
   return (
     <div className="min-h-screen bg-white">
       <SEOHead
-        title="Blog"
-        description="Stories, conservation updates, and safari tips from the Finding Fauna team at Kuno National Park."
-        canonical={`${SITE_URL}/blogs`}
+        title="Kuno National Park Safari Guides & Field Notes"
+        description="Field guides to Kuno from the naturalists who work there: safari zones and gates, how the permit system works, wildlife you can expect, and places worth visiting nearby."
+        canonical={generateCanonicalUrl('/blogs')}
         ogImage={featured.coverImage}
+        ogImageAlt={featured.title}
+        structuredData={generateBreadcrumbSchema([
+          { name: 'Home', url: SITE_URL },
+          { name: 'Blog', url: `${SITE_URL}/blogs` },
+        ])}
       />
 
       {/* Hero */}
@@ -51,6 +56,24 @@ const Blogs = () => {
         </div>
       </TrackedSection>
 
+      {/* Topic archives */}
+      <nav aria-label="Blog categories" className="border-b border-neutral-100 bg-neutral-50">
+        <div className="container flex flex-wrap items-center gap-3 py-4">
+          <span className="text-sm font-medium text-neutral-500">Browse by topic:</span>
+          {blogCategories.map((category) => (
+            <TrackedLink
+              key={category.slug}
+              category="blog"
+              label={`category_${category.slug}`}
+              to={`/blog/category/${category.slug}`}
+              className="rounded-full border border-neutral-200 bg-white px-4 py-1.5 text-sm transition-colors hover:border-primary-400 hover:text-primary-700"
+            >
+              {category.name} ({category.count})
+            </TrackedLink>
+          ))}
+        </div>
+      </nav>
+
       {/* Featured Post */}
       {featured && (
         <TrackedSection category="blog" label="featured_post" className="section pb-0 bg-white">
@@ -66,6 +89,8 @@ const Blogs = () => {
                 <img loading="lazy" decoding="async"
                   src={featured.coverImage}
                   alt={featured.title}
+                  width={800}
+                  height={534}
                   className="w-full h-full object-cover"
                 />
                 <span className="absolute top-4 left-4 bg-accent-500 text-white text-xs font-semibold px-3 py-1 rounded-full">
@@ -130,6 +155,8 @@ const Blogs = () => {
                     <img loading="lazy" decoding="async"
                       src={post.coverImage}
                       alt={post.title}
+                      width={600}
+                      height={224}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />

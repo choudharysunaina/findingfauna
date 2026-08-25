@@ -1,135 +1,109 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { SITE_URL, SITE_NAME } from '../../config/site';
+import { generateMetaDescription, generateOGImageUrl } from '../../utils/seoUtils';
 
 interface SEOHeadProps {
+  /**
+   * The page's own title. `| Kuno Cheetah Safari` is appended unless the title
+   * already names the brand or is long enough that the suffix would be cut off
+   * in results — write the keyword-first title you actually want to rank.
+   */
   title: string;
   description: string;
-  keywords?: string;
-  canonical?: string;
+  canonical: string;
   ogImage?: string;
+  ogImageAlt?: string;
   ogType?: 'website' | 'article' | 'product';
   twitterCard?: 'summary' | 'summary_large_image';
-  structuredData?: object;
+  /** One JSON-LD object, or several to emit as separate script blocks. */
+  structuredData?: object | object[];
+  /** ISO date (YYYY-MM-DD) for article:published_time. */
+  publishedTime?: string | null;
+  author?: string;
   noindex?: boolean;
   nofollow?: boolean;
+}
+
+/** Roughly the point at which Google truncates a title in desktop results. */
+const TITLE_BUDGET = 60;
+
+function buildTitle(title: string): string {
+  const suffix = ` | ${SITE_NAME}`;
+  const alreadyBranded = title.toLowerCase().includes(SITE_NAME.toLowerCase());
+  if (alreadyBranded || title.length + suffix.length > TITLE_BUDGET) return title;
+  return `${title}${suffix}`;
 }
 
 const SEOHead: React.FC<SEOHeadProps> = ({
   title,
   description,
-  keywords = 'Kuno National Park, Cheetah Safari, Wildlife Safari, Madhya Pradesh, India, Wildlife Conservation, Safari Packages, Photography Safari',
   canonical,
   ogImage = '/home/cheetah.webp',
+  ogImageAlt,
   ogType = 'website',
   twitterCard = 'summary_large_image',
   structuredData,
+  publishedTime,
+  author,
   noindex = false,
   nofollow = false,
 }) => {
-  const fullTitle = `${title} | ${SITE_NAME}`;
-  const fullDescription = `${description} Experience the thrill of spotting wild cheetahs, leopards, and diverse wildlife in India's premier national park.`;
-  
-  const defaultStructuredData = {
-    "@context": "https://schema.org",
-    "@type": "TouristDestination",
-    "name": "Kuno National Park",
-    "description": "Experience the thrill of spotting wild cheetahs, leopards, and diverse wildlife in India's premier national park.",
-    "url": SITE_URL,
-    "image": [
-      `${SITE_URL}/home/cheetah.webp`,
-      `${SITE_URL}/home/leopard.webp`,
-      `${SITE_URL}/home/tiger.webp`
-    ],
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Kuno",
-      "addressRegion": "Madhya Pradesh",
-      "addressCountry": "IN"
-    },
-    "geo": {
-      "@type": "GeoCoordinates",
-      "latitude": 25.5,
-      "longitude": 77.5
-    },
-    "telephone": "+91-XXXXXXXXXX",
-    "priceRange": "₹₹₹",
-    "openingHours": "Mo-Su 06:00-18:00",
-    "amenityFeature": [
-      {
-        "@type": "LocationFeatureSpecification",
-        "name": "Safari Tours",
-        "value": true
-      },
-      {
-        "@type": "LocationFeatureSpecification",
-        "name": "Wildlife Photography",
-        "value": true
-      },
-      {
-        "@type": "LocationFeatureSpecification",
-        "name": "Expert Guides",
-        "value": true
-      }
-    ]
-  };
+  const fullTitle = buildTitle(title);
+  // Descriptions used to have a fixed sentence appended, which pushed every
+  // page to 240-390 characters and gave all of them the same ending. Truncate
+  // instead, and let each page write its own.
+  const metaDescription = generateMetaDescription(description);
+  const imageUrl = generateOGImageUrl(ogImage);
+  const robots = [noindex ? 'noindex' : 'index', nofollow ? 'nofollow' : 'follow'].join(', ');
+  const schemas = structuredData
+    ? Array.isArray(structuredData)
+      ? structuredData
+      : [structuredData]
+    : [];
 
   return (
     <Helmet>
-      {/* Basic Meta Tags */}
       <title>{fullTitle}</title>
-      <meta name="description" content={fullDescription} />
-      <meta name="keywords" content={keywords} />
-      <meta name="author" content={SITE_NAME} />
-      <meta name="robots" content={noindex ? 'noindex' : nofollow ? 'nofollow' : 'index, follow'} />
-      
-      {/* Canonical URL */}
-      {canonical && <link rel="canonical" href={canonical} />}
-      
-      {/* Open Graph Meta Tags */}
+      <meta name="description" content={metaDescription} />
+      <meta name="robots" content={robots} />
+      <link rel="canonical" href={canonical} />
+
+      {/* Open Graph */}
       <meta property="og:title" content={fullTitle} />
-      <meta property="og:description" content={fullDescription} />
+      <meta property="og:description" content={metaDescription} />
       <meta property="og:type" content={ogType} />
-      <meta property="og:url" content={canonical || window.location.href} />
-      <meta property="og:image" content={ogImage.startsWith('http') ? ogImage : `${window.location.origin}${import.meta.env.BASE_URL}${ogImage.startsWith('/') ? ogImage.slice(1) : ogImage}`} />
-      <meta property="og:image:width" content="1200" />
-      <meta property="og:image:height" content="630" />
+      <meta property="og:url" content={canonical} />
+      <meta property="og:image" content={imageUrl} />
+      <meta property="og:image:alt" content={ogImageAlt || title} />
       <meta property="og:site_name" content={SITE_NAME} />
-      <meta property="og:locale" content="en_US" />
-      
-      {/* Twitter Card Meta Tags */}
+      <meta property="og:locale" content="en_IN" />
+      {ogType === 'article' && publishedTime && (
+        <meta property="article:published_time" content={publishedTime} />
+      )}
+      {ogType === 'article' && author && <meta property="article:author" content={author} />}
+
+      {/* Twitter */}
       <meta name="twitter:card" content={twitterCard} />
       <meta name="twitter:title" content={fullTitle} />
-      <meta name="twitter:description" content={fullDescription} />
-      <meta name="twitter:image" content={ogImage.startsWith('http') ? ogImage : `${window.location.origin}${import.meta.env.BASE_URL}${ogImage.startsWith('/') ? ogImage.slice(1) : ogImage}`} />
-      <meta name="twitter:site" content="@kunosafari" />
-      
-      {/* Additional SEO Meta Tags */}
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <meta name="theme-color" content="#059669" />
-      <meta name="msapplication-TileColor" content="#059669" />
-      
-      {/* Language and Region */}
-      <meta httpEquiv="content-language" content="en" />
-      <meta name="language" content="English" />
+      <meta name="twitter:description" content={metaDescription} />
+      <meta name="twitter:image" content={imageUrl} />
+      <meta name="twitter:image:alt" content={ogImageAlt || title} />
+
+      {/* Region hints */}
       <meta name="geo.region" content="IN-MP" />
       <meta name="geo.placename" content="Kuno National Park" />
-      
-      {/* Structured Data */}
-      <script type="application/ld+json">
-        {JSON.stringify(structuredData || defaultStructuredData)}
-      </script>
-      
-      {/* Preconnect to external domains */}
-      <link rel="preconnect" href="https://fonts.googleapis.com" />
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-      
-      {/* Favicon and App Icons */}
-      <link rel="icon" type="image/png" href="/icons/ff_logo.png" />
-      <link rel="apple-touch-icon" href="/icons/ff_logo.png" />
-      <link rel="manifest" href={`${import.meta.env.BASE_URL}icons/site.webmanifest`} />
+
+      {schemas.map((schema, index) => (
+        <script type="application/ld+json" key={index}>
+          {JSON.stringify(schema)}
+        </script>
+      ))}
     </Helmet>
   );
 };
 
 export default SEOHead;
+
+/** Re-exported so pages can build canonicals without a second import. */
+export { SITE_URL };

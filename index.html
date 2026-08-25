@@ -1,47 +1,38 @@
 <!doctype html>
-<html lang="en">
+<html lang="en-IN">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="/icons/ff_logo.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#059669" />
+
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png" />
     <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
     <link rel="manifest" href="/icons/site.webmanifest" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- TODO: paste the token from Search Console > Settings > Ownership verification
+         > HTML tag, and the one from Bing Webmaster Tools. Both must live here
+         rather than in SEOHead so they survive on every route and on 404.html. -->
+    <!-- <meta name="google-site-verification" content="" /> -->
+    <!-- <meta name="msvalidate.01" content="" /> -->
+
     <!--
-      No static title/description/canonical/og/twitter tags here on purpose:
-      SEOHead.tsx (react-helmet-async) renders page-specific versions of all
-      of these on every route (see src/pages/*.tsx), and the prerender step
-      (scripts/prerender.mjs) bakes that per-page output into each route's
-      built HTML file. Static duplicates here would double up with Helmet's
-      tags in the prerendered output — worse, since Helmet doesn't remove
-      tags it didn't create itself, every non-home route would ship an extra
-      canonical link pointing at the homepage, which Google explicitly says
-      makes it ignore canonical signals entirely for that page.
+      No static title/description/canonical/og/twitter/JSON-LD tags here on
+      purpose. SEOHead.tsx (react-helmet-async) renders page-specific versions
+      on every route, Layout.tsx renders the site-wide Organization/WebSite/
+      LocalBusiness graph once, and the prerender step (scripts/prerender.mjs)
+      bakes that per-page output into each route's built HTML file. Static
+      duplicates here would double up with Helmet's tags in the prerendered
+      output — worse, since Helmet doesn't remove tags it didn't create itself,
+      every non-home route would ship an extra canonical link pointing at the
+      homepage, which Google explicitly says makes it ignore canonical signals
+      entirely for that page.
+
+      The title below is only a fallback for the unprerendered SPA shell
+      (dist/404.html); every real route overwrites it.
     -->
-    <title>Kuno National Park Safari</title>
+    <title>Kuno Cheetah Safari — Kuno National Park Safari Booking</title>
 
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "Organization",
-        "name": "Kuno National Park Safari",
-        "url": "https://cheetahsafarikuno.com",
-        "logo": "https://cheetahsafarikuno.com/icons/logo.png",
-        "description": "Premier wildlife safari operator in Kuno National Park, offering guided tours, photography packages, and conservation experiences.",
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "Kuno",
-          "addressRegion": "Madhya Pradesh",
-          "addressCountry": "IN"
-        },
-        "sameAs": [
-          "https://www.facebook.com/share/1JGyQ8mZVS/?mibextid=wwXIfr",
-          "https://www.instagram.com/finding_fauna/",
-          "https://www.linkedin.com/in/finding-fauna-1820b934a"
-        ]
-      }
-    </script>
-
-    <link rel="preload" as="image" href="/home/home_background2.webp" fetchpriority="high" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link

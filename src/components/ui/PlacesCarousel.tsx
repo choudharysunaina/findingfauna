@@ -5,6 +5,10 @@ import ResponsiveImage from './ResponsiveImage';
 interface Place {
   name: string;
   image: string;
+  /** One line on what the place is — tiles used to carry a name and nothing else. */
+  description?: string;
+  /** Descriptive alt; falls back to the name if not supplied. */
+  alt?: string;
 }
 
 interface PlacesCarouselProps {
@@ -49,15 +53,20 @@ const PlacesCarousel = ({ places }: PlacesCarouselProps) => {
               <div className="relative h-40 md:h-48 rounded-lg overflow-hidden shadow-md group">
                 <ResponsiveImage
                   src={place.image}
-                  alt={place.name}
-                  className="w-full h-full transition-transform duration-300 group-hover:scale-105"
+                  alt={place.alt ?? place.name}
+                  width={400}
+                  height={192}
+                  className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
                   sizes="(max-width: 768px) 50vw, 20vw"
                 />
                 <div className="absolute inset-0 bg-black/40 pointer-events-none" />
-                <span className="absolute inset-0 flex items-center justify-center text-white font-semibold text-lg drop-shadow">
+                <h3 className="absolute inset-0 flex items-center justify-center px-2 text-center text-white font-semibold text-lg drop-shadow">
                   {place.name}
-                </span>
+                </h3>
               </div>
+              {place.description && (
+                <p className="mt-2 text-sm leading-relaxed text-neutral-600">{place.description}</p>
+              )}
             </div>
           ))}
         </div>

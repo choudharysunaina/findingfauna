@@ -49,7 +49,9 @@ const AccommodationOptions = ({
               <div className="relative h-64 overflow-hidden">
                 <img loading="lazy" decoding="async"
                   src={option.image}
-                  alt={option.type}
+                  alt={`${option.type} accommodation near Kuno National Park`}
+                  width={600}
+                  height={400}
                   className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>

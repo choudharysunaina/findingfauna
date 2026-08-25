@@ -6,26 +6,39 @@ import SpecializedPackages from '../components/home/SpecializedPackages';
 import ExperienceSection from '../components/home/Experiences';
 import SurpriseSection from '../components/home/SurpriseSection';
 import MomentsSection from '../components/home/MomentsSection';
+import PlanningSection from '../components/home/PlanningSection';
+import { Helmet } from 'react-helmet-async';
 import SEOHead from '../components/ui/SEOHead';
-import { SITE_URL } from '../config/site';
+import { generateCanonicalUrl, generateReviewSchema } from '../utils/seoUtils';
+import { testimonials } from '../data/testimonials';
 
 const Home = () => {
   return (
     <>
       <SEOHead
-        title="Home"
-        description="Experience the thrill of spotting wild cheetahs, leopards, and diverse wildlife in Kuno National Park. Book your safari adventure today with expert guides and customized packages."
-        keywords="Kuno National Park, Cheetah Safari, Wildlife Safari, Madhya Pradesh, India, Safari Packages, Wildlife Photography, Conservation"
-        canonical={SITE_URL}
+        title="Kuno Cheetah Safari Booking — Prices, Zones & Timings"
+        description="Book a naturalist-led cheetah safari in Kuno National Park, India's only free-ranging cheetah landscape. 4D/3N packages from ₹28,000, Gypsy permits and Gwalior transfers included."
+        canonical={generateCanonicalUrl('/')}
         ogImage="/home/cheetah.webp"
+        ogImageAlt="Wild cheetah in the grasslands of Kuno National Park, Madhya Pradesh"
         ogType="website"
+        structuredData={generateReviewSchema(
+          testimonials.map((t) => ({ author: t.name, rating: t.rating, reviewBody: t.quote }))
+        )}
       />
+      {/* Homepage-only: the hero video's poster frame is the LCP element here.
+          This preload used to sit in index.html, where it made every other
+          route fetch an image it never displays. */}
+      <Helmet>
+        <link rel="preload" as="image" href="/home/home_background2.webp" fetchPriority="high" />
+      </Helmet>
       <HeroSection />
       <MoreInfo />
       <SpecializedPackages />
       <ExperienceSection />
       <SurpriseSection />
       <MomentsSection />
+      <PlanningSection />
       <TestimonialsSection />
       <ContactSection />
     </>

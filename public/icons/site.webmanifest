@@ -1,19 +1,31 @@
 {
-  "name": "Finding Fauna - Kuno National Park Safari",
-  "short_name": "Finding Fauna",
-  "description": "Experience the thrill of spotting wild cheetahs, leopards, and diverse wildlife in India's premier national park.",
+  "name": "Kuno Cheetah Safari — Finding Fauna",
+  "short_name": "Kuno Safari",
+  "description": "Naturalist-led cheetah and big cat safaris in Kuno National Park, Madhya Pradesh.",
   "icons": [
     {
-      "src": "ff_logo.png",
-      "sizes": "100x92",
+      "src": "icon-192.png",
+      "sizes": "192x192",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ],
   "theme_color": "#059669",
   "background_color": "#ffffff",
   "display": "standalone",
   "start_url": "/",
-  "scope": "/"
+  "scope": "/",
+  "lang": "en-IN"
 }
-

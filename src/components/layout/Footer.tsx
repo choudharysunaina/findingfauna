@@ -1,7 +1,14 @@
 import { Link, NavLink } from 'react-router-dom';
-import { Facebook, Instagram, Twitter, Linkedin, Mail, Phone, MapPin } from 'lucide-react';
+import { Facebook, Instagram, Youtube, Linkedin, Mail, Phone, MapPin } from 'lucide-react';
 import { trackEvent } from '../../utils/analytics';
-import { CONTACT_EMAIL } from '../../config/site';
+import { guides } from '../../data/guides';
+import {
+  CONTACT_EMAIL,
+  CONTACT_PHONE,
+  CONTACT_PHONE_DISPLAY,
+  BUSINESS,
+  SOCIAL_LINKS,
+} from '../../config/site';
 
 // Scrolls to top on internal nav and records a GA4 footer click.
 const handleClick = (label: string) => () => {
@@ -20,45 +27,39 @@ const Footer = () => {
   return (
     <footer className="bg-neutral-900 text-white">
       <div className="container py-12 md:py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
           {/* Company Info */}
           <div>
             <h4 className="text-xl font-bold mb-4">Finding Fauna</h4>
             <p className="text-neutral-300 mb-4">
               Exploring the wild, telling its stories, and preserving its future.
             </p>
+            {/* Same set as Organization.sameAs in seoUtils — both read
+                SOCIAL_LINKS, so a profile added there shows up in the footer
+                and in the structured data together. YouTube was previously
+                linked only from the homepage video section and was missing
+                from sameAs entirely, despite being the largest channel. */}
             <div className="flex space-x-4">
-              <a
-                href="https://www.facebook.com/share/1JGyQ8mZVS/?mibextid=wwXIfr"
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={trackFooter('social_facebook')}
-                className="text-neutral-300 hover:text-primary-400 transition-colors"
-                aria-label="Facebook"
-              >
-                <Facebook size={20} />
-              </a>
-              <a
-                href="https://www.instagram.com/finding_fauna/"
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={trackFooter('social_instagram')}
-                className="text-neutral-300 hover:text-primary-400 transition-colors"
-                aria-label="Instagram"
-              >
-                <Instagram size={20} />
-              </a>
-
-                     <a
-                href="https://www.linkedin.com/in/finding-fauna-1820b934a"
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={trackFooter('social_linkedin')}
-                className="text-neutral-300 hover:text-primary-400 transition-colors"
-                aria-label="LinkedIn"
-              >
-                <Linkedin size={20} />
-              </a>
+              {(
+                [
+                  ['facebook', 'Facebook', Facebook],
+                  ['instagram', 'Instagram', Instagram],
+                  ['youtube', 'YouTube', Youtube],
+                  ['linkedin', 'LinkedIn', Linkedin],
+                ] as const
+              ).map(([key, label, Icon]) => (
+                <a
+                  key={key}
+                  href={SOCIAL_LINKS[key]}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={trackFooter(`social_${key}`)}
+                  className="text-neutral-300 hover:text-primary-400 transition-colors"
+                  aria-label={label}
+                >
+                  <Icon size={20} />
+                </a>
+              ))}
             </div>
             
           </div>
@@ -97,6 +98,30 @@ const Footer = () => {
                   Kuno National Park
                 </NavLink>
               </li>
+              <li>
+                <NavLink onClick={handleClick('quicklink_blog')} to="/blogs" className="text-neutral-300 hover:text-white transition-colors">
+                  Blog
+                </NavLink>
+              </li>
+            </ul>
+          </div>
+
+          {/* Planning guides. Sourced from src/data/guides.ts so the footer,
+              the nav dropdown and the guides' own cross-links never diverge. */}
+          <div>
+            <h4 className="text-xl font-bold mb-4">Plan Your Trip</h4>
+            <ul className="space-y-2">
+              {guides.map((guide) => (
+                <li key={guide.path}>
+                  <NavLink
+                    onClick={handleClick(`guide_${guide.path.replace(/\//g, '')}`)}
+                    to={guide.path}
+                    className="text-neutral-300 hover:text-white transition-colors"
+                  >
+                    {guide.label}
+                  </NavLink>
+                </li>
+              ))}
             </ul>
           </div>
 
@@ -128,18 +153,16 @@ const Footer = () => {
             <ul className="space-y-3">
               <li className="flex items-start">
                 <MapPin size={20} className="mr-2 text-primary-400 flex-shrink-0 mt-1" />
-                <span className="text-neutral-300">
-                  Bus Stand Pohari, Shivpuri, 473775
-                </span>
+                <span className="text-neutral-300">{BUSINESS.addressDisplay}</span>
               </li>
               <li className="flex items-center">
                 <Phone size={20} className="mr-2 text-primary-400 flex-shrink-0" />
                 <a
-                  href="tel:+919893486893"
+                  href={`tel:${CONTACT_PHONE}`}
                   onClick={trackFooter('tel')}
                   className="text-neutral-300 hover:text-white transition-colors"
                 >
-                  (+91)9893486893
+                  {CONTACT_PHONE_DISPLAY}
                 </a>
               </li>
               <li className="flex items-center">

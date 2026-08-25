@@ -2,62 +2,106 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://cheetahsafarikuno.com/</loc>
-    <priority>1.0</priority>
+    <lastmod>2026-08-25</lastmod>
   </url>
   <url>
     <loc>https://cheetahsafarikuno.com/kuno-national-park</loc>
-    <priority>0.9</priority>
+    <lastmod>2026-08-25</lastmod>
+  </url>
+  <url>
+    <loc>https://cheetahsafarikuno.com/kuno-safari-booking</loc>
+    <lastmod>2026-08-25</lastmod>
+  </url>
+  <url>
+    <loc>https://cheetahsafarikuno.com/kuno-safari-price</loc>
+    <lastmod>2026-08-25</lastmod>
+  </url>
+  <url>
+    <loc>https://cheetahsafarikuno.com/kuno-safari-zones</loc>
+    <lastmod>2026-08-25</lastmod>
+  </url>
+  <url>
+    <loc>https://cheetahsafarikuno.com/best-time-to-visit-kuno</loc>
+    <lastmod>2026-08-25</lastmod>
+  </url>
+  <url>
+    <loc>https://cheetahsafarikuno.com/how-to-reach-kuno</loc>
+    <lastmod>2026-08-25</lastmod>
+  </url>
+  <url>
+    <loc>https://cheetahsafarikuno.com/where-to-stay-near-kuno</loc>
+    <lastmod>2026-08-25</lastmod>
   </url>
   <url>
     <loc>https://cheetahsafarikuno.com/packages</loc>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://cheetahsafarikuno.com/package/kuno-cheetah-safari-package</loc>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://cheetahsafarikuno.com/package/big-cat-safari-package</loc>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://cheetahsafarikuno.com/package/photography-package</loc>
-    <priority>0.8</priority>
+    <lastmod>2026-08-25</lastmod>
   </url>
   <url>
     <loc>https://cheetahsafarikuno.com/beyond-safari</loc>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://cheetahsafarikuno.com/about</loc>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://cheetahsafarikuno.com/contact</loc>
-    <priority>0.6</priority>
+    <lastmod>2026-08-25</lastmod>
   </url>
   <url>
     <loc>https://cheetahsafarikuno.com/blogs</loc>
-    <priority>0.6</priority>
+    <lastmod>2026-08-25</lastmod>
   </url>
   <url>
-    <loc>https://cheetahsafarikuno.com/blog/return-of-cheetahs-to-kuno</loc>
-    <priority>0.5</priority>
+    <loc>https://cheetahsafarikuno.com/about</loc>
+    <lastmod>2026-08-25</lastmod>
   </url>
   <url>
-    <loc>https://cheetahsafarikuno.com/blog/first-wildlife-safari-tips</loc>
-    <priority>0.5</priority>
-  </url>
-  <url>
-    <loc>https://cheetahsafarikuno.com/blog/beyond-big-cats-kuno-biodiversity</loc>
-    <priority>0.5</priority>
+    <loc>https://cheetahsafarikuno.com/contact</loc>
+    <lastmod>2026-08-25</lastmod>
   </url>
   <url>
     <loc>https://cheetahsafarikuno.com/terms-and-conditions</loc>
-    <priority>0.3</priority>
+    <lastmod>2026-08-25</lastmod>
   </url>
   <url>
     <loc>https://cheetahsafarikuno.com/privacy-policy</loc>
-    <priority>0.3</priority>
+    <lastmod>2026-08-25</lastmod>
+  </url>
+  <url>
+    <loc>https://cheetahsafarikuno.com/package/kuno-cheetah-safari-package</loc>
+    <lastmod>2026-08-25</lastmod>
+  </url>
+  <url>
+    <loc>https://cheetahsafarikuno.com/package/big-cat-safari-package</loc>
+    <lastmod>2026-08-25</lastmod>
+  </url>
+  <url>
+    <loc>https://cheetahsafarikuno.com/package/photography-package</loc>
+    <lastmod>2026-08-25</lastmod>
+  </url>
+  <url>
+    <loc>https://cheetahsafarikuno.com/blog/wildlife-of-kuno</loc>
+    <lastmod>2026-07-28</lastmod>
+  </url>
+  <url>
+    <loc>https://cheetahsafarikuno.com/blog/safari-zones</loc>
+    <lastmod>2026-07-25</lastmod>
+  </url>
+  <url>
+    <loc>https://cheetahsafarikuno.com/blog/safari-booking-system</loc>
+    <lastmod>2026-07-08</lastmod>
+  </url>
+  <url>
+    <loc>https://cheetahsafarikuno.com/blog/park-history</loc>
+    <lastmod>2026-07-04</lastmod>
+  </url>
+  <url>
+    <loc>https://cheetahsafarikuno.com/blog/nearby-places</loc>
+    <lastmod>2026-06-05</lastmod>
+  </url>
+  <url>
+    <loc>https://cheetahsafarikuno.com/blog/category/wildlife</loc>
+    <lastmod>2026-07-28</lastmod>
+  </url>
+  <url>
+    <loc>https://cheetahsafarikuno.com/blog/category/about-the-park</loc>
+    <lastmod>2026-07-25</lastmod>
+  </url>
+  <url>
+    <loc>https://cheetahsafarikuno.com/blog/category/nearby-places</loc>
+    <lastmod>2026-06-05</lastmod>
   </url>
 </urlset>

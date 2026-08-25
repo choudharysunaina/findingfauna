@@ -22,7 +22,16 @@ import TrackedButton from "../components/tracking/TrackedButton";
 import AccommodationOptions from "../components/packages/AccommodationOptions";
 import SEOHead from "../components/ui/SEOHead";
 import { packageData } from "../data/packageData";
-import { generateSafariPackageSchema } from "../utils/seoUtils";
+import {
+  generateSafariPackageSchema,
+  generateProductSchema,
+  generateBreadcrumbSchema,
+  generateFAQSchema,
+  generateCanonicalUrl,
+} from "../utils/seoUtils";
+import Breadcrumbs from "../components/ui/Breadcrumbs";
+import FaqSection from "../components/ui/FaqSection";
+import { packageFaqs } from "../data/packageFaqs";
 import { SITE_URL } from "../config/site";
 
 const FIXED_INCLUSIONS = [
@@ -56,24 +65,50 @@ const PackageDetailPage = () => {
     itineraryRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
+  const canonical = generateCanonicalUrl(`/package/${pkg.id}`);
+  const faqs = packageFaqs[pkg.id] ?? [];
+  const breadcrumbs = [
+    { name: "Home", url: SITE_URL },
+    { name: "Safari Packages", url: `${SITE_URL}/packages` },
+    { name: pkg.title, url: canonical },
+  ];
+
   return (
     <div className="min-h-screen bg-gray-50">
       <SEOHead
-        title={pkg.title}
+        title={`${pkg.title} — ${pkg.duration}, from ₹${pkg.price.toLocaleString('en-IN')}`}
         description={pkg.description}
-        canonical={`${SITE_URL}/package/${pkg.id}`}
+        canonical={canonical}
         ogImage={pkg.image}
+        ogImageAlt={pkg.heroImageAlt}
         ogType="product"
-        structuredData={generateSafariPackageSchema({
-          name: pkg.title,
-          description: pkg.description,
-          image: pkg.image,
-          price: String(pkg.price),
-          duration: pkg.duration,
-          includes: pkg.features,
-          highlights: pkg.highlights,
-        })}
+        structuredData={[
+          generateSafariPackageSchema({
+            name: pkg.title,
+            description: pkg.description,
+            image: pkg.image,
+            price: String(pkg.price),
+            duration: pkg.duration,
+            includes: pkg.features,
+            highlights: pkg.highlights,
+            url: canonical,
+          }),
+          generateProductSchema({
+            name: pkg.title,
+            description: pkg.description,
+            image: pkg.image,
+            price: String(pkg.price),
+            url: canonical,
+            sku: pkg.id,
+          }),
+          generateBreadcrumbSchema(breadcrumbs),
+          ...(faqs.length > 0 ? [generateFAQSchema(faqs)] : []),
+        ]}
       />
+
+      <div className="container bg-white">
+        <Breadcrumbs items={breadcrumbs} className="pt-5" />
+      </div>
 
       {/* Hero Section */}
       <TrackedSection
@@ -153,6 +188,8 @@ const PackageDetailPage = () => {
               <img
                 src={pkg.image}
                 alt={pkg.heroImageAlt}
+                width={900}
+                height={600}
                 fetchPriority="high"
                 decoding="async"
                 className="w-full h-96 lg:h-[500px] object-cover rounded-2xl shadow-2xl"
@@ -289,6 +326,16 @@ const PackageDetailPage = () => {
         title="Accommodation Options & Package Cost"
         subtitle="Choose the accommodation style that best suits your adventure preferences and budget."
         options={pkg.accommodationOptions}
+      />
+
+      {/* Package-specific FAQs. The inclusions, exclusions and accommodation
+          blocks above are shared across all three packages, so these are what
+          give each page substantial content of its own. */}
+      <FaqSection
+        category={pkg.gaCategory}
+        faqs={faqs}
+        title={`${pkg.title} — Questions We Get Asked`}
+        className="section bg-white"
       />
 
       {/* Contact Section */}

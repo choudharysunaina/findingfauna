@@ -11,6 +11,8 @@ const MomentsSection = () => {
           <div className="flex-[3] w-full max-w-5xl relative">
             <ResponsiveImage
               src="/home/overlay1.webp"
+              width={800}
+              height={450}
               alt="Kuno National Park Moment"
               className="w-full h-[450px] object-cover shadow-lg"
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 60vw, 800px"
@@ -76,6 +78,8 @@ const MomentsSection = () => {
           <div className="flex-[3] w-full max-w-5xl relative">
             <ResponsiveImage
               src="/home/overlay2.webp"
+              width={800}
+              height={450}
               alt="Kuno National Park Moment"
               className="w-full h-[450px] object-cover shadow-lg"
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 60vw, 800px"

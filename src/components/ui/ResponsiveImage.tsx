@@ -1,68 +1,76 @@
-import React from 'react';
-import OptimizedImage from './OptimizedImage';
+import React, { useState } from 'react';
 
 interface ResponsiveImageProps {
   src: string;
   alt: string;
   className?: string;
+  /**
+   * Intrinsic pixel dimensions. Always pass these where the aspect ratio is
+   * known: without them the browser cannot reserve space before the image
+   * arrives, which is the main source of layout shift (CLS) on this site.
+   */
+  width?: number;
+  height?: number;
+  /**
+   * Kept for the call sites that already pass it, but currently inert — there
+   * is one WebP per image in public/, so there is no srcSet for `sizes` to
+   * choose between. It starts working the moment width variants are generated.
+   */
   sizes?: string;
+  /** Above-the-fold hero image: loads eagerly at high priority. */
   priority?: boolean;
   fallbackSrc?: string;
-  onLoad?: () => void;
-  onError?: () => void;
 }
 
+function withBase(imageSrc: string): string {
+  if (imageSrc.startsWith('http') || imageSrc.startsWith('data:') || imageSrc.startsWith('//')) {
+    return imageSrc;
+  }
+  const base = import.meta.env.BASE_URL || '/';
+  const prefix = base.endsWith('/') ? base.slice(0, -1) : base;
+  if (prefix && imageSrc.startsWith(prefix)) return imageSrc;
+  return imageSrc.startsWith('/') ? `${prefix}${imageSrc}` : imageSrc;
+}
+
+/**
+ * Plain <img> with base-path handling and an optional error fallback.
+ *
+ * This replaces a ResponsiveImage -> OptimizedImage pair that ran the same
+ * path-normalising logic twice and wrapped every image in a fade: the image
+ * rendered at opacity-0 behind a visible "Loading..." placeholder until onLoad
+ * fired. That hid real content from anything that snapshots the page — it is
+ * the reason scripts/prerender.mjs has to sit and wait before capturing — and
+ * the IntersectionObserver that was supposed to drive lazy-loading had been
+ * commented out "temporarily for debugging" and left dead. Native
+ * loading="lazy" does that job without any of it.
+ */
 const ResponsiveImage: React.FC<ResponsiveImageProps> = ({
   src,
   alt,
   className = '',
-  sizes = '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw',
+  width,
+  height,
+  sizes,
   priority = false,
   fallbackSrc,
-  onLoad,
-  onError,
 }) => {
-  // Handle base path for absolute paths
-  const getBasePath = () => {
-    const base = import.meta.env.BASE_URL || '/';
-    // Remove trailing slash for consistency
-    return base.endsWith('/') ? base.slice(0, -1) : base;
-  };
-  
-  const normalizeSrc = (imageSrc: string) => {
-    // Skip if already has base path, is external URL, or data URI
-    if (imageSrc.startsWith('http') || imageSrc.startsWith('data:') || imageSrc.startsWith('//')) {
-      return imageSrc;
-    }
-    
-    const basePath = getBasePath();
-    // Check if base path is already included
-    if (imageSrc.startsWith(basePath)) {
-      return imageSrc;
-    }
-    
-    // Add base path if it starts with /
-    if (imageSrc.startsWith('/')) {
-      return `${basePath}${imageSrc}`;
-    }
-    
-    return imageSrc;
-  };
+  const [failed, setFailed] = useState(false);
+  const resolved = withBase(failed && fallbackSrc ? fallbackSrc : src);
 
-  const normalizedSrc = normalizeSrc(src);
-  const normalizedFallbackSrc = fallbackSrc ? normalizeSrc(fallbackSrc) : undefined;
-
-  // Assets in public/ are pre-optimized WebP, so no <picture>/<source> switching is needed
   return (
-    <OptimizedImage
-      src={normalizedSrc}
+    <img
+      src={resolved}
       alt={alt}
-      className={className}
+      width={width}
+      height={height}
       sizes={sizes}
-      priority={priority}
-      fallbackSrc={normalizedFallbackSrc}
-      onLoad={onLoad}
-      onError={onError}
+      className={className}
+      loading={priority ? 'eager' : 'lazy'}
+      {...(priority ? { fetchPriority: 'high' as const } : {})}
+      decoding="async"
+      onError={() => {
+        if (fallbackSrc && !failed) setFailed(true);
+      }}
     />
   );
 };

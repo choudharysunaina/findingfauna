@@ -3,6 +3,7 @@ import { NavLink, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { trackEvent } from "../../utils/analytics";
+import { guides } from "../../data/guides";
 
 // Turn a nav label into a stable GA4 label slug, e.g. "Kuno National Park" -> "nav_kuno_national_park".
 const navLabel = (name: string) =>
@@ -11,7 +12,9 @@ const navLabel = (name: string) =>
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [dropdownOpen, setDropdownOpen] = useState(false);
+  // Which dropdown is open, keyed by nav path. Was a single boolean, which
+  // meant every dropdown opened at once as soon as a second one was added.
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   let dropdownTimeout: ReturnType<typeof setTimeout> | null = null;
   const location = useLocation();
 
@@ -41,6 +44,12 @@ const Navbar = () => {
   const navLinks = [
     { name: "Home", path: "/" },
     { name: "Kuno National Park", path: "/kuno-national-park" },
+    {
+      // Hub is the booking guide, the highest-intent page of the cluster.
+      name: "Plan Your Trip",
+      path: "/kuno-safari-booking",
+      children: guides.map((guide) => ({ name: guide.label, path: guide.path })),
+    },
     { name: "Beyond Safari", path: "/beyond-safari" },
     { name: "Blog", path: "/blogs" },
     {
@@ -58,13 +67,13 @@ const Navbar = () => {
     { name: "About Us", path: "/about" },
   ];
 
-  const handleDropdownEnter = () => {
+  const handleDropdownEnter = (path: string) => {
     if (dropdownTimeout) clearTimeout(dropdownTimeout);
-    setDropdownOpen(true);
+    setOpenDropdown(path);
   };
 
   const handleDropdownLeave = () => {
-    dropdownTimeout = setTimeout(() => setDropdownOpen(false), 150);
+    dropdownTimeout = setTimeout(() => setOpenDropdown(null), 150);
   };
 
   return (
@@ -85,7 +94,9 @@ const Navbar = () => {
         >
           <img
             src={`${import.meta.env.BASE_URL}icons/logo.png`}
-            alt="Finding Fauna Logo"
+            alt="Finding Fauna — Kuno Cheetah Safari"
+            width={1048}
+            height={487}
             className="h-12 w-auto"
           />
         </NavLink>
@@ -97,7 +108,7 @@ const Navbar = () => {
               <div
                 key={link.path}
                 className="relative"
-                onMouseEnter={handleDropdownEnter}
+                onMouseEnter={() => handleDropdownEnter(link.path)}
                 onMouseLeave={handleDropdownLeave}
               >
                 <NavLink
@@ -120,10 +131,10 @@ const Navbar = () => {
                   {link.name}
                 </NavLink>
                 {/* Dropdown */}
-                {dropdownOpen && (
+                {openDropdown === link.path && (
                   <div
                     className="absolute left-0 mt-2 w-60 bg-white shadow-lg rounded-md z-20"
-                    onMouseEnter={handleDropdownEnter}
+                    onMouseEnter={() => handleDropdownEnter(link.path)}
                     onMouseLeave={handleDropdownLeave}
                   >
                     {link.children.map((child) => (
@@ -214,28 +225,57 @@ const Navbar = () => {
             transition={{ duration: 0.3 }}
             className="md:hidden bg-white"
           >
-            <nav className="container py-4 flex flex-col space-y-4">
+            <nav className="container py-4 flex flex-col space-y-2">
               {navLinks.map((link) => (
-                <NavLink
-                  key={link.path}
-                  to={link.path}
-                  onClick={() =>
-                    trackEvent({
-                      category: "nav",
-                      action: "click",
-                      label: `mobile_${navLabel(link.name).slice(4)}`,
-                    })
-                  }
-                  className={({ isActive }) =>
-                    `py-2 px-4 rounded-md transition-colors ${
-                      isActive
-                        ? "bg-primary-50 text-primary-600"
-                        : "text-neutral-700 hover:bg-neutral-100"
-                    }`
-                  }
-                >
-                  {link.name}
-                </NavLink>
+                <div key={link.path}>
+                  <NavLink
+                    to={link.path}
+                    onClick={() =>
+                      trackEvent({
+                        category: "nav",
+                        action: "click",
+                        label: `mobile_${navLabel(link.name).slice(4)}`,
+                      })
+                    }
+                    className={({ isActive }) =>
+                      `block py-2 px-4 rounded-md transition-colors ${
+                        isActive
+                          ? "bg-primary-50 text-primary-600"
+                          : "text-neutral-700 hover:bg-neutral-100"
+                      }`
+                    }
+                  >
+                    {link.name}
+                  </NavLink>
+                  {/* Sub-pages were previously desktop-hover-only, so on mobile
+                      the package and guide pages had no nav entry at all. */}
+                  {link.children && (
+                    <div className="ml-4 border-l border-neutral-200 pl-2">
+                      {link.children.map((child) => (
+                        <NavLink
+                          key={child.path}
+                          to={child.path}
+                          onClick={() =>
+                            trackEvent({
+                              category: "nav",
+                              action: "click",
+                              label: `mobile_dropdown_${navLabel(child.name).slice(4)}`,
+                            })
+                          }
+                          className={({ isActive }) =>
+                            `block py-2 px-4 text-sm rounded-md transition-colors ${
+                              isActive
+                                ? "text-primary-600"
+                                : "text-neutral-600 hover:bg-neutral-100"
+                            }`
+                          }
+                        >
+                          {child.name}
+                        </NavLink>
+                      ))}
+                    </div>
+                  )}
+                </div>
               ))}
               <NavLink
                 to="/contact"

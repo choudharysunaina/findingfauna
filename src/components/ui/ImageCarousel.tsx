@@ -56,6 +56,8 @@ const ImageCarousel = ({ images, className = '', intervalMs = 5000 }: ImageCarou
         >
           <ResponsiveImage
             src={current.src}
+            width={600}
+            height={400}
             alt={current.alt}
             className="w-full h-full object-cover"
             sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 600px"

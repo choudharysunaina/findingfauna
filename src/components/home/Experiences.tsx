@@ -4,14 +4,6 @@ import TrackedSection from "../tracking/TrackedSection";
 import TrackedButton from "../tracking/TrackedButton";
 
 const ExperienceSection = () => {
-  const benefits = [
-    "Creative and innovative design solutions",
-    "Expert team with diverse skill sets",
-    "Collaborative approach to projects",
-    "Dedicated to meeting client goals",
-    "Commitment to quality and excellence",
-  ];
-
   return (
     <TrackedSection category="home_experiences" label="videos" className="section bg-neutral-50">
       <div className="container">
@@ -80,7 +72,9 @@ const ExperienceSection = () => {
               {/* Video Thumbnail */}
               <img loading="lazy" decoding="async"
                 src={`${import.meta.env.BASE_URL}home/cheetahandme.webp`}
-                alt="Kuno Safari Experience Video"
+                alt="Nived Yadav photographing a cheetah in Kuno National Park — still from our YouTube channel"
+                width={800}
+                height={534}
                 className="w-full h-auto object-cover cursor-pointer transition-opacity duration-300 group-hover:opacity-80"
               />
               {/* Play Button Overlay */}

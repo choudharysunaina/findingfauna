@@ -10,12 +10,25 @@ const handleClick = () => {
 
 interface PackageCardProps {
   imageUrl: string;
+  imageAlt: string;
   title: string;
   description: string;
+  features: string[];
+  price: string;
+  to: string;
   delay: number;
 }
 
-const PackageCard = ({ imageUrl, title, description, delay }: PackageCardProps) => {
+const PackageCard = ({
+  imageUrl,
+  imageAlt,
+  title,
+  description,
+  features,
+  price,
+  to,
+  delay,
+}: PackageCardProps) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -27,20 +40,31 @@ const PackageCard = ({ imageUrl, title, description, delay }: PackageCardProps) 
      <div className="flex flex-1 items-center justify-center">
         <ResponsiveImage
           src={imageUrl}
-          alt={`${title} Safari Package`}
+          alt={imageAlt}
+          width={340}
+          height={192}
           className="w-full h-48 object-cover rounded-t-lg"
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 350px, 340px"
         />
       </div>
-      <p className="text-xl font-semibold mb-2 mt-4 ">{title}</p>
-      <p className="text-neutral-600">{description}</p>
+      <h3 className="text-xl font-semibold mb-2 mt-4 self-start">{title}</h3>
+      <p className="text-neutral-600 self-start">{description}</p>
+      <ul className="mt-3 space-y-1.5 self-start text-sm text-neutral-600">
+        {features.map((feature) => (
+          <li key={feature} className="flex gap-2">
+            <span aria-hidden="true" className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-primary-500" />
+            <span>{feature}</span>
+          </li>
+        ))}
+      </ul>
+      <p className="mt-4 self-start font-semibold text-neutral-900">{price}</p>
       <TrackedLink
         category="home_packages"
         label={`book_now_${title.toLowerCase()}`}
-        to="/packages"
-        className="text-primary-600 font-medium mt-4 flex items-center hover:text-primary-700 transition-colors"
+        to={to}
+        className="text-primary-600 font-medium mt-2 flex items-center self-start hover:text-primary-700 transition-colors"
       >
-        Book now
+        See the itinerary
         <svg
           width="20"
           height="20"
@@ -72,20 +96,47 @@ const PackageCard = ({ imageUrl, title, description, delay }: PackageCardProps) 
 const PackagesSection = () => {
   const packages = [
     {
-        imageUrl: '/home/family.webp',
-        title: 'Family',
-        description: 'Customized best jungle experiences, Expert guide and family-friendly driver, Diverse outdoor activities, Detailed Kuno history sessions'
+      imageUrl: '/home/family.webp',
+      imageAlt: 'Family on a Gypsy safari in Kuno National Park with a naturalist guide',
+      title: 'Families',
+      description:
+        'Four days paced for children as well as adults, with a driver used to travelling with families and a history session on Kuno that keeps older kids genuinely interested.',
+      features: [
+        'Maximum four guests per Gypsy',
+        'Six safari sessions across three nights',
+        'Homestay or lodge, all meals included',
+      ],
+      price: 'From ₹28,000 per person',
+      to: '/package/kuno-cheetah-safari-package',
     },
-   {
-        imageUrl: '/home/photographer.webp',
-        title: 'Photographers',
-        description: 'Customized photo-focused itineraries, On-field photography tips and hacks, Dedicated expert guide and driver, Post-processing session after safari'
+    {
+      imageUrl: '/home/photographer.webp',
+      imageAlt: 'Wildlife photographer shooting from an open safari vehicle in Kuno National Park',
+      title: 'Photographers',
+      description:
+        'Built around light rather than a schedule. Kuno is unusually open for an Indian forest, which means clean lines of sight — and far fewer vehicles at a sighting.',
+      features: [
+        'Kuno, Madhav and Chambal in one trip',
+        'On-field guidance from working photographers',
+        'Post-processing session after the safaris',
+      ],
+      price: 'From ₹35,000 per person',
+      to: '/package/photography-package',
     },
-   {
-        imageUrl: '/home/couple.webp',
-        title: 'Couples',
-        description: 'Romantic, customized itineraries, Expert guide and private driver, Luxury, intimate accommodations, Serene nature walks'
-    }
+    {
+      imageUrl: '/home/couple.webp',
+      imageAlt: 'Couple watching the sunset over the grasslands near Kuno National Park',
+      title: 'Couples',
+      description:
+        'A quieter itinerary with an unhurried pace, private transport throughout and time built in for nature walks between drives.',
+      features: [
+        'Private Gypsy and driver',
+        'Premium lodge with spa available',
+        'Three big cats on one itinerary',
+      ],
+      price: 'From ₹32,000 per person',
+      to: '/package/big-cat-safari-package',
+    },
   ];
   
   return (
@@ -93,7 +144,7 @@ const PackagesSection = () => {
       <div className="container">
         <SectionHeading
           title="Discover Kuno National Park"
-          subtitle="Tailored Trips for families, couples, or photographers – experience Kuno with custom plans, expert guides, and unforgettable moments in the wild."
+          subtitle="Every trip is four days, three nights and six safari sessions — what changes is the pace, the vehicle arrangements and which parks we cover."
           center
         />
 
@@ -113,9 +164,7 @@ const PackagesSection = () => {
                 "
             >
           <PackageCard
-            imageUrl={pkge.imageUrl}
-            title={pkge.title}
-            description={pkge.description}
+            {...pkge}
             delay={index + 1}
           />
           </div>

@@ -1,49 +1,63 @@
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import {
-  Sun,
-  CloudRain,
-  Snowflake,
-  Plane,
-  Train,
-  Car,
-  ChevronDown,
-  ArrowRight,
-} from "lucide-react";
+import { motion } from "framer-motion";
+import { Sun, CloudRain, Snowflake, Plane, Train, Car, ArrowRight } from "lucide-react";
 import SEOHead from "../components/ui/SEOHead";
 import SectionHeading from "../components/ui/SectionHeading";
 import ResponsiveImage from "../components/ui/ResponsiveImage";
 import PlacesCarousel from "../components/ui/PlacesCarousel";
-import { generateFAQSchema } from "../utils/seoUtils";
+import FaqSection from "../components/ui/FaqSection";
+import {
+  generateFAQSchema,
+  generateCanonicalUrl,
+  generateBreadcrumbSchema,
+  generateTouristDestinationSchema,
+} from "../utils/seoUtils";
 import { SITE_URL } from "../config/site";
+import { guides } from "../data/guides";
 import TrackedSection from "../components/tracking/TrackedSection";
 import TrackedLink from "../components/tracking/TrackedLink";
-import { trackEvent } from "../utils/analytics";
 
 const thingsToDo = [
   {
     name: "Jungle Safari",
     image: "/kuno-national-park/junglesafari.webp",
+    alt: "Open Gypsy jungle safari on a forest track in Kuno National Park",
+    description:
+      "The main event. A 3.5 to 4 hour Gypsy drive through grassland, dry deciduous forest and river crossings, in a morning or evening slot. Gypsy is the only official safari vehicle here — there are no canters.",
   },
   {
     name: "Birds Watching",
     image: "/kuno-national-park/BIRDWATCHING1.webp",
+    alt: "Birdwatching in the riverine habitat of Kuno National Park",
+    description:
+      "Over 200 recorded species, including the Forest Owlet, rediscovered here after 123 years. Indian eagle-owl, painted spurfowl, changeable hawk-eagle and paradise flycatcher are all regulars.",
   },
   {
     name: "Night Drive",
     image: "/kuno-national-park/NightDrive.webp",
+    alt: "Night drive on the buffer roads outside Kuno National Park",
+    description:
+      "On the buffer roads outside the core, after dark — the window for nocturnal species like striped hyena, jungle cat, civets and nightjars that you rarely see on a day drive.",
   },
   {
     name: "Herping",
     image: "/kuno-national-park/HERPING.webp",
+    alt: "Indian rock python photographed while herping near Kuno National Park",
+    description:
+      "Reptile and amphibian walks with the person who has handled 150-plus rescues. Rock pythons, mugger crocodiles and a long list of snakes and lizards, approached safely and without disturbing them.",
   },
   {
     name: "River Side Dinner",
     image: "/kuno-national-park/dinner.webp",
+    alt: "Dinner set up beside the river near Kuno National Park",
+    description:
+      "Dinner beside the water at the end of a safari day. Quiet, no schedule, and usually the point at which the day's sightings get argued over properly.",
   },
   {
     name: "Trekking",
     image: "/kuno-national-park/trekking.webp",
+    alt: "Guided nature walk through the hills surrounding Kuno National Park",
+    description:
+      "Guided walks in the buffer and surrounding hills — tracks, scat, alarm calls and plants. The slow version of the safari, and the best way to learn how the forest is read.",
   },
 ];
 
@@ -53,34 +67,39 @@ const popularPlaces = [
     image: "/kuno-national-park/DEVKHO.webp",
     description:
       "Dev Kho is a scenic eco-tourism and pilgrimage spot in the Karahal region of Sheopur district, Madhya Pradesh.",
-    link: "/blog/nearby-places",
+    alt: "Dev Kho eco-tourism and pilgrimage site in the Karahal region near Kuno National Park",
+    link: "/blog/nearby-places#devkho-temple",
   },
   {
     name: "Kuno River",
     image: "/kuno-national-park/KunoRiver.webp",
     description:
       "The lifeline of the park, flowing through its heart and supporting riverine forests, marsh crocodiles and a rich diversity of birdlife.",
-    link: "/blog/nearby-places",
+    alt: "The Kuno river flowing through riverine forest inside Kuno National Park",
+    link: "/blog/park-history#overview-of-kuno-national-park",
   },
   {
     name: "Madhav National Park",
     image: "/kuno-national-park/MadhavPark.webp",
     description:
       "Madhav National Park is India's 58th Tiger Reserve, the sanctuary is home to tigers, leopards, nilgai, chinkara, sambar, and barking deer.",
-    link: "/blog/nearby-places",
+    alt: "Madhav National Park, India's 58th Tiger Reserve, near Shivpuri",
+    link: "/blog/nearby-places#madhav-tiger-reserve",
   },
   {
     name: "Jal Mandir",
     image: "/kuno-national-park/JalMandir.webp",
     description:
       "The Jal Mandir in Pohari, located about 35 km from Shivpuri in Madhya Pradesh, is a unique 3-story shrine constructed in 1811.",
-    link: "/blog/nearby-places",
+    alt: "Jal Mandir, the three-storey shrine at Pohari built in 1811, near Kuno",
+    link: "/blog/nearby-places#jal-mandir-pohri",
   },
   {
     name: "Chhatri",
     image: "/kuno-national-park/Chhatri.webp",
     description:
       "The Chhatris of Shivpuri are a magnificent set of marble cenotaphs built by the Scindia dynasty in Madhya Pradesh.",
+    alt: "Marble Chhatris of the Scindia dynasty at Shivpuri",
     link: "/blog/nearby-places",
   },
   {
@@ -88,7 +107,8 @@ const popularPlaces = [
     image: "/kuno-national-park/GaneshTemple.webp",
     description:
       "200 years old Lord Ganesh temple known as 'Pohari Ganesh Temple.",
-    link: "/blog/nearby-places",
+    alt: "The 200-year-old Pohari Ganesh Temple near Kuno National Park",
+    link: "/blog/nearby-places#ganesh-temple-pohri",
   },
 ];
 
@@ -138,30 +158,51 @@ const nearbyPlaces = [
   {
     name: "Gwalior",
     image: "/kuno-national-park/gwalior.webp",
+    alt: "Gwalior Fort, 165 km from Kuno National Park",
+    description:
+      "165 km. The arrival city for almost everyone — and worth a day for Gwalior Fort, Jai Vilas Palace and the Sas Bahu temples.",
   },
   {
     name: "Shivpuri",
     image: "/kuno-national-park/shivpuri.webp",
+    alt: "Marble Chhatris of the Scindia dynasty at Shivpuri, near Kuno National Park",
+    description:
+      "35 km. Nearest town and railway station, home to the Scindia marble Chhatris and the gateway to Madhav National Park.",
   },
   {
     name: "Sawai Madhopur",
     image: "/kuno-national-park/SawaiMadhopur.webp",
+    alt: "Ranthambore forest at Sawai Madhopur, around 170 km from Kuno",
+    description:
+      "170 km. The base for Ranthambore, which makes a combined cheetah-and-tiger itinerary genuinely practical.",
   },
   {
     name: "Agra",
     image: "/kuno-national-park/agra.webp",
+    alt: "The Taj Mahal at Agra, 480 km from Kuno National Park",
+    description:
+      "480 km. Works as part of a longer Golden Triangle route rather than a side trip from the park.",
   },
   {
     name: "Jaipur",
     image: "/kuno-national-park/jaipur.webp",
+    alt: "Hawa Mahal in Jaipur, 290 km from Kuno National Park",
+    description:
+      "290 km, five to six hours. The second-nearest airport and an easy add-on for anyone travelling through Rajasthan.",
   },
   {
     name: "Orchha",
     image: "/kuno-national-park/orcha.webp",
+    alt: "Bundela cenotaphs on the Betwa river at Orchha, near Kuno",
+    description:
+      "280 km. Bundela palaces and cenotaphs on the Betwa river — the quietest of the heritage stops near Kuno.",
   },
   {
     name: "Khajuraho",
     image: "/kuno-national-park/khajuraho.webp",
+    alt: "Temple carvings at Khajuraho, a heritage site reachable from Kuno",
+    description:
+      "The UNESCO temple complex, best reached via Orchha if you are extending the trip east.",
   },
 ];
 
@@ -209,65 +250,23 @@ const faqs = [
   },
 ];
 
-interface FAQItemProps {
-  faq: { question: string; answer: string };
-  isOpen: boolean;
-  onToggle: () => void;
-}
-
-const FAQItem = ({ faq, isOpen, onToggle }: FAQItemProps) => (
-  <div className="bg-white rounded-lg shadow-md overflow-hidden">
-    <button
-      onClick={() => {
-        trackEvent({
-          category: "kuno_park",
-          action: "click",
-          label: `faq_toggle: ${faq.question}`,
-        });
-        onToggle();
-      }}
-      aria-expanded={isOpen}
-      className="w-full flex items-center justify-between text-left px-6 py-4 font-semibold text-neutral-800 hover:text-primary-600 transition-colors"
-    >
-      <span>{faq.question}</span>
-      <motion.span
-        animate={{ rotate: isOpen ? 180 : 0 }}
-        transition={{ duration: 0.2 }}
-        className="flex-shrink-0 ml-4 text-primary-600"
-      >
-        <ChevronDown size={20} />
-      </motion.span>
-    </button>
-    <AnimatePresence>
-      {isOpen && (
-        <motion.div
-          initial={{ height: 0, opacity: 0 }}
-          animate={{ height: "auto", opacity: 1 }}
-          exit={{ height: 0, opacity: 0 }}
-          transition={{ duration: 0.3 }}
-          className="overflow-hidden"
-        >
-          <p className="px-6 pb-5 text-neutral-600 leading-relaxed">
-            {faq.answer}
-          </p>
-        </motion.div>
-      )}
-    </AnimatePresence>
-  </div>
-);
-
 const KunoNationalPark = () => {
-  const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null);
-
   return (
     <>
       <SEOHead
-        title="Kuno National Park - Home of India's Cheetahs"
-        description="Explore Kuno National Park in Sheopur, Madhya Pradesh - India's only free-ranging cheetah landscape. Discover its history, wildlife, best time to visit, how to reach and everything you need to plan your safari."
-        keywords="Kuno National Park, Project Cheetah, Cheetah Safari India, Sheopur Madhya Pradesh, Kuno Safari Booking, Kuno Wildlife, Palpur Fort, Kuno River"
-        canonical={`${SITE_URL}/kuno-national-park`}
+        title="Kuno National Park: Cheetah Safari Guide & Facts"
+        description="748.76 sq km in Sheopur, Madhya Pradesh — India's only free-ranging cheetah landscape. History, wildlife, safari zones, best time to visit and how to reach Kuno."
+        canonical={generateCanonicalUrl('/kuno-national-park')}
         ogImage="/home/cheetah.webp"
-        structuredData={generateFAQSchema(faqs)}
+        ogImageAlt="Cheetah in the grasslands of Kuno National Park, Sheopur, Madhya Pradesh"
+        structuredData={[
+          generateTouristDestinationSchema(),
+          generateFAQSchema(faqs),
+          generateBreadcrumbSchema([
+            { name: 'Home', url: SITE_URL },
+            { name: 'Kuno National Park', url: `${SITE_URL}/kuno-national-park` },
+          ]),
+        ]}
       />
 
       <TrackedSection
@@ -277,8 +276,10 @@ const KunoNationalPark = () => {
       >
         <img
           src={`${import.meta.env.BASE_URL}kuno-national-park/cheetah.webp`}
-          alt="Safari Background"
-          fetchpriority="high"
+          alt=""
+          width={1600}
+          height={900}
+          fetchPriority="high"
           decoding="async"
           className="absolute inset-0 w-full h-full object-cover z-0"
           style={{ pointerEvents: "none" }}
@@ -431,8 +432,10 @@ const KunoNationalPark = () => {
                   />
                   <ResponsiveImage
                     src={place.image}
-                    alt={place.name}
-                    className="relative w-40 h-40 md:w-44 md:h-44 rounded-xl shadow-md"
+                    alt={place.alt}
+                    width={176}
+                    height={176}
+                    className="relative w-40 h-40 md:w-44 md:h-44 rounded-xl object-cover shadow-md"
                     sizes="176px"
                   />
                 </div>
@@ -538,35 +541,48 @@ const KunoNationalPark = () => {
         </div>
       </TrackedSection>
 
-      {/* FAQs */}
-      <TrackedSection
-        category="kuno_park"
-        label="faqs"
-        className="section bg-neutral-50"
-      >
+      {/* Links out to the planning guides. This page ranks for the head term
+          "kuno national park" but had no path from here to the pages that
+          answer the commercial questions. */}
+      <TrackedSection category="kuno_park" label="planning_guides" className="section bg-white">
         <div className="container">
-          <SectionHeading title="People Also Ask About Kuno" />
-          <div className="max-w-3xl mx-auto space-y-4">
-            {faqs.map((faq, index) => (
-              <motion.div
-                key={faq.question}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: index * 0.05 }}
+          <SectionHeading
+            title="Planning a Visit to Kuno National Park"
+            subtitle="Permits, prices, zones and timings — everything you need before booking."
+          />
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {guides.map((guide) => (
+              <TrackedLink
+                key={guide.path}
+                category="kuno_park"
+                label={`guide_${guide.path.replace(/\//g, "")}`}
+                to={guide.path}
+                className="group flex h-full flex-col rounded-xl border border-neutral-200 p-5 transition-colors hover:border-primary-400"
               >
-                <FAQItem
-                  faq={faq}
-                  isOpen={openFaqIndex === index}
-                  onToggle={() =>
-                    setOpenFaqIndex(openFaqIndex === index ? null : index)
-                  }
-                />
-              </motion.div>
+                <h3 className="flex items-center font-semibold text-neutral-900 group-hover:text-primary-700">
+                  {guide.label}
+                  <ArrowRight
+                    size={16}
+                    className="ml-1.5 transition-transform group-hover:translate-x-1"
+                  />
+                </h3>
+                <p className="mt-1.5 text-sm text-neutral-600">{guide.blurb}</p>
+              </TrackedLink>
             ))}
           </div>
         </div>
       </TrackedSection>
+
+      {/* FAQs. Rendered with the shared <details>-based FaqSection: the old
+          useState accordion kept every answer out of the DOM until clicked,
+          so the FAQPage JSON-LD on this page described text that appeared
+          nowhere in the HTML. */}
+      <FaqSection
+        category="kuno_park"
+        faqs={faqs}
+        title="People Also Ask About Kuno"
+        className="section bg-neutral-50"
+      />
     </>
   );
 };
