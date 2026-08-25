@@ -35,21 +35,19 @@ const PackageCard = ({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-100px' }}
       transition={{ duration: 0.5, delay: delay * 0.1 }}
-      className="card p-6 flex flex-col items-center h-full"
+      className="card p-6 flex flex-col h-full"
     >
-     <div className="flex flex-1 items-center justify-center">
-        <ResponsiveImage
-          src={imageUrl}
-          alt={imageAlt}
-          width={340}
-          height={192}
-          className="w-full h-48 object-cover rounded-t-lg"
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 350px, 340px"
-        />
-      </div>
-      <h3 className="text-xl font-semibold mb-2 mt-4 self-start">{title}</h3>
-      <p className="text-neutral-600 self-start">{description}</p>
-      <ul className="mt-3 space-y-1.5 self-start text-sm text-neutral-600">
+      <ResponsiveImage
+        src={imageUrl}
+        alt={imageAlt}
+        width={340}
+        height={192}
+        className="w-full h-48 object-cover rounded-t-lg shrink-0"
+        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 350px, 340px"
+      />
+      <h3 className="text-xl font-semibold mb-2 mt-4">{title}</h3>
+      <p className="text-neutral-600">{description}</p>
+      <ul className="mt-3 space-y-1.5 text-sm text-neutral-600">
         {features.map((feature) => (
           <li key={feature} className="flex gap-2">
             <span aria-hidden="true" className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-primary-500" />
@@ -57,12 +55,15 @@ const PackageCard = ({
           </li>
         ))}
       </ul>
-      <p className="mt-4 self-start font-semibold text-neutral-900">{price}</p>
+      {/* mt-auto pins price + link to the bottom so the three cards' footers
+          line up even when the description/feature list above is a different
+          length in each card. */}
+      <p className="mt-auto pt-4 font-semibold text-neutral-900">{price}</p>
       <TrackedLink
         category="home_packages"
         label={`book_now_${title.toLowerCase()}`}
         to={to}
-        className="text-primary-600 font-medium mt-2 flex items-center self-start hover:text-primary-700 transition-colors"
+        className="text-primary-600 font-medium mt-2 flex items-center hover:text-primary-700 transition-colors"
       >
         See the itinerary
         <svg
@@ -150,17 +151,18 @@ const PackagesSection = () => {
 
     <div className=" relative my-6">
     <div className="overflow-x-auto ">
-      <div className="flex gap-6 overflow-x-auto scroll-smooth  justify-center items-center"
+      <div className="flex gap-6 overflow-x-auto scroll-smooth justify-center items-stretch"
        >
         {packages.map((pkge, index) => (
             <div
                 key={index}
                 className="
-                min-w-[85vw] max-w-[85vw] 
-                sm:min-w-[350px] sm:max-w-[350px] 
-                md:min-w-[300px] md:max-w-[300px] 
-                lg:min-w-[340px] lg:max-w-[340px] 
+                min-w-[85vw] max-w-[85vw]
+                sm:min-w-[350px] sm:max-w-[350px]
+                md:min-w-[300px] md:max-w-[300px]
+                lg:min-w-[340px] lg:max-w-[340px]
                 flex-shrink-0
+                flex
                 "
             >
           <PackageCard

@@ -46,7 +46,10 @@ const SurpriseSection = () => {
           center
         />
         <div className="container">
-          <div className="mx-auto max-w-3xl space-y-4 text-lg leading-relaxed text-neutral-700">
+          {/* Same max-width as the image grid below, so the text column and
+              the photos share a left/right edge instead of the text looking
+              narrower and off-center against the full-width grid. */}
+          <div className="mx-auto max-w-4xl space-y-4 text-lg leading-relaxed text-neutral-700">
             <p>
               Kuno is the only place in India where you can see free-ranging
               cheetahs, and it is also one of the very few parks where three big
@@ -72,9 +75,9 @@ const SurpriseSection = () => {
           </div>
 
           {/* 2-column image section */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
+          <div className="mx-auto max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
             {/* First column: 1 large image */}
-            <figure className="flex flex-col items-center justify-center">
+            <figure className="flex flex-col">
               <ResponsiveImage
                 src={species[0].src}
                 alt={species[0].alt}

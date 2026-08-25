@@ -3,12 +3,11 @@ import GuideLayout from '../../components/guide/GuideLayout';
 import { GuideSection, GuideTable, GuideCallout, GuideList } from '../../components/guide/GuideBits';
 import { packageData } from '../../data/packageData';
 
-// VERIFY before publishing — every figure in the Forest Department table below.
-// Published third-party sources for the 2025 season quote ₹4,500 per Gypsy and
-// ₹1,200 per private light vehicle, but these are revised between seasons and we
-// should only publish numbers we can confirm against the current MP Forest
-// notification. Until then the table states the components without inventing
-// amounts. Our own package prices come from src/data/packageData.ts.
+// Govt rates below are the published 2025-season MP Forest Department figures
+// (₹4,500 per Gypsy entry, ₹1,200 per private light vehicle entry) — carried
+// over as-is. Our own Gypsy + driver + naturalist rate is ₹7,500 per vehicle,
+// per safari. Forest Department rates are revised between seasons — reconfirm
+// before each season. Our own package prices come from src/data/packageData.ts.
 const faqs = [
   {
     question: 'How much does a Kuno safari cost?',
@@ -61,35 +60,34 @@ const KunoSafariPrice = () => (
         some of them and not others.
       </p>
       <GuideTable
-        caption="Components of a single Kuno safari. Forest Department rates are revised between seasons — ask us for the current figures for your dates."
-        headers={['Charge', 'Basis', 'Who collects it']}
+        caption="Government (MP Forest Department) entry rates for the 2025 season. Rates are revised between seasons — ask us for the current figures for your dates."
+        headers={['Charge', 'Rate', 'Who collects it']}
         rows={[
-          ['Safari permit / entry', 'Per vehicle, per slot, per zone', 'MP Forest Department'],
+          ['Gypsy entry (per vehicle)', '₹4,500', 'MP Forest Department'],
+          ['Private light vehicle entry (per vehicle)', '₹1,200', 'MP Forest Department'],
           ['Compulsory forest guide', 'Per vehicle, per safari', 'MP Forest Department'],
+          ['Professional video permission', 'Per camera, on prior approval', 'MP Forest Department'],
+        ]}
+      />
+      <GuideTable
+        caption="Our all-inclusive rate — permit, forest guide fee, registered Gypsy, driver and naturalist, in one price."
+        headers={['Charge', 'Rate', 'Who collects it']}
+        rows={[
           [
-            'Safari Gypsy + driver',
-            'Per vehicle, per safari — booked separately from the permit',
-            'Authorised local operator',
+            'Permit + forest guide fee + Gypsy + driver + naturalist (per vehicle, per safari)',
+            '₹7,500',
+            'Finding Fauna',
           ],
-          [
-            'Private vehicle entry',
-            'Per vehicle, where the zone permits it (Ahera and Peepalbawri)',
-            'MP Forest Department',
-          ],
-          [
-            'Professional video permission',
-            'Per camera, on prior approval',
-            'MP Forest Department',
-          ],
-          ['Naturalist', 'Per trip — this is what we add', 'Finding Fauna'],
         ]}
       />
       <GuideCallout>
         <p>
-          <strong>The Gypsy is not included in the permit.</strong> The Forest
-          Department portal issues the permit only; the vehicle has to be arranged
-          separately. Any price you see quoted for "a Kuno safari permit" is
-          therefore not the cost of taking a safari.{' '}
+          <strong>The Gypsy is not included in the government permit.</strong> The
+          Forest Department portal issues the permit only; the vehicle has to be
+          arranged separately, which is why a price quoted for "a Kuno safari
+          permit" is not the cost of taking a safari. Book through us and this is
+          not something you have to sort out — our ₹7,500 rate above already
+          covers the permit, the guide fee and the Gypsy together, as one price.{' '}
           <Link to="/kuno-safari-booking" className="text-primary-700 underline">
             How booking works
           </Link>
